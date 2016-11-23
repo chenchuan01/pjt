@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>pjt-web</artifactId>
 	<packaging>war</packaging>
-	<name>pjt-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
