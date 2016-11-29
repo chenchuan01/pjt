@@ -46,21 +46,6 @@
 			<url>http://nexus.cq196.cn:8081/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<!-- Upload URL -->
-	<distributionManagement>
-		<repository>
-			<id>releases</id>
-			<name>pjt Releases</name>
-			<url>http://nexus.cq196.cn:8081/content/repositories/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshot</id>
-			<name>pjt Snapshot</name>
-			<url>http://nexus.cq196.cn:8081/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<!-- build config -->
 	<build>
 		<plugins>
