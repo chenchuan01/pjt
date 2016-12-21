@@ -17,5 +17,16 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+		<groupId>com.ifenduo</groupId>
+		<artifactId>ifod-common</artifactId>
+		<version>1.4.5</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.pagehelper</groupId>
+		<artifactId>pagehelper</artifactId>
+		<version>4.1.6</version>
+	</dependency>
+	
   </dependencies>
 </project>
