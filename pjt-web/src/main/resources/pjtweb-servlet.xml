@@ -16,9 +16,12 @@ http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 	
 	
 	<!-- 自动扫描(自动注入）-->
-	<context:component-scan base-package="com.ifenduo.*" />
-	<context:component-scan base-package="com.yidingliu.pjt*" />
-	
+	<!-- <context:component-scan base-package="com.ifenduo.*" />
+	<context:component-scan base-package="com.yidingliu.pjt*" /> -->
+	<context:component-scan base-package="com.yidingliu.pjt">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 	<!-- 控制层 数据绑定转换类型 -->
 	<bean class = "org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
    		<property name = "webBindingInitializer" >  
@@ -94,7 +97,6 @@ http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 	<!-- spring 全局异常处理 -->
 	<bean id="ifodExceptionHandler4Spring" class="com.yidingliu.pjt.web.util.IFODExceptionHandler4Spring" />
     
-	<bean id="springContextHolder" class="com.yidingliu.pjt.web.SpringContextHolder"/>
 	<!-- 定时任务配置 -->
 	<task:annotation-driven scheduler="qbScheduler" mode="proxy"/>  
     <task:scheduler id="qbScheduler" pool-size="5"/> 
