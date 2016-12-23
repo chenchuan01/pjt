@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yidingliu</groupId>
@@ -10,14 +10,12 @@
 	<properties>
 		<project.language>java</project.language>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-
 		<jdk.version>1.7</jdk.version>
 		<junit.version>4.11</junit.version>
 		<mybatis-spring.version>1.2.4</mybatis-spring.version>
 		<mysql.version>5.1.26</mysql.version>
-
 		<spring.version>4.3.0.RELEASE</spring.version>
+		<slf4j.version>1.7.7</slf4j.version>
 	</properties>
 	<!-- dependency jar manage -->
 	<dependencyManagement>
@@ -26,6 +24,21 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -117,6 +130,6 @@
 		<module>pjt-data</module>
 		<module>pjt-web</module>
 		<module>pjt-rest</module>
-	</modules>
+  </modules>
 
 </project>
