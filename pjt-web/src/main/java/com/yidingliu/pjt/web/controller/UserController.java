@@ -4,18 +4,15 @@
 package com.yidingliu.pjt.web.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ifenduo.common.lang.page.Paginator;
 import com.yidingliu.pjt.data.bean.User;
-import com.yidingliu.pjt.data.bean.example.UserExample;
+import com.yidingliu.pjt.data.mapper.example.UserExample;
 import com.yidingliu.pjt.data.service.UserService;
 
 /**
@@ -47,12 +44,11 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping("userlist.htm")
-	public String userList(Map<String, Object> map,HttpServletRequest request, HttpServletResponse response,Paginator paginator){
-		
+	public String userList(Model model){
 		UserExample userExample = new UserExample();
 		userExample.createCriteria();
 		List<User> list = userService.findByQuery(userExample);
-		map.put("pageList", list);
+		model.addAttribute("list", list);
 		return "content/user/list";
 	}
 }

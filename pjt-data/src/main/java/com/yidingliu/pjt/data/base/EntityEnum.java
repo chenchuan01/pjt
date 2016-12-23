@@ -1,4 +1,4 @@
-package com.yidingliu.pjt.base.enums;
+package com.yidingliu.pjt.data.base;
 
 import java.util.ArrayList;
 import java.util.List;

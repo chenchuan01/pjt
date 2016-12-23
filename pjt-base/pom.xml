@@ -11,17 +11,12 @@
 	<artifactId>pjt-base</artifactId>
 	<name>pjt-base</name>
 	<description>系统基础模块</description>
-	<url>http://nexus.cq196.cn:8081/content/repositories/releases/</url>
-	
+
 	<properties></properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -38,10 +33,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
 		</dependency>
 	</dependencies>
 </project>

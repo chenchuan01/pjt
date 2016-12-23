@@ -2,6 +2,9 @@ package com.yidingliu.pjt.data.base.bean;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.JSON;
+import com.yidingliu.pjt.data.base.EntityEnum;
+
 
 /**
  * 
@@ -78,5 +81,8 @@ public class BaseEntity {
 		this.updateDate = updateDate;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return JSON.toJSONString(this);
+	}
 }

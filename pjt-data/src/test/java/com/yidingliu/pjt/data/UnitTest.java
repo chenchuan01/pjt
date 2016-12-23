@@ -1,4 +1,4 @@
-package com.yidingliu.pjt.base.test;
+package com.yidingliu.pjt.data;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +35,7 @@ import junit.framework.TestCase;
 @Transactional
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class UnitTest extends TestCase {
+	
 	@Test
 	public void intiXML(){
 		LogUtil.info(UnitTest.class,"applicationContext.xml init success...");

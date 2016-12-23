@@ -19,13 +19,15 @@ package com.yidingliu.pjt.base.exception;
  *          <li>Content: create</li>
  *
  */
-public class BaseException {
+public class BaseException extends RuntimeException{
+	/** Comment for <code>serialVersionUID</code> */
+	private static final long serialVersionUID = 1L;
 	/** 错误码 <code>code</code> */
-	private String code;
+	protected String code;
 	/** 提示信息 <code>msg</code> */
-	private String msg;
+	protected String msg;
 	/** 原始异常 <code>e</code> */
-	private Throwable e;
+	protected Throwable e;
 
 	public String getCode() {
 		return code;

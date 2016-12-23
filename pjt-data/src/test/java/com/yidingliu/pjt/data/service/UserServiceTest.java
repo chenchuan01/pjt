@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.yidingliu.pjt.data;
+package com.yidingliu.pjt.data.service;
 
 
 import java.util.Date;
@@ -10,7 +10,8 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 
-import com.yidingliu.pjt.base.test.UnitTest;
+import com.yidingliu.pjt.base.util.LogUtil;
+import com.yidingliu.pjt.data.UnitTest;
 import com.yidingliu.pjt.data.bean.User;
 import com.yidingliu.pjt.data.service.UserService;
 
@@ -33,7 +34,7 @@ import com.yidingliu.pjt.data.service.UserService;
  *<li>Content: create</li>
  *
  */
-public class UserTest extends UnitTest{
+public class UserServiceTest extends UnitTest{
 
 	@Resource
 	UserService userService;
@@ -46,14 +47,14 @@ public class UserTest extends UnitTest{
 		user.setCreateDate(new Date());
 		user.setUpdateDate(new Date());
 		user.setStatus(0);
-		userService.insert(user);
-		
+		int rslt = userService.insert(user);
+		assertFalse(rslt!=1);
 	}
 	
 	@Test
 	public void findById(){
 		User user = userService.findById(2L);
-		System.out.println(user);
+		LogUtil.info(getClass(), user.toString());
 	}
 	
 	@Test

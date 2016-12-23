@@ -5,7 +5,7 @@ package com.yidingliu.pjt.data.service;
 
 import com.yidingliu.pjt.data.base.service.BaseService;
 import com.yidingliu.pjt.data.bean.User;
-import com.yidingliu.pjt.data.bean.example.UserExample;
+import com.yidingliu.pjt.data.mapper.example.UserExample;
 
 /**
  *                       

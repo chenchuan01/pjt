@@ -1,4 +1,4 @@
-package com.yidingliu.pjt.data.bean.example;
+package com.yidingliu.pjt.data.mapper.example;
 
 import java.util.ArrayList;
 import java.util.Date;

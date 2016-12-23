@@ -2,7 +2,7 @@ package com.yidingliu.pjt.data.mapper;
 
 import com.yidingliu.pjt.data.base.mapper.BaseMapper;
 import com.yidingliu.pjt.data.bean.User;
-import com.yidingliu.pjt.data.bean.example.UserExample;
+import com.yidingliu.pjt.data.mapper.example.UserExample;
 
 import org.springframework.stereotype.Repository;
 

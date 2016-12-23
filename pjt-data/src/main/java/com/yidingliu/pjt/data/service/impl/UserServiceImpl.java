@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.yidingliu.pjt.data.base.service.BaseServiceImpl;
 import com.yidingliu.pjt.data.bean.User;
-import com.yidingliu.pjt.data.bean.example.UserExample;
 import com.yidingliu.pjt.data.mapper.UserMapper;
+import com.yidingliu.pjt.data.mapper.example.UserExample;
 import com.yidingliu.pjt.data.service.UserService;
 
 /**

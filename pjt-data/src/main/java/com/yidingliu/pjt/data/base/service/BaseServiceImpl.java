@@ -4,8 +4,11 @@ import java.util.List;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yidingliu.pjt.data.base.EntityEnum;
 import com.yidingliu.pjt.data.base.bean.BaseEntity;
 import com.yidingliu.pjt.data.base.dto.QueryParam;
+import com.yidingliu.pjt.data.base.exception.DataErrorEnum;
+import com.yidingliu.pjt.data.base.exception.DataException;
 import com.yidingliu.pjt.data.base.mapper.BaseExample;
 import com.yidingliu.pjt.data.base.mapper.BaseMapper;
 
@@ -39,7 +42,7 @@ public class BaseServiceImpl<E extends BaseEntity, M extends BaseExample> implem
 	 */
 	public BaseMapper<E, M> mapper() {
 		if (baseMapper == null) {
-			throw new EdpException(ErrorCodeEnum.ERROR_SYS_DEFULT.toString(), "Service子类未注入mapper实例");
+			throw new DataException(DataErrorEnum.DATA_MAPPER_NULL);
 		}
 		return baseMapper;
 	}
@@ -90,12 +93,12 @@ public class BaseServiceImpl<E extends BaseEntity, M extends BaseExample> implem
 
 	@Override
 	public int delete(E e) {
-		if (e == null) {
-			throw new EdpException(ErrorCodeEnum.ERROR_SYS_DEFULT.toString(),"删除对象为空");
+		if(e!=null){
+			//系统处理删除为假删除
+			e.setStatus(EntityEnum.DELETED.code());
+			return updateNotNull(e);
 		}
-		//系统处理删除为假删除
-		e.setStatus(Entity.DELETED.code());
-		return updateNotNull(e);
+		return 0;
 	}
 	@Override
 	public int delFormDB(E e){
@@ -118,7 +121,7 @@ public class BaseServiceImpl<E extends BaseEntity, M extends BaseExample> implem
 	@Override
 	public PageInfo<E> pageQuery(QueryParam<M> pageParam) {
 		if (pageParam == null) {
-			throw new EdpException(ErrorCodeEnum.ERROR_SYS_DEFULT.toString(),"分页查询条件为空");
+			pageParam = new QueryParam<>();
 		}
 		PageHelper.startPage(pageParam.getPage(), pageParam.getPageSize());
 		List<E> pageContent = mapper().selectByExample(pageParam.getParam());
