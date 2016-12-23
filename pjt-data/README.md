@@ -1,6 +1,6 @@
-#易鼎流data模块
-##结构
-	src/man/java
+## 易鼎流data模块
+### 目录结构
+	src/main/java
 	|-com.yidingliu.pjt.data
 		|-base
 			|-bean
@@ -12,13 +12,13 @@
 			|-example
 		|-mapper
 		|-service
-	src/man/resources
+	src/main/resources
 		|-mapping
 	src/test/java
 	|-com.yidingliu.pjt.data
 	src/test/resources
 	
-##mybatis逆向生成实体、dao、example
+### mybatis逆向生成实体、dao、example
 	1.创建数据库表
 	2.在src/test/resources中创建gennerator.xml文件，并配置链接数据库信息及代码生成位置(实体生成到bean中，example生成到example中，dao生成到mapper中，xml文件生成到mapping中)及表格信息
 	3.运行src/test/java中GenerratorTest.java文件生成代码
