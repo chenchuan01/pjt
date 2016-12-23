@@ -2,7 +2,10 @@ package com.yidingliu.pjt.base;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.yidingliu.pjt.base.util.LogUtil;
 
 /**
  * 
@@ -23,7 +26,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *          <li>Content: create</li>
  *
  */
-public class SpringContextHolder {
+public class SpringContextHolder implements ApplicationContextAware {
 	private static ApplicationContext applicationContext;
 
 	/**
@@ -31,6 +34,7 @@ public class SpringContextHolder {
 	 */
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		SpringContextHolder.applicationContext = applicationContext;
+		LogUtil.info(SpringContextHolder.class, "applicationContext inject success...");
 	}
 
 	/**
