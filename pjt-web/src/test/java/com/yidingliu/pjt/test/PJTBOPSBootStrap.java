@@ -177,10 +177,10 @@ public class PJTBOPSBootStrap {
 	private static String getResultPath() {
 		String path = PJTBOPSBootStrap.class.getResource(SEPARATOR_CHAR_SLASH).getPath();
 		String webPath = path.substring(1, path.indexOf(PROJECT_NAM)) + WEB_SRC;
-		return "//"+webPath;
+		return "/"+webPath;
 	}
 
 	public static void main(String[] args) {
-		new PJTBOPSBootStrap(getResultPath(), 8098, "/").start();
+		new PJTBOPSBootStrap(getResultPath(), 8098, "//").start();
 	}
 }

@@ -2,10 +2,28 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>pjt-web</display-name>
 
-  <display-name>ROOT</display-name>
-  
-  <!-- Servlet Encoding Start -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>pjt-web</param-value>
+	</context-param>
+	<context-param>
+		<param-name>projectDisplayName</param-name>
+		<param-value>pjt-web</param-value>
+	</context-param>
+
+
+	<!-- logback -->
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>classpath*:log4j.properties</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+	<!-- Servlet Encoding Start -->
 	<filter>
 		<filter-name>Set Character Encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -24,14 +42,30 @@
 	</filter-mapping>
 	<!-- Servlet Encoding End -->
 	
+	
+	
+
 	<!-- spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:applicationContext.xml</param-value>
 	</context-param>
 
+
+	<!-- springmvc监控 -->
+	<listener>
+		<description>spring监听器</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 防止spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+
 	<servlet>
-		<servlet-name>SpringMVC</servlet-name>
+		<servlet-name>WebMVC</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -41,8 +75,11 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
 	<servlet-mapping>
-		<servlet-name>SpringMVC</servlet-name>
+		<servlet-name>WebMVC</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
+	
+
 </web-app>
