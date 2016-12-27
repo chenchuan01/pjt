@@ -40,15 +40,15 @@ public class UserController {
 	/**
 	 * 用户service
 	 */
-	/*@Resource
-	private UserService userService;*/
+	@Resource
+	private UserService userService;
 	
 	@RequestMapping("userlist.htm")
 	public String userList(Model model){
 		UserExample userExample = new UserExample();
 		userExample.createCriteria();
-		/*List<User> list = userService.findByQuery(userExample);
-		model.addAttribute("list", list);*/
+		List<User> list = userService.findByQuery(userExample);
+		model.addAttribute("list", list);
 		return "content/user/list";
 	}
 }
