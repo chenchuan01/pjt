@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>pjt-web</display-name>
-
+	<!-- Params -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
 		<param-value>pjt-web</param-value>
@@ -12,20 +12,38 @@
 		<param-name>projectDisplayName</param-name>
 		<param-value>pjt-web</param-value>
 	</context-param>
-
-
-	<!-- logback -->
 	<context-param>
 		<param-name>logbackConfigLocation</param-name>
 		<param-value>classpath*:log4j.properties</param-value>
 	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext.xml</param-value>
+	</context-param>
+	<!-- Params End -->
+
+	<!-- Listeners -->
+
+	<!-- Log -->
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
+	<!-- SpringMVC监控 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
-	<!-- Servlet Encoding Start -->
+	<!-- 防止spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<!-- Listeners End -->
+
+	<!-- Filter chain -->
+
+	<!-- Encoding -->
 	<filter>
-		<filter-name>Set Character Encoding</filter-name>
+		<filter-name>CharacterEncoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
@@ -37,33 +55,25 @@
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>Set Character Encoding</filter-name>
-		<url-pattern>/*</url-pattern>
+		<filter-name>CharacterEncoding</filter-name>
+		<url-pattern>*</url-pattern>
 	</filter-mapping>
-	<!-- Servlet Encoding End -->
-	
-	
-	
 
-	<!-- spring -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:applicationContext.xml</param-value>
-	</context-param>
+	<!-- XSS & SQL parameter filter -->
+	<filter>
+		<filter-name>XssAndSqlFilter</filter-name>
+		<filter-class>com.yidingliu.pjt.web.filter.XssAndSqlFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>XssAndSqlFilter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
 
-
-	<!-- springmvc监控 -->
-	<listener>
-		<description>spring监听器</description>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<!-- 防止spring内存溢出监听器 -->
-	<listener>
-		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-	</listener>
+	<!-- Filter chain End -->
 
 
+
+	<!-- Spring Dispatcher -->
 	<servlet>
 		<servlet-name>WebMVC</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -80,6 +90,6 @@
 		<servlet-name>WebMVC</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-	
+	<!-- Spring Dispatcher End-->
 
 </web-app>
