@@ -5,8 +5,8 @@ package com.yidingliu.pjt.web.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,15 +40,15 @@ public class UserController {
 	/**
 	 * 用户service
 	 */
-	/*@Resource
-	private UserService userService;*/
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("userlist.htm")
 	public String userList(Model model){
 		UserExample userExample = new UserExample();
 		userExample.createCriteria();
-		/*List<User> list = userService.findByQuery(userExample);
-		model.addAttribute("list", list);*/
+		List<User> list = userService.findByQuery(userExample);
+		model.addAttribute("list", list);
 		return "content/user/list";
 	}
 }
