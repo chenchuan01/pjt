@@ -8,8 +8,7 @@
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="classpath:res.properties" />
-	<bean id="poolConfigRedis" class="redis.clients.jedis.JedisPoolConfig">
+	<!-- <bean id="poolConfigRedis" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="200" /> 
 		<property name="maxTotal" value="10000" />
 		<property name="maxWaitMillis" value="3000" />
@@ -18,12 +17,11 @@
 
 	<bean id="connectionFactoryRedis"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:host-name="${redis_url}" p:port="7070" p:password="${redis_pwd}"
+		p:host-name="${redis_url}" p:port="${redis_port}" p:password="${redis_pwd}"
 		p:pool-config-ref="poolConfigRedis" />
 
 	
-	<bean id="fastjsonSerializer"
-		class="cn.cq196.ty.base.cache.serializer.RedisFastJsonSerializer" />
+	<bean id="fastjsonSerializer"    class="cn.cq196.ty.base.cache.serializer.RedisFastJsonSerializer" />
 	<bean id="redisStringSerializer" class="cn.cq196.ty.base.cache.serializer.RedisStringSerializer" />
 
 	
@@ -31,6 +29,6 @@
 		<property name="connectionFactory" ref="connectionFactoryRedis" />
 		<property name="keySerializer" ref="fastjsonSerializer" />
 		<property name="valueSerializer" ref="fastjsonSerializer" />
-	</bean>
+	</bean> -->
 
 </beans>

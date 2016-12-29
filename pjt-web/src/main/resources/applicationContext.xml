@@ -16,45 +16,18 @@
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task-3.2.xsd">
         
-    <context:component-scan base-package="com.yidingliu.pjt">
+	<!-- 扫描组件 -->
+	<context:component-scan base-package="com.yidingliu.pjt">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-    <context:property-placeholder location="classpath:res.properties" />
-    <!-- 配置数据源 -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${jdbc_driver}" />
-        <property name="url" value="${jdbc_url}" />
-        <property name="username" value="${jdbc_username}" />
-        <property name="password" value="${jdbc_password}" />
-    </bean>
-    <!-- 实例化分页器 -->
- 	<bean id="pagehelperInterceptor" class="com.github.pagehelper.PageHelper"></bean>
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath:mapping/*.xml"></property>
-        <property name="plugins">
-        	<array>
-        		<ref local="pagehelperInterceptor"/>
-        	</array>
-        </property>
-    </bean>
- 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="annotationClass" value="org.springframework.stereotype.Repository" />
-        <property name="basePackage" value="com.yidingliu.pjt.data.mapper" />
-    </bean>
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
-    </bean>
- 
-    <!-- 事务管理 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
- 
-    <!-- 事务注解支持 -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
-    <!-- <import resource="classpath:spring/spring-*.xml"/> -->
-    <bean id="springContextHolder" class="com.yidingliu.pjt.base.SpringContextHolder" />
+	
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:res.properties" />
+	
+	<!-- 加载Spring Module -->
+	<import resource="classpath:spring/spring-data.xml" />
+	<import resource="classpath:spring/spring-*.xml" />
+	<!-- 保存Spring容器 -->
+	<bean id="springContextHolder" class="com.yidingliu.pjt.base.SpringContextHolder" />
 </beans>

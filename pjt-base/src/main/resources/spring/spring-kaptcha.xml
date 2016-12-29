@@ -6,7 +6,7 @@
                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
 	default-lazy-init="true">
 
-	<description>verifyCode</description>
+	<description>验证码配置</description>
 
 	<bean id="captchaProducer4" class="com.google.code.kaptcha.impl.DefaultKaptcha">
 		<property name="config">

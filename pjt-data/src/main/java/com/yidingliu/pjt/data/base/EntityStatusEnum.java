@@ -22,7 +22,7 @@ import java.util.List;
  *<li>Content: create</li>
  *
  */
-public enum EntityEnum {
+public enum EntityStatusEnum {
 
 	/** 正常 */
 	NORMAL(0, "正常"),
@@ -42,7 +42,7 @@ public enum EntityEnum {
 	 * @param code
 	 * @param message
 	 */
-	private EntityEnum(Integer code, String message) {
+	private EntityStatusEnum(Integer code, String message) {
 		this.code = code;
 		this.message = message;
 	}
@@ -81,8 +81,8 @@ public enum EntityEnum {
 	 * @param code
 	 * @return EntityEnum
 	 */
-	public static EntityEnum getByCode(String code) {
-		for (EntityEnum _enum : values()) {
+	public static EntityStatusEnum getByCode(String code) {
+		for (EntityStatusEnum _enum : values()) {
 			if (_enum.getCode().equals(code)) {
 				return _enum;
 			}
@@ -95,9 +95,9 @@ public enum EntityEnum {
 	 * 
 	 * @return List<EntityEnum>
 	 */
-	public List<EntityEnum> getAllEnum() {
-		List<EntityEnum> list = new ArrayList<EntityEnum>();
-		for (EntityEnum _enum : values()) {
+	public List<EntityStatusEnum> getAllEnum() {
+		List<EntityStatusEnum> list = new ArrayList<EntityStatusEnum>();
+		for (EntityStatusEnum _enum : values()) {
 			list.add(_enum);
 		}
 		return list;
@@ -110,7 +110,7 @@ public enum EntityEnum {
 	 */
 	public List<Integer> getAllEnumCode() {
 		List<Integer> list = new ArrayList<Integer>();
-		for (EntityEnum _enum : values()) {
+		for (EntityStatusEnum _enum : values()) {
 			list.add(_enum.code());
 		}
 		return list;

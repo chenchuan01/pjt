@@ -33,7 +33,7 @@ public class LogUtil {
 	 * @param params
 	 */
 	public static void info(Class<?> clazz, String context, Object... params) {
-		logger = LoggerFactory.getLogger(clazz);
+		logger(clazz);
 		context = FormatUtil.formatParam(context, params);
 		logger.info(context, params);
 	}
@@ -59,7 +59,7 @@ public class LogUtil {
 	 * @param params
 	 */
 	private static void error(Class<?> clazz, String context, Object... params) {
-		logger = LoggerFactory.getLogger(clazz);
+		logger(clazz);
 		logger.error(context, params);
 	}
 
@@ -84,19 +84,19 @@ public class LogUtil {
 	 * @param e
 	 */
 	public static void error(Class<?> clazz, String context, Exception e) {
-		logger = LoggerFactory.getLogger(clazz);
+		logger(clazz);
 		logger.error(context, e);
 	}
 
-	/**
-	 * 记录业务异常
-	 * 
-	 * @param clazz
-	 * @param context
-	 * @param e
-	 *//*
-		 * public static void error(Class<?> clazz, AppExpection e) { String
-		 * context = "BusExpection[method=" + e.getMethodName() + "msg=" +
-		 * e.getMessage() + "]\n"; error(clazz, context, e); }
-		 */
+	public static Logger logger(Class<?> clazz) {
+		logger = LoggerFactory.getLogger(clazz);
+		return logger;
+	}
+
+	public static void debug(Class<?> clazz, String msg) {
+		logger(clazz);
+		logger.debug(msg);
+	}
+
+	
 }

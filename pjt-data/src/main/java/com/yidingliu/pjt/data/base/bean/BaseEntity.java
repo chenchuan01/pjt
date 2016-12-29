@@ -3,7 +3,7 @@ package com.yidingliu.pjt.data.base.bean;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
-import com.yidingliu.pjt.data.base.EntityEnum;
+import com.yidingliu.pjt.data.base.EntityStatusEnum;
 
 
 /**
@@ -44,7 +44,7 @@ public class BaseEntity {
 	private Date updateDate;
 	
 	public BaseEntity(){
-		setStatus(EntityEnum.NORMAL.code());
+		setStatus(EntityStatusEnum.NORMAL.code());
 		setCreateDate(new Date());
 		setUpdateDate(new Date());
 	}

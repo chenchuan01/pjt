@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO" />
+	<!-- 核心安全会话管理监听 -->
+	<bean id="sessionManager" class="com.yidingliu.pjt.base.auth.WebSessionManager">
+		<property name="sessionDAO" ref="sessionDAO" />
+		<property name="sessionListeners">
+			<list>
+				<bean class="com.yidingliu.pjt.base.auth.WebSessionListener" />
+			</list>
+		</property>
+		<property name="globalSessionTimeout" value="1800000" />
+	</bean>
+	<!-- 权限认证缓存 -->
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:cache/shiro-cache.xml" />
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+	<!-- 登录时与数据库交互的类 -->
+	<bean id="shiroDbRealm" class="com.yidingliu.pjt.data.base.auth.ShiroDbRealm">
+		<property name="authorizationCacheName" value="shiro.authorizationCache" />
+	</bean>
+	<!-- securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="sessionMode" value="native" />
+		<property name="sessionManager" ref="sessionManager" />
+		<property name="cacheManager" ref="shiroCacheManager" />
+		<property name="realm" ref="shiroDbRealm" />
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+	<!-- shrio的filter，在这里可以配置，登陆相关的页面，及对哪些URL进行权限拦截权限认证 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/auth.htm" />
+		<!--授权失败时跳到的页面 -->
+		<property name="unauthorizedUrl" value="/error.htm?code=401" />
+		<property name="filters">
+            <util:map>
+                <entry key="permissionFilter">
+                    <bean class="com.yidingliu.pjt.web.filter.PermissionFilter"/>
+                </entry>
+            </util:map>
+        </property>
+		<property name="filterChainDefinitions">
+			<value>
+				/com/**  = anon
+				/auth/** = anon
+				<!-- permission validation -->
+				/** = authc,permissionFilter
+			</value>
+		</property>
+	</bean>
+</beans>

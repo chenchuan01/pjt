@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yidingliu.pjt.data.base.EntityEnum;
+import com.yidingliu.pjt.data.base.EntityStatusEnum;
 import com.yidingliu.pjt.data.base.bean.BaseEntity;
 import com.yidingliu.pjt.data.base.dto.QueryParam;
 import com.yidingliu.pjt.data.base.exception.DataErrorEnum;
@@ -95,7 +95,7 @@ public class BaseServiceImpl<E extends BaseEntity, M extends BaseExample> implem
 	public int delete(E e) {
 		if(e!=null){
 			//系统处理删除为假删除
-			e.setStatus(EntityEnum.DELETED.code());
+			e.setStatus(EntityStatusEnum.DELETED.code());
 			return updateNotNull(e);
 		}
 		return 0;
