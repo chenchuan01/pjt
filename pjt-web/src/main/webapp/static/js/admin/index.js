@@ -17,6 +17,7 @@ $('.larry-side-menu').click(function() {
       $('#larry-side').animate({
         width: '0'
       });
+      $('.larry-side-menu i').html("&#xe602;");
   } else {
       $('#larry-body').animate({
         left: '200px'
@@ -27,6 +28,7 @@ $('.larry-side-menu').click(function() {
       $('#larry-side').animate({
         width: '200px'
       });
+      $('.larry-side-menu i').html("&#xe603;");
   }
 });
 
