@@ -10,11 +10,9 @@
     font-weight: normal;
     font-style: normal;
 }
-.layui-canvs{
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	z-index: -1;
+.larry-login{
+	background: #c4c4c4;
+	padding: 0;
 }
 .layui-layout-login{
     width:350px;
@@ -25,7 +23,7 @@
     padding-right: 50px;
     padding-top: 40px;
     padding-bottom: 20px;
-    box-shadow:0 -15px 30px #0d957a;
+    box-shadow:0 -10px 80px #e4e4e4;
     border-radius:5px;
     z-index: 1000;
 }
@@ -34,7 +32,6 @@
 	font-weight:bold;
 	text-align:center;
 	color:#45bda6;
-	text-shadow:0 0 1px #0e947a;
 	margin-bottom:15px;
 }
 .layui-layout-login h1 strong{

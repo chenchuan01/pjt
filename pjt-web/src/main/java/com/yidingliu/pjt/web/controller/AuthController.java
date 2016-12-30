@@ -3,6 +3,9 @@ package com.yidingliu.pjt.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yidingliu.pjt.data.bean.sys.SysUser;
+import com.yidingliu.pjt.web.util.SessionUtil;
+
 /**
  *                       
  * @Filename AuthController.java
@@ -32,6 +35,7 @@ public class AuthController {
 	}
 	@RequestMapping("/login")
 	public String login(){
+		SessionUtil.setLoginUser(new SysUser());
 		return "redirect:/admin.htm";
 	}
 	

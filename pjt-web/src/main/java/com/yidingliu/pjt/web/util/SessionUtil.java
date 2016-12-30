@@ -53,6 +53,48 @@ public class SessionUtil {
 	public static List<SysCompetence> getUserPermission() {
 		return (List<SysCompetence>)attribute(Constants.LOGIN_USER_PERMISSION);
 	}
+	/** 
+	 * <p>标题: setLoginUser</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月29日</p>
+	 * @param sysUser
+	 */
+	public static void setLoginUser(SysUser sysUser){
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.getSession().setAttribute(Constants.LOGIN_USER_PERMISSION, sysUser);
+	}
+	/** 
+	 * <p>标题: setUserPermission</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月29日</p>
+	 * @param competences
+	 */
+	public static void setUserPermission(List<SysCompetence> competences){
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.getSession().setAttribute(Constants.LOGIN_USER_PERMISSION, competences);
+	}
+	/** 
+	 * <p>标题: setUserAndAuth</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月29日</p>
+	 * @param sysUser
+	 * @param competences
+	 */
+	public static void setUserAndAuth(SysUser sysUser,List<SysCompetence> competences){
+		setLoginUser(sysUser);
+		setUserPermission(competences);
+	}
+	/** 
+	 * <p>标题: attribute</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月29日</p>
+	 * @param key
+	 * @return
+	 */
 	private static Object attribute(String key) {
 		Subject currentUser = SecurityUtils.getSubject();
 		return currentUser.getSession().getAttribute(key);
