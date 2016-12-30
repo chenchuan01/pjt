@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yidingliu.pjt.data.mapper.sys.SysUserMapper">
+	<resultMap id="BaseResultMap" type="com.yidingliu.pjt.data.bean.sys.SysUser">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="lastLoginTime" property="lastLoginTime" jdbcType="TIMESTAMP" />
+		<result column="loginName" property="loginName" jdbcType="VARCHAR" />
+		<result column="loginPassword" property="loginPassword" jdbcType="VARCHAR" />
+		<result column="niceName" property="niceName" jdbcType="VARCHAR" />
+		<result column="tel" property="tel" jdbcType="VARCHAR" />
+		<result column="roleId" property="roleId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, createDate, updateDate, status, lastLoginTime,
+		loginName,
+		loginPassword, 
+		niceName,
+		tel,
+		roleId
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.yidingliu.pjt.data.mapper.example.sys.SysUserExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from sysuser
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from sysuser
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		sysuser
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.yidingliu.pjt.data.mapper.example.sys.SysUserExample">
+		delete from sysuser
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.yidingliu.pjt.data.bean.sys.SysUser">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into sysuser (id, createDate, updateDate,
+		status, lastLoginTime,
+		loginName,
+		loginPassword, 
+		niceName, 
+		tel,
+		roleId
+		)
+		values
+		(#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=TINYINT},
+		#{lastLoginTime,jdbcType=TIMESTAMP}, #{loginName,jdbcType=VARCHAR},
+		#{loginPassword,jdbcType=VARCHAR}, #{niceName,jdbcType=VARCHAR},
+		#{tel,jdbcType=VARCHAR},
+		#{roleId,jdbcType=BIGINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.yidingliu.pjt.data.bean.sys.SysUser">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into sysuser
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="createDate != null">
+				createDate,
+			</if>
+			<if test="updateDate != null">
+				updateDate,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="lastLoginTime != null">
+				lastLoginTime,
+			</if>
+			<if test="loginName != null">
+				loginName,
+			</if>
+			<if test="loginPassword != null">
+				loginPassword,
+			</if>
+			<if test="niceName != null">
+				niceName,
+			</if>
+			<if test="tel != null">
+				tel,
+			</if>
+			<if test="roleId != null">
+				roleId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="lastLoginTime != null">
+				#{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="loginPassword != null">
+				#{loginPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="niceName != null">
+				#{niceName,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.yidingliu.pjt.data.mapper.example.sys.SysUserExample"
+		resultType="java.lang.Integer">
+		select count(*) from sysuser
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update sysuser
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=BIGINT},
+			</if>
+			<if test="record.createDate != null">
+				createDate = #{record.createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateDate != null">
+				updateDate = #{record.updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=TINYINT},
+			</if>
+			<if test="record.lastLoginTime != null">
+				lastLoginTime =
+				#{record.lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.loginName != null">
+				loginName = #{record.loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.loginPassword != null">
+				loginPassword = #{record.loginPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="record.niceName != null">
+				niceName = #{record.niceName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tel != null">
+				tel = #{record.tel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.roleId != null">
+				roleId = #{record.roleId,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update sysuser
+		set id = #{record.id,jdbcType=BIGINT},
+		createDate =
+		#{record.createDate,jdbcType=TIMESTAMP},
+		updateDate =
+		#{record.updateDate,jdbcType=TIMESTAMP},
+		status =
+		#{record.status,jdbcType=TINYINT},
+		lastLoginTime =
+		#{record.lastLoginTime,jdbcType=TIMESTAMP},
+		loginName =
+		#{record.loginName,jdbcType=VARCHAR},
+		loginPassword =
+		#{record.loginPassword,jdbcType=VARCHAR},
+		niceName =
+		#{record.niceName,jdbcType=VARCHAR},
+		tel =
+		#{record.tel,jdbcType=VARCHAR},
+		roleId =
+		#{record.roleId,jdbcType=BIGINT},
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yidingliu.pjt.data.bean.sys.SysUser">
+		update sysuser
+		<set>
+			<if test="createDate != null">
+				createDate = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				updateDate = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="lastLoginTime != null">
+				lastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginName != null">
+				loginName = #{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="loginPassword != null">
+				loginPassword = #{loginPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="niceName != null">
+				niceName = #{niceName,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				roleId = #{roleId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yidingliu.pjt.data.bean.sys.SysUser">
+		update sysuser
+		set
+		createDate = #{createDate,jdbcType=TIMESTAMP},
+		updateDate = #{updateDate,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=TINYINT},
+		lastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP},
+		loginName = #{loginName,jdbcType=VARCHAR},
+		loginPassword = #{loginPassword,jdbcType=VARCHAR},
+		niceName = #{niceName,jdbcType=VARCHAR},
+		tel = #{tel,jdbcType=VARCHAR},
+		roleId = #{roleId,jdbcType=BIGINT}
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>
