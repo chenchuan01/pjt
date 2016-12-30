@@ -1,10 +1,58 @@
-<html>
-<body>
-	<ul>
-		#foreach( $user in $list) 
-			<li>$!{user.id}</li>
-			<li>$!{user.userName}</li>
-		#end
-	</ul>
-</body>
-</html>
+<section class="layui-main"><!--页面开始  -->
+	<div class="layui-header"><!-- 页面头部 -->
+		<div class=""><!--头部左侧导航  -->
+			<h1 class="layui-header layui-header-item">
+				<i class="layui-icon">&#xe642;</i> 
+					用户列表
+				<span>&gt; 
+					列表 
+				</span>
+			</h1>
+		</div>
+		<div class="layui-header"><!--头部右侧添加按钮  -->
+			<a href="" class="layui-but" >
+				<i class="layui-icon">&#xe61f;</i>
+				添加按钮
+			</a>  
+		</div>
+	</div><!--页面头部结束  -->
+	<div class="layui-body"><!-- 页面主体 -->
+				<header><!--主体标题  -->
+					<span><i class="layui-icon">&#xe62d;</i> </span>
+					<h2>用户列表</h2>
+				</header>
+				<div class="layui-body layui-body-items"><!-- 主体内容 -->
+					<form class="layui-form"  action="" id="userForm"  enctype="multipart/form-data">
+					  <div >
+						<div  class="layui-form-item">
+						 	<label class="layui-form-block">
+						 		<span >用户名称：</span> 
+						 		<input type="search"  placeholder="" name="" value="" class="layui-input">
+						 	</label>
+						 	<label class="layui-form-block">
+						 		<a href=""  id="submit" class="layui-but"><i class="layui-icon" >&#xe615;</i>搜索</a>
+							</label>
+						</div>
+					 </div>
+					 <div>
+						<table class="layui-table">
+					        <thead>
+					            <tr>
+					            	<th>用户名称</th>
+									<th style="min-width:250px;">操作</th>
+							   </tr>
+					        </thead>
+					        <tbody>
+					           #foreach($element in $pageList)
+									<tr>
+										<td></td>
+									</tr>
+								 #end
+					        </tbody>
+						</table>
+						#parse("/system/page.html")
+					</div>	
+			  </div><!--主体结束  -->
+	</div><!--页面主体结束  -->
+</section><!-- 页面结束 -->
+	

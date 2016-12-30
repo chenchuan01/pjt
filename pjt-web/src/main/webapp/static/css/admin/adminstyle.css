@@ -55,40 +55,7 @@
 .larry-side-menu:hover{
 	background-color: #5FB878;
 }
-/* 头部左侧 */
-.layui-larry-menu{
-	width: auto;
-	height: 70px;
-	position: absolute;
-	left: 245px;
-	top: 0px;
-}
-.layui-larry-menu ul.layui-nav{
-	height: 70px;
-	position:static;
-}
-.layui-larry-menu ul.layui-nav li.layui-nav-item{
-	margin: 0px;
-}
-.layui-larry-menu ul.layui-nav li.layui-nav-item a{
-	color: #F5F5F5;
-	font-size: 14px;
-	line-height: 60px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-.layui-larry-menu ul.layui-nav li.layui-nav-item a i{
-	padding-right: 5px;
-	line-height: 70px;
-}
-.layui-larry-menu ul.layui-nav .layui-this{
-	background: #2B2E37;
 
-}
-.layui-larry-menu ul.layui-nav .layui-this::after{
-	/* background: #2B2E37; */
-	background: #1AA094;
-}
 /* 头部右侧 */
 .header ul.larry-header-item{
 	height: 70px;
@@ -96,14 +63,6 @@
 .header ul.larry-header-item li.layui-nav-item{
 	margin-left: 0px;
 	margin-right: 0px;
-}
-.header ul.larry-header-item .userimg{
-	width: 40px;
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border: 4px solid #44576b;
-	margin-top: -6px;
 }
 .header ul.larry-header-item .layui-this{
 	background: #393D49;
@@ -159,10 +118,7 @@
 	bottom: 0;
 	border-left: solid 2px #1AA094;
 }
-.layui-tab-content{
-	min-height: 150px; 
-	/* padding: 5px 0 0 0; */
-}
+
  /* tab选项卡 */
 .layui-body{
  	padding-left: 10px;
