@@ -27,4 +27,8 @@ public class Constants {
 	 * 已经登录用户的权限
 	 */
 	public static final String LOGIN_USER_PERMISSION = "LOGIN_USER_PERMISSION";
+	/**
+	 * 已经登录用户的角色
+	 */
+	public static final String LOGIN_USER_ROLE = "LOGIN_USER_ROLE";
 }

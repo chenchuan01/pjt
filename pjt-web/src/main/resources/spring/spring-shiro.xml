@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="gbk"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
 	default-lazy-init="true">
 
@@ -43,8 +43,9 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/auth.htm" />
+		 <property name="successUrl" value="/admin.htm"/>
 		<!--授权失败时跳到的页面 -->
-		<property name="unauthorizedUrl" value="/error.htm?code=401" />
+		<property name="unauthorizedUrl" value="/auth/error.htm?code=401" />
 		<property name="filters">
             <util:map>
                 <entry key="permissionFilter">
@@ -54,9 +55,9 @@
         </property>
 		<property name="filterChainDefinitions">
 			<value>
-				/com/**  = anon
 				/auth/** = anon
-				/admin.htm = anon
+				/com/**  = anon
+				/error.htm =anon
 				<!-- permission validation -->
 				/** = authc,permissionFilter
 			</value>

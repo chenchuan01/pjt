@@ -45,7 +45,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser,SysUserExample> 
 	}
 
 	@Override
-	public Long verifyUser(SysUser sysUser) {
+	public SysUser verifyUser(SysUser sysUser) {
 		if(sysUser!=null){
 			SysUserExample example = new SysUserExample();
 			SysUserExample.Criteria criteria = example.createCriteria();
@@ -59,9 +59,9 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser,SysUserExample> 
 				sysUser.setLastLoginTime(new Date());
 				updateNotNull(sysUser);
 			}
-			return verifyResult?sysUser.getId():-1L;
+			return sysUser;
 		}
-		return -1L;
+		return null;
 	}
 
 	@Override
@@ -72,5 +72,16 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser,SysUserExample> 
 			return sysUser.getId();
 		}
 		return -1L;
+	}
+	@Override
+	public SysUser queryUserByName(String userName) {
+		SysUserExample example = new SysUserExample();
+		SysUserExample.Criteria criteria = example.createCriteria();
+		criteria.andLoginNameEqualTo(userName);
+		List<SysUser> list = findByQuery(example);
+		if(list!=null&&!list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
 	}
 }

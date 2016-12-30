@@ -34,9 +34,9 @@ public interface SysUserService extends BaseService<SysUser, SysUserExample> {
 	 * @param sysUser
 	 * 		  loginName（用户名）
 	 * 		  loginPassword（密码）
-	 * @return -1/userId
+	 * @return null/SysUser
 	 */
-	Long verifyUser(SysUser sysUser);
+	SysUser verifyUser(SysUser sysUser);
 	
 	/** 
 	 * <p>标题: registUser</p>	
@@ -47,5 +47,15 @@ public interface SysUserService extends BaseService<SysUser, SysUserExample> {
 	 * @return 新增用户Id
 	 */
 	Long registUser(SysUser sysUser);
+	
+	/** 
+	 * <p>标题: queryUserByName</p>	
+	 * <p>说明: 根据用户名查询用户</p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月30日</p>
+	 * @param userName
+	 * @return
+	 */
+	SysUser queryUserByName(String userName);
 
 }

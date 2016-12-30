@@ -12,6 +12,7 @@ var Request = function(){
 	
 	var REQTYPE_POST="post";
 	var REQTYPE_GET="get";
+	
 	/**
 	 * POST 请求
 	 */

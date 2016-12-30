@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 
 import com.yidingliu.pjt.base.util.LogUtil;
+import com.yidingliu.pjt.data.base.auth.ShiroSessionMng;
 import com.yidingliu.pjt.data.bean.sys.SysCompetence;
 import com.yidingliu.pjt.data.bean.sys.SysUser;
-import com.yidingliu.pjt.web.util.SessionUtil;
 
 /**
  *                       
@@ -63,11 +63,16 @@ public class PermissionFilter extends AuthorizationFilter {
 	 * @return
 	 */
 	private boolean checkPermission(String url,ServletRequest request) {
-		SysUser master = SessionUtil.getLoginUser();
+		SysUser master = ShiroSessionMng.getLoginUser();
 		if (master == null) {
 			return false;
 		}
-		List<SysCompetence> userComs=SessionUtil.getUserPermission();
+		/**放开首页检查*/
+		if("/admin.htm".equals(url)){
+			LogUtil.debug(getClass(),"权限验证成功,url=>{0} 请求用户=>{1}",url,master.getLoginName());
+			return true;
+		}
+		List<SysCompetence> userComs=ShiroSessionMng.getUserPermission();
 		for (SysCompetence action : userComs) {
 			String permission = action.getUrl();
 			if (action.getParentId()==null) {//父级菜单不做拦截
@@ -80,11 +85,11 @@ public class PermissionFilter extends AuthorizationFilter {
 			}
 			Pattern p = Pattern.compile(permission);
 			if (p.matcher(url).matches()) {
-				LogUtil.info(getClass(),"权限验证成功,code=>{0} 请求用户=>{1} URL=>{2}",url,master.getLoginName(),request.getRemoteAddr());
+				LogUtil.debug(getClass(),"权限验证成功,url=>{0} 请求用户=>{1}",url,master.getLoginName());
 				return true;
 			}
 		}
-		LogUtil.info(getClass(),"权限验证失败,code=>{0} 请求用户=>{1} URL=>{2}",url,master.getLoginName(),request.getRemoteAddr());
+		LogUtil.debug(getClass(),"权限验证失败,url=>{0} 请求用户=>{1}",url,master.getLoginName());
 		return false;
 	}
 	

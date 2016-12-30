@@ -35,7 +35,7 @@ public class FormatUtil {
 		if(param!=null&&param.length>0
 				&&StringUtil.isNotBlank(content)){
 			for (int i = 0; i < param.length; i++) {
-				content=content.replaceAll("{"+i+"}", param[i].toString());
+				content=content.replaceAll("\\{"+i+"\\}", param[i].toString());
 			}
 		}
 		return content;

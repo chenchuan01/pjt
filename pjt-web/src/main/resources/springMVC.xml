@@ -21,18 +21,33 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
-
-	<!-- 解决fastjson循环引用 -->
-	<bean id="DisableCircularReferenceDetect"
-		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
-		<property name="staticField"
-			value="com.alibaba.fastjson.serializer.SerializerFeature.DisableCircularReferenceDetect"></property>
+	<!-- 控制层 数据绑定转换类型 -->
+	<bean class = "org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
+   		<property name="messageConverters">
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+		            <list>
+						<value>application/json;charset=UTF-8</value>
+						<value>html/json;charset=UTF-8</value>
+						<value>text/plain;charset=UTF-8</value>
+					</list>
+        		</property>
+        		<property name="features">  
+			        <array value-type="com.alibaba.fastjson.serializer.SerializerFeature">  
+			           <value>DisableCircularReferenceDetect</value>  
+			        </array>  
+			    </property>
+			</bean>
+		</property>
 	</bean>
-
-	<bean
-		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-
-
+	<!-- 解决fastjson循环引用 -->
+	<bean id="DisableCircularReferenceDetect" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.DisableCircularReferenceDetect"></property>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	
+	
 	<!-- 配置velocity引擎 -->
 	<bean id="velocityConfig"
 		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">

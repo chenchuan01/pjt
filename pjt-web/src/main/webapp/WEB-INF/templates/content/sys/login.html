@@ -46,20 +46,7 @@
     </div>
 </div>
 <script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
-<script type="text/javascript" src="/static/js/login/login.js"></script>
 <script type="text/javascript" src="/static/js/front.app.js"></script>
-<script type="text/javascript">
-$(function(){
-	layui.use(['form'], function(){
-		  var form = layui.form(),
-		  layer = layui.layer;
-		  //自定义验证规则
-		  form.verify({
-		   	pass: [/(.+){6,12}$/, '密码必须6到12位']
-		  });
-		  
-		});
-});
-</script>
+<script type="text/javascript" src="/static/js/login/login.js"></script>
 
 </body></html>

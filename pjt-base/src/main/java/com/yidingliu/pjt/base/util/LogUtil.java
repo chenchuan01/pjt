@@ -38,18 +38,6 @@ public class LogUtil {
 		logger.info(context, params);
 	}
 
-	/**
-	 * info级别（含方法名）
-	 * 
-	 * @param clazz
-	 * @param methodName
-	 * @param context
-	 * @param params
-	 */
-	public static void info(Class<?> clazz, String methodName, String context, Object... params) {
-		context = "methodName=>(" + methodName + ");info->" + context;
-		info(clazz, context, params);
-	}
 
 	/**
 	 * error级别
@@ -93,9 +81,29 @@ public class LogUtil {
 		return logger;
 	}
 
+	/** 
+	 * <p>标题: debug</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月30日</p>
+	 * @param clazz
+	 * @param msg
+	 */
 	public static void debug(Class<?> clazz, String msg) {
 		logger(clazz);
 		logger.debug(msg);
+	}
+	/** 
+	 * <p>标题: debug</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月30日</p>
+	 * @param clazz
+	 * @param msg
+	 */
+	public static void debug(Class<?> clazz, String content,Object...param) {
+		logger(clazz);
+		logger.debug(FormatUtil.formatParam(content, param));
 	}
 
 	

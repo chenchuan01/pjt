@@ -26,6 +26,7 @@ import com.yidingliu.pjt.data.mapper.example.sys.SysRoleExample;
  */
 public interface SysRoleService extends BaseService<SysRole, SysRoleExample> {
 	
+	
 	/** 
 	 * <p>标题: queryUserRole</p>	
 	 * <p>说明: 查询用户角色</p>	
