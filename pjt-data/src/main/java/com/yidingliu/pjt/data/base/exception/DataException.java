@@ -26,15 +26,34 @@ public class DataException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	
+	/**
+	 * 构建一个<code>DataException.java</code>
+	 * @param dataErr
+	 */
 	public DataException(DataErrorEnum dataErr) {
 		setCode(dataErr.code().toString());
 		setMsg(dataErr.getMessage());
 	}
 
 
+	/**
+	 * 构建一个<code>DataException.java</code>
+	 * @param dataErr
+	 * @param param
+	 */
 	public DataException(DataErrorEnum dataErr, Object... param) {
 		setCode(dataErr.code().toString());
 		setMsg(FormatUtil.formatParam(dataErr.getMessage(), param));
 	}
 	
+	/**
+	 * 构建一个<code>DataException.java</code>
+	 * @param errCode
+	 * @param msg
+	 * @param param
+	 */
+	public DataException(String errCode,String msg,Object... param){
+		setCode(errCode);
+		setMsg(FormatUtil.formatParam(msg, param));
+	}
 }

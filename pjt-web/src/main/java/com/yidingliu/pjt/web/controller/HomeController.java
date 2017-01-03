@@ -23,11 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-public class ComController {
+@RequestMapping("/admin")
+public class HomeController {
 	private static final String CONTENT_ROOT="content/";
-	@RequestMapping("/admin")
+	@RequestMapping("")
 	public String admin(){
-		
 		return CONTENT_ROOT+"admin";
+	}
+	@RequestMapping("/dashboard")
+	public String dashboard(){
+		return CONTENT_ROOT+"dashboard";
 	}
 }

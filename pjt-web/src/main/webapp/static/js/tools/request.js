@@ -33,24 +33,22 @@ var Request = function(){
 	/**
 	 * PAGE 跳转请求
 	 */
-	var page = function(url){
+	var page = function(reqMap){
 		if(reqMap){
 			reqMap['dataType']=DATA_TYPE_HTML;
-			reqMap['suc']=function(rslt){
-				
-			};
-			reqMap['err']=function(rslt){
-				
-			};
 			ajax(reqMap);
 		}
 	}
 	
-	var success = function(){
-		
+	var success = function(rslt,suc){
+		if(suc&&typeof(suc)=='function'){
+			suc(rslt);
+		}
 	};
-	var error   = function(){
-		
+	var error   = function(rslt,err){
+		if(err&&typeof(err)=='function'){
+			err(rslt);
+		}
 	};
 	/**
 	 * 前台网络请求封装 param 
