@@ -68,7 +68,7 @@ public class PermissionFilter extends AuthorizationFilter {
 			return false;
 		}
 		/**放开首页检查*/
-		if("/admin.htm".equals(url)){
+		if(url.indexOf("admin")>-1){
 			LogUtil.debug(getClass(),"权限验证成功,url=>{0} 请求用户=>{1}",url,master.getLoginName());
 			return true;
 		}

@@ -47,6 +47,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser,SysUserExample> 
 	@Override
 	public SysUser verifyUser(SysUser sysUser) {
 		if(sysUser!=null){
+			SysUser dbUser = null;
 			SysUserExample example = new SysUserExample();
 			SysUserExample.Criteria criteria = example.createCriteria();
 			criteria.andLoginNameEqualTo(sysUser.getLoginName());
@@ -54,12 +55,12 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser,SysUserExample> 
 			List<SysUser> rslt = findByQuery(example);
 			boolean verifyResult= rslt!=null&&rslt.size()>0;
 			if(verifyResult){
-				sysUser = rslt.get(0);
+				dbUser = rslt.get(0);
 				//更新上次登陆时间
-				sysUser.setLastLoginTime(new Date());
-				updateNotNull(sysUser);
+				dbUser.setLastLoginTime(new Date());
+				updateNotNull(dbUser);
 			}
-			return sysUser;
+			return dbUser;
 		}
 		return null;
 	}

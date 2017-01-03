@@ -2,7 +2,6 @@ package com.yidingliu.pjt.data.base.auth;
 
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,12 +10,9 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.apache.shiro.subject.Subject;
 
-import com.alibaba.fastjson.JSON;
 import com.yidingliu.pjt.base.util.LogUtil;
 import com.yidingliu.pjt.data.bean.sys.SysCompetence;
 import com.yidingliu.pjt.data.bean.sys.SysRole;

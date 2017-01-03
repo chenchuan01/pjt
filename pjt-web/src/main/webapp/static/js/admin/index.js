@@ -34,7 +34,9 @@ $('.larry-side-menu').click(function() {
 
  
 $(function(){
-   // 刷新iframe操作
+	var req = new Request();
+	var element = layui.element();
+	// 刷新iframe操作
     $("#refresh_iframe").click(function(){
        $(".layui-tab-content .layui-tab-item").each(function(){
           if($(this).hasClass('layui-show')){
@@ -42,81 +44,28 @@ $(function(){
           }
        });
     });
-   $('#lock').mouseover(function(){
-   	   layer.tips('请按Alt+L快速锁屏！', '#lock', {
-             tips: [1, '#FF5722'],
-             time: 4000
-       });
-   })
-   // 快捷键锁屏设置
-    $(document).keydown(function(e){
-         if(e.altKey && e.which == 76){
-         	 lockSystem();
-         }
-    });
-   function startTimer(){
-   	    var today=new Date();
-        var h=today.getHours();
-        var m=today.getMinutes();
-        var s=today.getSeconds();
-        m = m < 10 ? '0' + m : m;
-        s = s < 10 ? '0' + s : s;
-        $('#time').html(h+":"+m+":"+s);
-        t=setTimeout(function(){startTimer()},500);
-   }
-   // 锁屏状态检测
-   function checkLockStatus(locked){
-        // 锁屏
-        if(locked == 1){
-        	$('.lock-screen').show();
-            $('#locker').show();
-            $('#layui_layout').hide();
-            $('#lock_password').val('');
-        }else{
-        	$('.lock-screen').hide();
-            $('#locker').hide();
-            $('#layui_layout').show();
-        }
-    }
-
-   checkLockStatus('0');
-   // 锁定屏幕
-   function lockSystem(){
-   		
-   	   var url = '';
-   	   $.post(
-   	   	   url,
-   	   	   function(data){
-   	   	   if(data=='1'){
-   	   	   	  checkLockStatus(1);
-   	   	   }else{
-              layer.alert('锁屏失败，请稍后再试！');
-   	   	   }
-   	   });
-   	   startTimer();
-   }
-   //解锁屏幕
-   function unlockSystem(){
-        // 与后台交互代码已移除，根据需求定义或删除此功能
-        
-   	    checkLockStatus(0);
-    }
-   // 点击锁屏
-   $('#lock').click(function(){
-   	    lockSystem();
-   });
-   // 解锁进入系统
-   $('#unlock').click(function(){
-        unlockSystem();
-   });
-   // 监控lock_password 键盘事件
-   $('#lock_password').keypress(function(e){
-        var key = e.which;
-        if (key == 13) {
-            unlockSystem();
-        }
-    });
-    
+    //监听菜单点击跳转
+    $('a[menu-href]').click(function(){
+		var href=$(this).attr('menu-href');
+		var name=$(this).attr('menu-name');
+		if(CommonUtil.isNotNull(href)){
+			
+			$('.layui-tab-title li[menu-id="'+href+'"]').remove();
+			$('.layui-tab-item  div[menu-id="'+href+'"]').remove();
+			$('.layui-tab-title .layui-this').removeClass('layui-this');
+			$('.layui-tab-content .layui-show').removeClass('layui-show');
+			$('.layui-tab-title').append('<li menu-id="'+href+'" class="layui-this" >'+name+'</li>');
+			$('.layui-tab-content').append('<div menu-id="'+href+'" class="layui-tab-item layui-show"></div>');
+			req.goPage({
+				url:href,
+				suc:function(html){
+					$('div[menu-id="'+href+'"]').html(html);
+				}
+			});
+			element.init();
+		}
+	});
+    $('#homePage').trigger('click');
 });
 
 

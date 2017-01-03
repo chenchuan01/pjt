@@ -1,5 +1,13 @@
-<html>
-<body>
-	$!{errorCode}
-</body>
-</html>
+<div style="text-align: center;color:#FF5722;">
+	 <i class="layui-icon" style="font-size: 50px;">&#xe609;</i>
+	 <label>$!{errorCode}</label> 
+	 <div style="color:#01AAED">
+	  #if($!errorCode ==  401)
+	  	<label>没有访问权限！</label>
+	  #elseif($!errorCode ==  404)
+	  	<label>页面走丢了！</label>
+	  #elseif($!errorCode ==  500)
+	  	<label>后台程序出现异常！</label>
+	  #end
+	  </div>
+</div>

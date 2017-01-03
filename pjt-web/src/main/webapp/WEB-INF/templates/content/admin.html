@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="UTF-8">
-	<title>LarryCMS后台管理</title>
+	<title>CMS后台管理</title>
 	<meta name="renderer" content="webkit">	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
@@ -43,23 +43,58 @@
 		<!-- 左侧侧边导航开始 -->
 		<div class="layui-side layui-side-bg layui-larry-side" id="larry-side">
 	        <div class="layui-side-scroll" id="larry-nav-side" lay-filter="side">
+	        	#set($sysuser=$LOGIN_USER_TOKEN)
 				<div class="user-photo">
 					<a class="img" title="我的头像"><i class="layui-icon" style="font-size: 80px;color:#eee">&#xe612;</i></a>
-					<p>你好！admin, 欢迎登录</p>
+					<p>你好！$!{sysuser.niceName}, 欢迎登录</p>
 				</div>
 				<!-- 左侧菜单 -->
-				
-				<div>
-				</div>
+				#set($menus=$LOGIN_USER_PERMISSION)
+				<ul class="layui-nav layui-nav-tree" lay-filter="side">
+				  <li class="layui-nav-item">
+				    <a id="homePage" href="javascript:;" menu-href="admin/dashboard.htm" menu-name="后台首页">
+				    	<i class="layui-icon">&#xe629;</i>
+						<span>后台首页</span>
+					</a>
+				  </li>
+				  #foreach($competece in $menus)
+						#if($competece.displayMenu && !$competece.parentId)
+						  <li class="layui-nav-item">
+						    <a href="javascript:;" menu-href="$!{competece.url}" menu-name="$!{competece.menuName}">
+						    	<i class="layui-icon">$!{competece.icon}</i>
+								<span>$!{competece.menuName}</span>
+						    </a>
+						    <dl class="layui-nav-child">
+						    #foreach($subCompetece in $menus)
+								#if($subCompetece.parentId && $subCompetece.parentId == $competece.id && $subCompetece.displayMenu)
+							      <dd>
+								      <a href="javascript:;" menu-href="$!{subCompetece.url}" menu-name="$!{subCompetece.menuName}">
+								      	<i class="layui-icon">$!{subCompetece.icon}</i>
+								      	<span>${subCompetece.menuName}</span>
+								      </a>
+							      </dd>
+							     #end
+							#end
+						    </dl>
+						  </li>
+				   		#end 
+				  #end 
+				</ul>
 		    </div>
 		</div>
-	
 		<!-- 左侧侧边导航结束 -->
+		
+		
+		
 		<!-- 右侧主体内容 -->
 		<div class="layui-body" id="larry-body" style="bottom: 0;border-left: solid 2px #1AA094;">
-			<div class="layui-tab layui-tab-card larry-tab-box" id="larry-tab" lay-filter="demo" lay-allowclose="true">
+			<div class="layui-tab" lay-allowClose="true"  lay-filter="menuTabs">
+			  <ul class="layui-tab-title"></ul>
+			  <div class="layui-tab-content"></div>
 			</div>
 		</div>
+		
+		
 		<!-- 底部区域 -->
 		<div class="layui-footer">
 	    	<font style="position: absolute; left: 650px; top: 10px;">
