@@ -7,19 +7,6 @@
 	</div>
 	<div class="layui-tab-content layui-main layui-body"><!-- 主体内容 -->
 		 <div class="layui-tab-content layui-main layui-body layui-main-header">
-			<form class="layui-main layui-body layui-main-header layui-form"  action="" id="userForm"  enctype="multipart/form-data">
-				<div  class="layui-main layui-body layui-main-header layui-form layui-form-item">
-				 	<label class="layui-main layui-body layui-main-header layui-form layui-form-item layui-form-label">用户名称：</label> 
-				 	<div class="layui-main layui-body layui-main-header layui-form layui-form-item layui-form-block">
-				 		<input type="text"  placeholder="" name="" value="" class="layui-body layui-main layui-main-header layui-form-item layui-form-block layui-input" >
-				 	</div>
-				</div>
-			 	<div class="layui-main layui-body layui-main-header layui-form layui-form-items">
-				 	<button class="layui-body layui-main layui-main-header layui-form layui-form-items layui-but-normal">
-				 		<a href=""  id="submit" ><i class="layui-icon" >&#xe615;</i>搜索</a>
-					</button>
-			 	</div>
-			</form>
 			<div class="layui-tab-content layui-main layui-body layui-main-header layui-but">
 				<div class="layui-tab-content layui-main layui-body layui-main-header layui-but layui-item">
 					<a href="">
@@ -32,18 +19,20 @@
 			<table class="layui-table">
 		        <thead>
 		            <tr>
-		            	<th>用户编号</th>
-		            	<th>用户名称</th>
-		            	<th>用户密码</th>
+		            	<th>管理员账号</th>
+		            	<th>管理员昵称</th>
+		            	<th>角色</th>
+						<th>最后一次登录时间</th>
 						<th>操作</th>
 				   </tr>
 		        </thead>
-		        <tbody>
+		        <tbody id="table">
 				#foreach($element in $list)
-					<tr class="" >
-					<td>$!{element.id}</td>
-					<td>$!{element.userName}</td>
-					<td>$!{element.userPwd}</td>
+				<tr>
+					<td>$!{element.loginName}</td>
+					<td>$!{element.niceName}</td>
+					<td>$!{element.roleId}</td>
+					<td>$!{element.lastLoginTime}</td>
 					<td>
 					<a href="" target="_viewURL" title="修改"><i class="layui-icon" style="color: blue;">&#xe642;</i><font color="blue">修改</font></a>
 					<a href="javascript:void(0);" page=""  atr="$!{element.id}" uname="$!{element.bannerName}" title="删除"><i class="layui-icon" style="color: red;">&#x1006;</i><font color="red">删除</font></a>									
@@ -53,11 +42,52 @@
 		        </tbody>
 			</table>
 		</div>
-		<div class="layui-laypage" id="table-tool">
-		#parse("/content/sys/page.html")
-		</div>
+		<div class="layui-laypage" id="table-tool"></div>
   </div><!--主体结束  -->
 </section>
 <script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
 <script type="text/javascript" src="/static/layui/lay/modules/laypage.js"></script>
-
+<script>
+layui.use(['laypage', 'layer'], function(){
+  var laypage = layui.laypage
+  ,layer = layui.layer;
+  
+  //测试数据
+   var data = [
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>',         
+     '<tr></tr>'       
+  ];
+  var nums = 5; //每页出现的数据量
+  //模拟渲染
+   var render = function(curr){
+    //此处只是演示，实际场景通常是返回已经当前页已经分组好的数据
+    var str = '', last = curr*nums - 1;
+    last = last >= data.length ? (data.length-1) : last;
+    for(var i = (curr*nums - nums); i <= last; i++){
+      str += '<li>'+ data[i] +'</li>';
+    }
+    return str;
+  }; 
+  //调用分页
+  laypage({
+    cont: 'table-tool'
+    ,pages: Math.ceil(data.length/nums) //得到总页数
+    ,jump: function(obj){
+      document.getElementById('biuuu_city_list').innerHTML = render(obj.curr);
+    }
+  });
+}); 
+</script>

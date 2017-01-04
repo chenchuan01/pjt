@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.pagehelper.PageInfo;
+import com.yidingliu.pjt.data.base.dto.QueryParam;
 import com.yidingliu.pjt.data.bean.User;
 import com.yidingliu.pjt.data.mapper.example.UserExample;
 import com.yidingliu.pjt.data.service.UserService;
@@ -48,7 +50,10 @@ public class UserController {
 		UserExample userExample = new UserExample();
 		userExample.createCriteria();
 		List<User> list = userService.findByQuery(userExample);
+		PageInfo<User> pageInfo = userService.pageQuery(new QueryParam<UserExample>(userExample));
 		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+		
 		return "content/user/list";
 	}
 }

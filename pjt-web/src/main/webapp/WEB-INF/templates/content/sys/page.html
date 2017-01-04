@@ -1,0 +1,47 @@
+
+	<div class="layui-box layui-laypage layui-laypage-defalut" id="layui-laypage-0">
+		<span class="layui-laypage-curr">
+			<em class="layui-laypage-em"></em><em>1</em>
+		</span>
+			<a href="javascript:;" data-page=2>2</a>
+			<a href="javascript:;" data-page=3>3</a>
+			<a href="javascript:;" data-page=4>4</a>
+			<a href="javascript:;" data-page=5>5</a>
+			<span>...</span>
+			<a href="javascript:;" class="layui-laypage-last" title="尾页" data-page=5>末页</a>
+			<a href="javascript:;" class="layui-laypage-last"  data-page=2>下一页</a>
+	</div>
+ 
+
+<!-- 传给服务器的页码 -->
+<input name="page" id="pageNow" type="hidden" value="1" />
+</form>
+<script>
+	function toPage(num_obj, num_val, form_obj){
+		if(num_val==""){
+			return false;
+		}
+		else{
+			var reg = new RegExp("^[0-9]*$");
+			if(!reg.test(num_val))
+			{
+			    alert("页码不合法");
+		        return false;
+		    }
+		}
+		if(${pageList.paginator.getPages()} < num_val)
+		{
+		    return false;
+		}
+		if (form_obj.length > 0){
+			
+			num_obj.val(num_val);
+			form_obj.ajaxSubmit(function(a){
+				
+				response(a, $.content);
+			});
+/* 			form_obj.submit(); */
+			return true;
+		}
+	} 
+</script>
