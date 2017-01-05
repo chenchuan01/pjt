@@ -3,7 +3,6 @@
  */
 package com.yidingliu.pjt.web.controller;
 
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -49,11 +48,13 @@ public class UserController {
 	public String userList(Model model){
 		UserExample userExample = new UserExample();
 		userExample.createCriteria();
-		List<User> list = userService.findByQuery(userExample);
 		PageInfo<User> pageInfo = userService.pageQuery(new QueryParam<UserExample>(userExample));
-		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
-		
+	
 		return "content/user/list";
+	}
+	@RequestMapping("adduser.htm")
+	public String addUser(Model model){
+		return "content/user/add";
 	}
 }

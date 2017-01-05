@@ -2,62 +2,55 @@
 <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css" href="/static/css/list.css" media="all">
  <section class="layui-tab-content layui-main">
-	<div class="layui-tab-content layui-main  layui-header"><!--主体标题  -->
-		<i class="layui-icon" style="color: white;">&#xe62d;</i>&gt;  <font color="white">用户列表</font>
-	</div>
-	<div class="layui-tab-content layui-main layui-body"><!-- 主体内容 -->
-		 <div class="layui-tab-content layui-main layui-body layui-main-header">
-			<form class="layui-main layui-body layui-main-header layui-form"  action="" id="userForm"  enctype="multipart/form-data">
-				<div  class="layui-main layui-body layui-main-header layui-form layui-form-item">
-				 	<label class="layui-main layui-body layui-main-header layui-form layui-form-item layui-form-label">用户名称：</label> 
-				 	<div class="layui-main layui-body layui-main-header layui-form layui-form-item layui-form-block">
-				 		<input type="text"  placeholder="" name="" value="" class="layui-body layui-main layui-main-header layui-form-item layui-form-block layui-input" >
-				 	</div>
-				</div>
-			 	<div class="layui-main layui-body layui-main-header layui-form layui-form-items">
-				 	<button class="layui-body layui-main layui-main-header layui-form layui-form-items layui-but-normal">
-				 		<a href=""  id="submit" ><i class="layui-icon" >&#xe615;</i>搜索</a>
-					</button>
-			 	</div>
-			</form>
-			<div class="layui-tab-content layui-main layui-body layui-main-header layui-but">
-				<div class="layui-tab-content layui-main layui-body layui-main-header layui-but layui-item">
-					<a href="">
-						<i class="layui-icon">&#xe608;</i>添加用户
-					</a>
-				</div>
-			</div>
-		</div> 
-		<div class="layui-tab-content layui-main layui-body layui-main-item "><!-- 主体类容主体 -->
-			<table class="layui-table">
-		        <thead>
-		            <tr>
-		            	<th>用户编号</th>
-		            	<th>用户名称</th>
-		            	<th>用户密码</th>
-						<th>操作</th>
-				   </tr>
-		        </thead>
-		        <tbody>
-				#foreach($element in $list)
-					<tr class="" >
-					<td>$!{element.id}</td>
-					<td>$!{element.userName}</td>
-					<td>$!{element.userPwd}</td>
-					<td>
-					<a href="" target="_viewURL" title="修改"><i class="layui-icon" style="color: blue;">&#xe642;</i><font color="blue">修改</font></a>
-					<a href="javascript:void(0);" page=""  atr="$!{element.id}" uname="$!{element.bannerName}" title="删除"><i class="layui-icon" style="color: red;">&#x1006;</i><font color="red">删除</font></a>									
-					</td>
-				</tr>
-				 #end
-		        </tbody>
-			</table>
+		<div id="layui-but1">
+			<button class="layui-btn" style="width: 5%;position: absolute; left: 95%;" href="/user/adduser.htm">
+			  <i class="layui-icon">&#xe608;</i> 添加
+			</button>
 		</div>
-		<div class="layui-laypage" id="table-tool">
+		<div id="layui-but2">
+			<button class="layui-btn" style="width: 5%;position: absolute; left: 88%;" href="/user/userlist.htm">
+			  <i class="layui-icon">&#x1002;</i> 刷新
+			</button>
+		</div>
+		<form class="layui-form"  action="" id="userForm"  enctype="multipart/form-data">
+			  <div class="layui-form-item" style="background-color: #c2c2c2; width: 250px;">
+			    <label class="layui-form-label">用户姓名</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" style="width: 150px;">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <a class="layui-btn" style="width: 5%;position: absolute; left: 80%; top:-150% " href=""><i class="layui-icon">&#xe615;</i>搜索</a>
+			    </div>
+			  </div>
+		</form>
+		<table class="layui-table">
+	        <thead>
+	            <tr>
+	            	<th>用户编号</th>
+	            	<th>用户名称</th>
+	            	<th>用户密码</th>
+					<th>操作</th>
+			   </tr>
+	        </thead>
+	        <tbody>
+			#foreach($element in $pageInfo.list)
+				<tr class="" >
+				<td>$!{element.id}</td>
+				<td>$!{element.userName}</td>
+				<td>$!{element.userPwd}</td>
+				<td>
+				<a href="" class="layui-btn layui-btn-mini "><i class="layui-icon">&#xe642;</i>修改</a>
+				<a href="" class="layui-btn layui-btn-mini layui-btn-danger"><i class="layui-icon">&#x1006;</i>删除</a>									
+				</td>
+			</tr>
+			 #end
+	        </tbody>
+		</table>
+		<div class="layui-laypage" id="table-tool" style="position: absolute; top: 94%; left: 35%;">
 		#parse("/content/sys/page.html")
 		</div>
-  </div><!--主体结束  -->
 </section>
 <script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
-<script type="text/javascript" src="/static/layui/lay/modules/laypage.js"></script>
 

@@ -3,15 +3,19 @@
  */
 package com.yidingliu.pjt.web.controller.sys;
 
-import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.pagehelper.PageInfo;
+import com.yidingliu.pjt.data.base.dto.QueryParam;
 import com.yidingliu.pjt.data.bean.sys.SysUser;
+import com.yidingliu.pjt.data.mapper.example.sys.SysRoleCompetenceExample;
 import com.yidingliu.pjt.data.mapper.example.sys.SysUserExample;
 import com.yidingliu.pjt.data.service.sys.SysUserService;
 
@@ -43,17 +47,27 @@ public class SysController {
 	private SysUserService sysUserService;
 	
 	@RequestMapping("user.htm")
-	public String userList(Model model){
+	public String userList(Model model, QueryParam<SysUserExample> queryParam){
 		SysUserExample sysUserExample = new SysUserExample();
 		sysUserExample.createCriteria();
-		List<SysUser> list = sysUserService.findByQuery(sysUserExample);
-		Integer total = sysUserService.countByExample(sysUserExample);
-		model.addAttribute("list", list);
-		model.addAttribute("total", total);
+		PageInfo<SysUser> pageInfo = sysUserService.pageQuery(queryParam);
+		model.addAttribute("pageInfo", pageInfo);
 		return CONTENT_ROOT + "sysuser/list";
 	}
 	@RequestMapping("edituser.htm")
-	public String updateUser(){
+	public String updateUser(Model model,HttpServletRequest request,HttpServletResponse response){
+		
 		return CONTENT_ROOT + "sysuser/update";
+	}
+	@RequestMapping("adduser.htm")
+	public String addUser(Model model,HttpServletRequest request,HttpServletResponse response){
+		
+		return CONTENT_ROOT + "sysuser/add";
+	}
+	@RequestMapping("auth.htm")
+	public String authList(Model model, QueryParam<SysRoleCompetenceExample> queryParam){
+		
+		
+		return CONTENT_ROOT + "sysauth/list";
 	}
 }
