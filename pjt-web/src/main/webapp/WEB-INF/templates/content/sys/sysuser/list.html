@@ -1,58 +1,53 @@
-<!-- load css -->
-<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" media="all">
-<link rel="stylesheet" type="text/css" href="/static/css/list.css" media="all">
- <section class="layui-tab-content layui-main">
-		<div id="layui-but1">
-			<button class="layui-btn" style="width: 5%;position: absolute; left: 95%;">
-			  <i class="layui-icon">&#xe608;</i> 添加
-			</button>
-		</div>
-		<div id="layui-but2">
-			<button class="layui-btn" style="width: 5%;position: absolute; left: 88%;">
-			  <i class="layui-icon">&#x1002;</i> 刷新
-			</button>
-		</div>
-		<form class="layui-form"  action="" id="userForm"  enctype="multipart/form-data">
-			  <div class="layui-form-item" style="background-color: #c2c2c2; width: 250px;">
-			    <label class="layui-form-label">用户姓名</label>
-			    <div class="layui-input-block">
-			      <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" style="width: 150px;">
-			    </div>
-			  </div>
-			  <div class="layui-form-item">
-			    <div class="layui-input-block">
-			      <button class="layui-btn" style="width: 5%;position: absolute; left: 80%; top:-150% " lay-submit lay-filter="formDemo"><i class="layui-icon">&#xe615;</i>搜索</button>
-			    </div>
-			  </div>
-		</form>
-		<table class="layui-table">
-	        <thead>
-	            <tr>
-	            	<th>管理员登录名称</th>
-	            	<th>管理员昵称</th>
-	            	<th>角色</th>
-	            	<th>最后一次登录时间</th>
-					<th>操作</th>
-			   </tr>
-	        </thead>
-	        <tbody>
-			#foreach($element in $pageInfo.list)
-				<tr class="" >
-				<td>$!{element.loginName}</td>
-				<td>$!{element.niceName}</td>
-				<td>$!{element.roleId}</td>
-				<td>$!{element.lastLoginTime}</td>
-				<td>
-				<a href="" class="layui-btn layui-btn-mini "><i class="layui-icon">&#xe642;</i>修改</a>
-				<a href="" class="layui-btn layui-btn-mini layui-btn-danger"><i class="layui-icon">&#x1006;</i>删除</a>									
-				</td>
-			</tr>
-			 #end
-	        </tbody>
-		</table>
-		<div class="layui-laypage" id="table-tool" style="position: absolute; top: 84%; left: 35%;">
-		#parse("/content/sys/page.html")
-		</div>
-</section>
-<script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
-
+ <div class="layui-tab-content layui-main">
+	<div id="layui-but1">
+		<button class="layui-btn" style="width: 5%;position: absolute; left: 95%;">
+		  <i class="layui-icon">&#xe608;</i> 添加
+		</button>
+	</div>
+	<div id="layui-but2">
+		<button class="layui-btn" style="width: 5%;position: absolute; left: 88%;">
+		  <i class="layui-icon">&#x1002;</i> 刷新
+		</button>
+	</div>
+	<form class="layui-form"  action="" id="userForm"  enctype="multipart/form-data">
+		  <div class="layui-form-item" style="background-color: #c2c2c2; width: 250px;">
+		    <label class="layui-form-label">用户姓名</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" style="width: 150px;">
+		    </div>
+		  </div>
+		  <div class="layui-form-item">
+		    <div class="layui-input-block">
+		      <button class="layui-btn" style="width: 5%;position: absolute; left: 80%; top:-150% " lay-submit lay-filter="formDemo"><i class="layui-icon">&#xe615;</i>搜索</button>
+		    </div>
+		  </div>
+	</form>
+	<table class="layui-table">
+        <thead>
+            <tr>
+            	<th>管理员登录名称</th>
+            	<th>管理员昵称</th>
+            	<th>角色</th>
+            	<th>最后一次登录时间</th>
+				<th>操作</th>
+		   </tr>
+        </thead>
+        <tbody>
+		#foreach($element in $pageInfo.list)
+			<tr class="" >
+			<td>$!{element.loginName}</td>
+			<td>$!{element.niceName}</td>
+			<td>$!{element.roleId}</td>
+			<td>$!{element.lastLoginTime}</td>
+			<td>
+			<a href="" class="layui-btn layui-btn-mini "><i class="layui-icon">&#xe642;</i>修改</a>
+			<a href="" class="layui-btn layui-btn-mini layui-btn-danger"><i class="layui-icon">&#x1006;</i>删除</a>									
+			</td>
+		</tr>
+		 #end
+        </tbody>
+	</table>
+	<div class="layui-laypage" id="table-tool" style="position: absolute; top: 84%; left: 35%;">
+	#parse("/content/sys/page.html")
+	</div>
+</div>

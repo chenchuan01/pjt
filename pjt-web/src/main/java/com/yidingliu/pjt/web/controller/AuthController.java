@@ -1,7 +1,9 @@
 package com.yidingliu.pjt.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -84,7 +86,28 @@ public class AuthController extends BaseController{
 		ShiroSessionMng.setUserAndAuth(null,null,new ArrayList<SysCompetence>());
 		return "redirect:/auth.htm";
 	}
-	
+	/**
+	 * "title": "基本元素",
+	"icon": "fa-cubes",
+	"spread": true,
+	"children": [{
+		"title": "按钮",
+		"icon": "&#xe641;",
+		"href": "button.html"
+	},
+	 * <p>标题: menu</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2017年1月6日</p>
+	 * @return
+	 */
+	@RequestMapping("/menu")
+	public @ResponseBody WebResult menu(){
+		WebResult rslt = new WebResult();
+		List<SysCompetence> menus= ShiroSessionMng.getUserPermission();
+		rslt.setWebRslt(WebResultEnum.STATUS_200,menus);
+		return rslt;
+	}
 	@RequestMapping("/error")
 	public String error(String code, Model m) {
 		m.addAttribute("errorCode", code);

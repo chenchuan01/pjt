@@ -39,15 +39,29 @@ var Request = function(){
 			ajax(reqMap);
 		}
 	}
-	
+	/**
+	 * 网络请求成功公共方法
+	 */
 	var success = function(rslt,suc){
-		if(suc&&typeof(suc)=='function'){
+		if(rslt.code==200
+				&&suc
+				&&typeof(suc)=='function'){
 			suc(rslt);
+		}else{
+			MsgUtil.info(rslt.msg);
 		}
 	};
+	
 	var error   = function(rslt,err){
 		if(err&&typeof(err)=='function'){
 			err(rslt);
+		}else{
+			if(rslt.msg){
+				MsgUtil.info(rslt.msg);
+			}else{
+				MsgUtil.info("网络请求错误");
+			}
+			
 		}
 	};
 	/**
@@ -64,8 +78,8 @@ var Request = function(){
 	 */
 	var ajax = function(reqMap){
 		var jsonp = false;
-		if (CommonUtil.isNotNull(Global_Var.apiServer)) {
-			reqMap.url = Global_Var.apiServer + reqMap.url;
+		if (CommonUtil.isNotNull(Global_Var.webServer)) {
+			reqMap.url = Global_Var.webServer + reqMap.url;
 			jsonp = true;
 		}
 		reqMap.async = CommonUtil.isNotNull(reqMap.async) ? reqMap.async : true;
@@ -99,9 +113,11 @@ var Request = function(){
 				data : reqMap.data,
 				dataType : reqMap.dataType,
 				success : function(data) {
+					$('.submit').prop('disabled',false);
 					success(data, reqMap.suc);
 				},
 				error : function(data) {
+					$('.submit').prop('disabled',false);
 					error(data, reqMap.err);
 				}
 			});
@@ -110,9 +126,6 @@ var Request = function(){
 	return {
 		post:post,
 		get:get,
-		goPage:page,
-		test:function(){
-			alert("test");
-		}
+		goPage:page
 	};
 };
