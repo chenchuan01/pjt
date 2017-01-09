@@ -63,6 +63,10 @@ public class WebResult extends Result {
 		setCode(webEnum.code());
 		setMsg(webEnum.message());
 	}
+	public void setWebRslt(WebResultEnum webEnum,Object data){
+		setCode(webEnum.code());
+		setData(data);
+	}
 	public void setError(String msg){
 		setMsg(msg);
 	}

@@ -10,22 +10,26 @@ var Global_Var ={
 	/**图片服务器地址*/
 	imgServerUrl:'http://file.static.kantakj.com:10000/',
 	/**后台数据请求地址*/
-	apiServer:'',
+	webServer:'',
 	tools:[
 	       'common',
 	       'request'
 	]
 }
-function _import(toolName){
-	var toolRoot = "/static/js/tools/";
+function _import(path){
+	document.write('<script type="text/javascript" src="'+path+'"><\/script>')
+}
+function _importTools(toolName){
+	var toolRoot = "static/js/tools/";
 	var toolPath = toolRoot+toolName+".js";
-	document.write('<script type="text/javascript" src="'+toolPath+'"><\/script>')
+	_import(toolPath);
 }
 function _loadConfig(){
 	var toolNames =Global_Var.tools;
+	//引入前端框架JS
+	_import("static/layui/plugins/layui/layui.js");
 	for(var i =0 ; i<toolNames.length;i++){
-		_import(toolNames[i]);
+		_importTools(toolNames[i]);
 	}
 }
-
 _loadConfig();
