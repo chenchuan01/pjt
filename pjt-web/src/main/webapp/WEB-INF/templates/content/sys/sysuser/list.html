@@ -2,8 +2,8 @@
 <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css" href="/static/css/list.css" media="all">
  <section class="layui-tab-content layui-main">
-		<div id="layui-but1">
-			<button class="layui-btn" style="width: 5%;position: absolute; left: 95%;">
+		<div class="site-demo-button" id="addBtn">
+			<button class="layui-btn" style="width: 5%;position: absolute; left: 95%;" data-method="offset" data-type="auto">
 			  <i class="layui-icon">&#xe608;</i> 添加
 			</button>
 		</div>
@@ -43,16 +43,69 @@
 				<td>$!{element.roleId}</td>
 				<td>$!{element.lastLoginTime}</td>
 				<td>
-				<a href="" class="layui-btn layui-btn-mini "><i class="layui-icon">&#xe642;</i>修改</a>
-				<a href="" class="layui-btn layui-btn-mini layui-btn-danger"><i class="layui-icon">&#x1006;</i>删除</a>									
+				<div class="editBtn">
+				<button class="layui-btn layui-btn-mini " data-method="offset" data-type="auto"><i class="layui-icon">&#xe642;</i>修改</button>
+				</div>
 				</td>
 			</tr>
 			 #end
 	        </tbody>
 		</table>
-		<div class="layui-laypage" id="table-tool" style="position: absolute; top: 84%; left: 35%;">
+		<div class="layui-laypage" id="table-tool" style="position: relative; left: 35%;">
 		#parse("/content/sys/page.html")
 		</div>
 </section>
 <script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
-
+<script>
+layui.use('layer', function(){ //独立版的layer无需执行这一句
+  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+  
+  //触发事件
+  var active = {
+    offset: function(othis){
+      var type = othis.data('type');
+      layer.open({
+        type: 2
+        ,offset: type 
+        ,title: '添加管理员'
+        ,area: ['1000px', '800px']
+        ,id: 'addBtn'+type //防止重复弹出
+        ,content: '/user/adduser.htm'
+        ,btnAlign: 'c' //按钮居中
+        ,shade: 0 //不显示遮罩
+        ,zIndex: layer.zIndex 
+        ,success: function(layero){
+          layer.setTop(layero); 
+        }
+      });
+    }
+  };
+  $('#addBtn .layui-btn').on('click', function(){
+    var othis = $(this), method = othis.data('method');
+    active[method] ? active[method].call(this, othis) : '';
+  });
+  var actives = {
+		    offset: function(othis){
+		      var type = othis.data('type');
+		      layer.open({
+		        type: 2
+		        ,offset: type 
+		        ,title: '修改管理员'
+		        ,area: ['1000px', '800px']
+		        ,id: 'editBtn'+type //防止重复弹出
+		        ,content: '/user/updateuser.htm'
+		        ,btnAlign: 'c' //按钮居中
+		        ,shade: 0 //不显示遮罩
+		        ,zIndex: layer.zIndex 
+		        ,success: function(layero){
+		          layer.setTop(layero); 
+		        }
+		      });
+		    }
+		  };
+  $('.editBtn .layui-btn').on('click', function(){
+    var othis = $(this), method = othis.data('method');
+    actives[method] ? actives[method].call(this, othis) : '';
+  });
+});
+</script>

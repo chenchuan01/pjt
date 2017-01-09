@@ -1,0 +1,27 @@
+<!-- load css -->
+<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" media="all">
+
+<div class="layui-body" style="position: absolute;top: 5%;">
+	<form class="layui-form" id="addForm" action="" enctype="multipart/form-data">
+		<input type="hidden"  name="page" value="$!{page}">
+		<input type="hidden"  name="userId" value="$!{user.id}">
+		<div class="layui-form-item">
+		    <label class="layui-form-label">用户姓名</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="userName" placeholder="" value="$!{user.userName}" autocomplete="off" class="layui-input" style="width: 250px;">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">用户密码</label>
+		    <div class="layui-input-block">
+		      <input type="password" name="userPwd" placeholder="" value="$!{user.userPwd}" autocomplete="off" class="layui-input" style="width: 250px;">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <div class="layui-input-block">
+		      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+     			  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+</div>
