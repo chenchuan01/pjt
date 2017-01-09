@@ -1,9 +1,9 @@
 layui.config({
-	base: 'js/'
+	base: 'static/layui/js/'
 }).use(['element', 'layer', 'navbar', 'tab'], function() {
+	window.jQuery = window.$ = layui.jquery;
 	
 	var element = layui.element(),
-		$ = layui.jquery,
 		layer = layui.layer,
 		navbar = layui.navbar(),
 		tab = layui.tab({
@@ -24,7 +24,44 @@ layui.config({
 		url:"auth/menu.htm",
 		async:false,
 		suc:function(rslt){
-			var navs=rslt.data;
+			var data = rslt.data;
+			var index=1;
+			var navs=[{
+				title:'后台首页',
+				icon:'fa fa-dashboard',
+				spread:true,
+				href:'dashboard.htm'
+			}];
+			for(var i =0;i<data.length;i++){
+				if(!data[i].parentId&&data[i].displayMenu){
+					var parentItem = data[i];
+					navs[index]={
+							title:parentItem.menuName,
+							icon:parentItem.icon,
+							spread:false,
+					}
+					var childs=[];
+					var jndex=0;
+					for(var j=0;j<data.length;j++){
+						if(parentItem.id==data[j].parentId&&data[j].displayMenu){
+							var child = data[j];
+							childs[jndex]={
+									title:child.menuName,
+									icon:child.icon,
+									spread:false,
+									href:child.url
+							}
+							jndex++;
+						}
+					}
+					if(childs.length>0){
+						navs[index]['children']=childs;
+					}
+					index++;
+				}
+			}
+			
+			
 			//设置navbar
 			navbar.set({
 				spreadOne: true,
