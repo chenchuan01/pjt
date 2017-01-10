@@ -15,9 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.StringUtil;
 import com.yidingliu.pjt.data.base.dto.QueryParam;
 import com.yidingliu.pjt.data.bean.User;
 import com.yidingliu.pjt.data.mapper.example.UserExample;
@@ -71,7 +69,7 @@ public class UserController {
 			User user = new User();
 			user.setUserName(userName);
 			user.setUserPwd(userPwd);
-			user.setStatus(0);
+			user.setStatus(1);
 			user.setCreateDate(new Date());
 			user.setUpdateDate(new Date());
 			userService.insert(user);
@@ -92,7 +90,7 @@ public class UserController {
 		if ("update".equals(type)) {
 			user.setUserName(userName);
 			user.setUserPwd(userPwd);
-			user.setStatus(0);
+			user.setStatus(1);
 			user.setUpdateDate(new Date());
 			userService.update(user);
 			response.setCharacterEncoding("utf-8");
