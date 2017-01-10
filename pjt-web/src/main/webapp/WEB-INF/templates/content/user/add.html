@@ -1,56 +1,35 @@
-<!-- load css -->
-<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" media="all">
+<!DOCTYPE html>
+<html>
 
-<div class="layui-body" style="position: absolute;top: 5%;">
-	<form class="layui-form" id="addForm" action="/user/adduser.htm?type=save" enctype="multipart/form-data" method="post">
-		<div class="layui-form-item">
-		    <label class="layui-form-label">用户姓名</label>
-		    <div class="layui-input-block">
-		      <input type="text" name="userName" placeholder="" autocomplete="off" class="layui-input" style="width: 250px;">
-		    </div>
+	<head>
+		<meta charset="UTF-8">
+		<title>Add</title>
+		<link rel="stylesheet" href="/static/layui/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="/static/layui/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<div class="layui-main">
+			<form class="layui-form" action="/user/adduser.htm?type=save" enctype="multipart/form-data" method="post">
+				<div class="layui-form-item">
+				    <label class="layui-form-label">用户姓名</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="userName" placeholder="" autocomplete="off" class="layui-input" style="width: 250px;">
+				    </div>
+				</div>
+				<div class="layui-form-item">
+				    <label class="layui-form-label">用户密码</label>
+				    <div class="layui-input-block">
+				      <input type="password" name="userPwd" placeholder="" autocomplete="off" class="layui-input" style="width: 250px;">
+				    </div>
+				</div>
+				<div class="layui-form-item">
+				    <div class="layui-input-block">
+				      <button class="layui-btn" type="submit" >立即提交</button>
+		     		  <a href="/user/userlist.htm"  class="layui-btn">返回</a>
+				    </div>
+				</div>
+			</form>
 		</div>
-		<div class="layui-form-item">
-		    <label class="layui-form-label">用户密码</label>
-		    <div class="layui-input-block">
-		      <input type="password" name="userPwd" placeholder="" autocomplete="off" class="layui-input" style="width: 250px;">
-		    </div>
-		</div>
-		<div class="layui-form-item">
-		    <div class="layui-input-block">
-		      <button class="layui-btn" type="submit" lay-submit="" lay-filter="add">立即提交</button>
-     		  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-		    </div>
-		</div>
-	</form>
-</div>
-<script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
-<script type="text/javascript">
-'use strict';
-layui.use(['jquery'],function(){
-	window.jQuery = window.$ = layui.jquery;
-});
-$(function(){
-	layui.use(['form'], function(){
-		  var form = layui.form(),layer = layui.layer;
-		  //自定义验证规则
-		  //监听提交
-		  form.on('submit(add)', function(data) {
-			var req = new Request();
-			req.post({
-				url:data.form.action,
-				param:data.field,
-				suc:function(rslt){
-					if(rslt.code==200){
-						window.location.href=rslt.data;
-					}else{
-						layer.msg(rslt.msg);
-					}
-					
-				}
-			});
-			return false;
-		  });
-	});
-	
-});
-</script>
+		<script type="text/javascript" src="/static/layui/plugins/layui/layui.js"></script>
+	</body>
+</html>

@@ -1,27 +1,36 @@
-<!-- load css -->
-<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" media="all">
+<!DOCTYPE html>
+<html>
 
-<div class="layui-body" style="position: absolute;top: 5%;">
-	<form class="layui-form" id="addForm" action="" enctype="multipart/form-data">
-		<input type="hidden"  name="page" value="$!{page}">
-		<input type="hidden"  name="userId" value="$!{user.id}">
-		<div class="layui-form-item">
-		    <label class="layui-form-label">用户姓名</label>
-		    <div class="layui-input-block">
-		      <input type="text" name="userName" placeholder="" value="$!{user.userName}" autocomplete="off" class="layui-input" style="width: 250px;">
-		    </div>
+	<head>
+		<meta charset="UTF-8">
+		<title>Update</title>
+		<link rel="stylesheet" href="/static/layui/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="/static/layui/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<div class="layui-main">
+			<form class="layui-form"  action="/user/updateuser.htm?type=update" enctype="multipart/form-data" method="post">
+				<input type="hidden"  name="userId" value="$!{user.id}">
+				<div class="layui-form-item">
+				    <label class="layui-form-label">用户姓名</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="userName" value="$!{user.userName}" placeholder="" autocomplete="off" class="layui-input" style="width: 250px;">
+				    </div>
+				</div>
+				<div class="layui-form-item">
+				    <label class="layui-form-label">用户密码</label>
+				    <div class="layui-input-block">
+				      <input type="password" name="userPwd" value="$!{user.userPwd}" placeholder="" autocomplete="off" class="layui-input" style="width: 250px;">
+				    </div>
+				</div>
+				<div class="layui-form-item">
+				    <div class="layui-input-block">
+				      <button class="layui-btn" type="submit">立即提交</button>
+		     		  <a href="/user/userlist.htm"  class="layui-btn">返回</a>
+				    </div>
+				</div>
+			</form>
 		</div>
-		<div class="layui-form-item">
-		    <label class="layui-form-label">用户密码</label>
-		    <div class="layui-input-block">
-		      <input type="password" name="userPwd" placeholder="" value="$!{user.userPwd}" autocomplete="off" class="layui-input" style="width: 250px;">
-		    </div>
-		</div>
-		<div class="layui-form-item">
-		    <div class="layui-input-block">
-		      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-     			  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-		    </div>
-		</div>
-	</form>
-</div>
+		<script type="text/javascript" src="/static/layui/plugins/layui/layui.js"></script>
+	</body>
+</html>

@@ -1,99 +1,78 @@
-<!-- load css -->
-<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" media="all">
-<link rel="stylesheet" type="text/css" href="/static/css/list.css" media="all">
- <section class="layui-tab-content layui-main">
-		<div class="site-demo-button" id="addBtn">
-			<button class="layui-btn" style="width: 5%;position: absolute; left: 95%;" data-method="offset" data-type="auto">
-			  <i class="layui-icon">&#xe608;</i> 添加
-			</button>
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Table</title>
+		<link rel="stylesheet" href="/static/layui/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="/static/layui/plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/layui/css/table.css" />
+	</head>
+	<body>
+		<div class="admin-main">
+			<blockquote class="layui-elem-quote">
+			   <div class="layui-inline">
+			     <label class="layui-form-label">用户名称</label>
+			     <div class="layui-input-inline" style="width: 150px;">
+			       <input type="text" name="" autocomplete="off" class="layui-input">
+			     </div>
+			   </div>
+			   <a href="javascript:;" class="layui-btn" id="search">
+				  <i class="layui-icon">&#xe615;</i> 搜索
+			   </a>
+			   <a href="/user/adduser.htm" class="layui-btn" style="position: relative; left: 60%;" >
+				  <i class="layui-icon">&#xe608;</i> 添加信息
+			   </a>
+			</blockquote>
+			<fieldset class="layui-elem-field">
+				<legend>数据列表</legend>
+					<div class="layui-field-box">
+						<table class="layui-table">
+					        <thead>
+					            <tr>
+					            	<th>管理员登录名称</th>
+					            	<th>管理员昵称</th>
+					            	<th>角色</th>
+					            	<th>最后一次登录时间</th>
+									<th>操作</th>
+							   </tr>
+					        </thead>
+					        <tbody>
+							#foreach($element in $pageInfo.list)
+								<tr class="" >
+								<td>$!{element.loginName}</td>
+								<td>$!{element.niceName}</td>
+								<td>$!{element.roleId}</td>
+								<td>$!{element.lastLoginTime}</td>
+								<td>
+								<a href="/user/updateuser.htm?userId=${element.id}" class="layui-btn layui-btn-mini " ><i class="layui-icon">&#xe642;</i>修改</a>
+								</td>
+							</tr>
+							 #end
+					        </tbody>
+						</table>
+					</div>
+			</fieldset>	
+			<div class="layui-laypage"  style="position: relative; left: 35%;">
+				#parse("/content/sys/page.html")
+			</div>
 		</div>
-		<div id="layui-but2">
-			<button class="layui-btn" style="width: 5%;position: absolute; left: 88%;">
-			  <i class="layui-icon">&#x1002;</i> 刷新
-			</button>
-		</div>
-		<form class="layui-form"  action="" id="userForm"  enctype="multipart/form-data">
-			  <div class="layui-form-item" style="background-color: #c2c2c2; width: 250px;">
-			    <label class="layui-form-label">用户姓名</label>
-			    <div class="layui-input-block">
-			      <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" style="width: 150px;">
-			    </div>
-			  </div>
-			  <div class="layui-form-item">
-			    <div class="layui-input-block">
-			      <button class="layui-btn" style="width: 5%;position: absolute; left: 80%; top:-150% " lay-submit lay-filter="formDemo"><i class="layui-icon">&#xe615;</i>搜索</button>
-			    </div>
-			  </div>
-		</form>
-		<table class="layui-table">
-	        <thead>
-	            <tr>
-	            	<th>管理员登录名称</th>
-	            	<th>管理员昵称</th>
-	            	<th>角色</th>
-	            	<th>最后一次登录时间</th>
-					<th>操作</th>
-			   </tr>
-	        </thead>
-	        <tbody>
-			#foreach($element in $pageInfo.list)
-				<tr class="" >
-				<td>$!{element.loginName}</td>
-				<td>$!{element.niceName}</td>
-				<td>$!{element.roleId}</td>
-				<td>$!{element.lastLoginTime}</td>
-				<td>
-				<div class="editBtn">
-				<button class="layui-btn layui-btn-mini " data-method="offset" data-type="auto"><i class="layui-icon">&#xe642;</i>修改</button>
-				</div>
-				</td>
-			</tr>
-			 #end
-	        </tbody>
-		</table>
-		<div class="layui-laypage" id="table-tool" style="position: relative; left: 35%;">
-		#parse("/content/sys/page.html")
-		</div>
-</section>
-<script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
-<script>
-layui.use('layer', function(){ //独立版的layer无需执行这一句
-  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-  
-  //触发事件
-  var active = {
-    offset: function(othis){
-      var type = othis.data('type');
-      layer.open({
-        type: 2
-        ,offset: type 
-        ,title: '添加管理员'
-        ,area: ['1000px', '800px']
-        ,id: 'addBtn'+type //防止重复弹出
-        ,content: '/user/adduser.htm'
-        ,btnAlign: 'c' //按钮居中
-        ,shade: 0 //不显示遮罩
-        ,zIndex: layer.zIndex 
-        ,success: function(layero){
-          layer.setTop(layero); 
-        }
-      });
-    }
-  };
-  $('#addBtn .layui-btn').on('click', function(){
-    var othis = $(this), method = othis.data('method');
-    active[method] ? active[method].call(this, othis) : '';
-  });
-  var actives = {
+		<script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
+		<script>
+		layui.use('layer', function(){ //独立版的layer无需执行这一句
+		  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+		  
+		  //触发事件
+		  var active = {
 		    offset: function(othis){
 		      var type = othis.data('type');
 		      layer.open({
 		        type: 2
 		        ,offset: type 
-		        ,title: '修改管理员'
+		        ,title: '添加管理员'
 		        ,area: ['1000px', '800px']
-		        ,id: 'editBtn'+type //防止重复弹出
-		        ,content: '/user/updateuser.htm'
+		        ,id: 'addBtn'+type //防止重复弹出
+		        ,content: '/user/adduser.htm'
 		        ,btnAlign: 'c' //按钮居中
 		        ,shade: 0 //不显示遮罩
 		        ,zIndex: layer.zIndex 
@@ -103,10 +82,35 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 		      });
 		    }
 		  };
-  $('.editBtn .layui-btn').on('click', function(){
-    var othis = $(this), method = othis.data('method');
-    actives[method] ? actives[method].call(this, othis) : '';
-  });
-});
-</script>
- 
+		  $('#addBtn .layui-btn').on('click', function(){
+		    var othis = $(this), method = othis.data('method');
+		    active[method] ? active[method].call(this, othis) : '';
+		  });
+		  var actives = {
+				    offset: function(othis){
+				      var type = othis.data('type');
+				      layer.open({
+				        type: 2
+				        ,offset: type 
+				        ,title: '修改管理员'
+				        ,area: ['1000px', '800px']
+				        ,id: 'editBtn'+type //防止重复弹出
+				        ,content: '/user/updateuser.htm'
+				        ,btnAlign: 'c' //按钮居中
+				        ,shade: 0 //不显示遮罩
+				        ,zIndex: layer.zIndex 
+				        ,success: function(layero){
+				          layer.setTop(layero); 
+				        }
+				      });
+				    }
+				  };
+		  $('.editBtn .layui-btn').on('click', function(){
+		    var othis = $(this), method = othis.data('method');
+		    actives[method] ? actives[method].call(this, othis) : '';
+		  });
+		});
+		</script>
+	</body>
+
+</html>
