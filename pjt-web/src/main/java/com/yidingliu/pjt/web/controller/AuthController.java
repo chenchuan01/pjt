@@ -76,6 +76,7 @@ public class AuthController extends BaseController{
 		UsernamePasswordToken token = new UsernamePasswordToken(
 				loginUser.getLoginName(),loginUser.getLoginPassword(),rememberMe==null?false:rememberMe);
 		SecurityUtils.getSubject().login(token);
+		ShiroSessionMng.setAttr("ctx", getCtx(req));
 		rslt.setData("admin.htm");
 		return rslt;
 	}
