@@ -62,33 +62,54 @@ public class UserController {
 	}
 	@RequestMapping("adduser.htm")
 	public String addUser(Model model,HttpServletRequest request,HttpServletResponse response,QueryParam<UserExample> queryParam) throws IOException{
+		UserExample userExample = new UserExample();
+		userExample.createCriteria();
 		String type = request.getParameter("type");
 		String userName = request.getParameter("userName");
 		String userPwd = request.getParameter("userPwd");
 		if ("save".equals(type)) {
 			User user = new User();
-			if (StringUtil.isNotEmpty(userName)) {
-				user.setUserName(userName);
-			}
-			if (StringUtil.isNotEmpty(userPwd)) {
-				user.setUserPwd(userPwd);
-			}
+			user.setUserName(userName);
+			user.setUserPwd(userPwd);
 			user.setStatus(0);
 			user.setCreateDate(new Date());
 			user.setUpdateDate(new Date());
 			userService.insert(user);
-			model.addAttribute("url", "/user/userlist.htm?page="+queryParam.getPage());
 			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(JSON.toJSONString(model));
+			response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
+			return "content/user/list";
 		}else {
 			return "content/user/add";
 		}
-		return null;
 	}
 	@RequestMapping("updateuser.htm")
-	public String updateUser(Model model,HttpServletRequest request, QueryParam<UserExample> queryParam){
-		
+	public String updateUser(Model model,HttpServletRequest request,HttpServletResponse response, QueryParam<UserExample> queryParam) throws IOException{
+		String type = request.getParameter("type");
+		String userId = request.getParameter("userId");
+		String userName = request.getParameter("userName");
+		String userPwd = request.getParameter("userPwd");
+		User user = userService.findById(Long.valueOf(userId));
+		if ("update".equals(type)) {
+			user.setUserName(userName);
+			user.setUserPwd(userPwd);
+			user.setStatus(0);
+			user.setUpdateDate(new Date());
+			userService.update(user);
+			response.setCharacterEncoding("utf-8");
+			response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
+		}else {
+			model.addAttribute("user", user);
 			return "content/user/update";
-		
+		}
+		return null;
+	}
+	@RequestMapping("deleteuser.htm")
+	public String deleteUser(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String userId = request.getParameter("userId");
+		User user = userService.findById(Long.valueOf(userId));
+		userService.delete(user);
+		response.setCharacterEncoding("utf-8");
+		response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
+		return null;
 	}
 }

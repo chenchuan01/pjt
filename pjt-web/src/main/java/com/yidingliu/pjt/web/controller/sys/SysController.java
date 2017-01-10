@@ -14,9 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageInfo;
 import com.yidingliu.pjt.data.base.dto.QueryParam;
+import com.yidingliu.pjt.data.bean.sys.SysCompetence;
+import com.yidingliu.pjt.data.bean.sys.SysRole;
+import com.yidingliu.pjt.data.bean.sys.SysRoleCompetence;
 import com.yidingliu.pjt.data.bean.sys.SysUser;
+import com.yidingliu.pjt.data.mapper.example.sys.SysCompetenceExample;
 import com.yidingliu.pjt.data.mapper.example.sys.SysRoleCompetenceExample;
+import com.yidingliu.pjt.data.mapper.example.sys.SysRoleExample;
 import com.yidingliu.pjt.data.mapper.example.sys.SysUserExample;
+import com.yidingliu.pjt.data.service.sys.SysCompetenceService;
+import com.yidingliu.pjt.data.service.sys.SysRoleCompetenceService;
+import com.yidingliu.pjt.data.service.sys.SysRoleService;
 import com.yidingliu.pjt.data.service.sys.SysUserService;
 
 /**
@@ -46,7 +54,13 @@ public class SysController {
 	@Resource
 	private SysUserService sysUserService;
 	
-	@RequestMapping("user.htm")
+	@Resource
+	private SysRoleService sysRoleService;
+	
+	@Resource
+	private SysCompetenceService sysCompetenceService;
+	
+	@RequestMapping("user")
 	public String userList(Model model, QueryParam<SysUserExample> queryParam){
 		SysUserExample sysUserExample = new SysUserExample();
 		sysUserExample.createCriteria();
@@ -54,20 +68,30 @@ public class SysController {
 		model.addAttribute("pageInfo", pageInfo);
 		return CONTENT_ROOT + "sysuser/list";
 	}
-	@RequestMapping("edituser.htm")
+	@RequestMapping("edituser")
 	public String updateUser(Model model,HttpServletRequest request,HttpServletResponse response){
 		
 		return CONTENT_ROOT + "sysuser/update";
 	}
-	@RequestMapping("adduser.htm")
+	@RequestMapping("adduser")
 	public String addUser(Model model,HttpServletRequest request,HttpServletResponse response){
 		
 		return CONTENT_ROOT + "sysuser/add";
 	}
-	@RequestMapping("auth.htm")
-	public String authList(Model model, QueryParam<SysRoleCompetenceExample> queryParam){
-		
-		
+	@RequestMapping("action")
+	public String authList(Model model, QueryParam<SysCompetenceExample> queryParam){
+		SysCompetenceExample sysCompetenceExample = new SysCompetenceExample();
+		sysCompetenceExample.createCriteria();
+		PageInfo<SysCompetence> pageInfo = sysCompetenceService.pageQuery(queryParam);
+		model.addAttribute("pageInfo", pageInfo);
 		return CONTENT_ROOT + "sysauth/list";
+	}
+	@RequestMapping("role")
+	public String roleList(Model model, QueryParam<SysRoleExample> queryParam){
+		SysRoleExample sysRoleExample = new SysRoleExample();
+		sysRoleExample.createCriteria();
+		PageInfo<SysRole> pageInfo = sysRoleService.pageQuery(queryParam);
+		model.addAttribute("pageInfo", pageInfo);
+		return CONTENT_ROOT + "sysrole/list";
 	}
 }
