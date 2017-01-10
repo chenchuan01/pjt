@@ -62,4 +62,19 @@ public class BaseController {
 		    }
 		}
 	}
+	
+	/** 
+	 * <p>标题: getCtx</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2017年1月10日</p>
+	 * @param req
+	 */
+	protected String getCtx(HttpServletRequest req){
+		String path = req.getContextPath();
+		String basePath = req.getScheme() + "://"
+				+ req.getServerName() + ":" + req.getServerPort()
+				+ path + "/";
+		return basePath;
+	}
 }

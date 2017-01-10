@@ -72,8 +72,7 @@ public class ShiroSessionMng {
 	 * @param sysUser
 	 */
 	public static void setLoginUser(SysUser sysUser){
-		Subject currentUser = SecurityUtils.getSubject();
-		currentUser.getSession().setAttribute(Constants.LOGIN_USER_TOKEN, sysUser);
+		setAttr(Constants.LOGIN_USER_TOKEN, sysUser);
 	}
 	/** 
 	 * <p>标题: setLoginRole</p>	
@@ -83,8 +82,7 @@ public class ShiroSessionMng {
 	 * @param sysRole
 	 */
 	public static void setLoginRole(SysRole sysRole){
-		Subject currentUser = SecurityUtils.getSubject();
-		currentUser.getSession().setAttribute(Constants.LOGIN_USER_ROLE, sysRole);
+		setAttr(Constants.LOGIN_USER_ROLE, sysRole);
 	}
 	
 	/** 
@@ -95,8 +93,7 @@ public class ShiroSessionMng {
 	 * @param competences
 	 */
 	public static void setUserPermission(List<SysCompetence> competences){
-		Subject currentUser = SecurityUtils.getSubject();
-		currentUser.getSession().setAttribute(Constants.LOGIN_USER_PERMISSION, competences);
+		setAttr(Constants.LOGIN_USER_PERMISSION, competences);
 	}
 	/** 
 	 * <p>标题: setUserAndAuth</p>	
@@ -137,6 +134,10 @@ public class ShiroSessionMng {
 		return currentUser.getSession().getAttribute(key);
 	}
 
+	public static void setAttr(String key ,Object obj){
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.getSession().setAttribute(key, obj);
+	}
 
 	
 }

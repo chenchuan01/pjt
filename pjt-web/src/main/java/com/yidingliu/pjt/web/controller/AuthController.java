@@ -1,9 +1,7 @@
 package com.yidingliu.pjt.web.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +62,7 @@ public class AuthController extends BaseController{
 	}
 
 	@RequestMapping("/login")
-	public @ResponseBody WebResult login(SysUser loginUser,HttpServletRequest req,HttpServletResponse resp) {
+	public @ResponseBody WebResult login(SysUser loginUser,Boolean rememberMe,HttpServletRequest req,HttpServletResponse resp) {
 		WebResult rslt = new WebResult();
 		loginUser=sysUserService.verifyUser(loginUser);
 		if(loginUser==null){
@@ -75,7 +73,8 @@ public class AuthController extends BaseController{
 		SysRole loginRole = sysRoleService.queryUserRole(loginUser);
 		List<SysCompetence> permission = sysCompetenceService.getUserCompetence(loginRole);
 		ShiroSessionMng.setUserAndAuth(loginUser,loginRole,permission);
-		UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getLoginName(),loginUser.getLoginPassword());
+		UsernamePasswordToken token = new UsernamePasswordToken(
+				loginUser.getLoginName(),loginUser.getLoginPassword(),rememberMe==null?false:rememberMe);
 		SecurityUtils.getSubject().login(token);
 		rslt.setData("admin.htm");
 		return rslt;
