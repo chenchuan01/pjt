@@ -3,10 +3,10 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Table</title>
-		<link rel="stylesheet" href="/static/layui/plugins/layui/css/layui.css" media="all" />
-		<link rel="stylesheet" href="/static/layui/plugins/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/layui/css/table.css" />
+		<title>sysuserlist</title>
+		<base href="$!{ctx}" />
+		<link rel="stylesheet" href="static/layui/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="static/layui/css/main.css" />
 	</head>
 	<body>
 		<div class="admin-main">
@@ -20,7 +20,7 @@
 			   <a href="javascript:;" class="layui-btn" id="search">
 				  <i class="layui-icon">&#xe615;</i> 搜索
 			   </a>
-			   <a href="/user/adduser.htm" class="layui-btn" style="position: relative; left: 60%;" >
+			   <a href="sys/adduser.htm" class="layui-btn" >
 				  <i class="layui-icon">&#xe608;</i> 添加信息
 			   </a>
 			</blockquote>
@@ -39,13 +39,13 @@
 					        </thead>
 					        <tbody>
 							#foreach($element in $pageInfo.list)
-								<tr class="" >
+								<tr>
 								<td>$!{element.loginName}</td>
 								<td>$!{element.niceName}</td>
 								<td>$!{element.roleId}</td>
-								<td>$!{element.lastLoginTime}</td>
+								<td>$date.format('yyyy-MM-dd HH:mm:ss ',$!element.lastLoginTime)</td>
 								<td>
-								<a href="/user/updateuser.htm?userId=${element.id}" class="layui-btn layui-btn-mini " ><i class="layui-icon">&#xe642;</i>修改</a>
+									<a href="/user/updateuser.htm?userId=${element.id}" class="layui-btn layui-btn-mini " ><i class="layui-icon">&#xe642;</i>修改</a>
 								</td>
 							</tr>
 							 #end
@@ -57,7 +57,7 @@
 				#parse("/content/sys/page.html")
 			</div>
 		</div>
-		<script type="text/javascript" src="/static/layui/lay/dest/layui.all.js"></script>
+		<script type="text/javascript" src="/static/js/front.app.js"></script>
 		<script>
 		layui.use('layer', function(){ //独立版的layer无需执行这一句
 		  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句

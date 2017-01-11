@@ -41,7 +41,7 @@ import com.yidingliu.pjt.data.service.UserService;
  *
  */
 @Controller
-@RequestMapping("/user/")
+@RequestMapping("/user")
 public class UserController {
 	/**
 	 * 用户service
@@ -49,7 +49,7 @@ public class UserController {
 	@Resource
 	private UserService userService;
 	
-	@RequestMapping("userlist.htm")
+	@RequestMapping("/userlist")
 	public String userList(Model model,HttpServletRequest request, QueryParam<UserExample> queryParam){
 		UserExample userExample = new UserExample();
 		userExample.createCriteria();
@@ -58,7 +58,7 @@ public class UserController {
 	
 		return "content/user/list";
 	}
-	@RequestMapping("adduser.htm")
+	@RequestMapping("/adduser")
 	public String addUser(Model model,HttpServletRequest request,HttpServletResponse response,QueryParam<UserExample> queryParam) throws IOException{
 		UserExample userExample = new UserExample();
 		userExample.createCriteria();
@@ -74,13 +74,13 @@ public class UserController {
 			user.setUpdateDate(new Date());
 			userService.insert(user);
 			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
+			response.sendRedirect(request.getContextPath()+"/user/userlist");
 			return "content/user/list";
 		}else {
 			return "content/user/add";
 		}
 	}
-	@RequestMapping("updateuser.htm")
+	@RequestMapping("/updateuser")
 	public String updateUser(Model model,HttpServletRequest request,HttpServletResponse response, QueryParam<UserExample> queryParam) throws IOException{
 		String type = request.getParameter("type");
 		String userId = request.getParameter("userId");
@@ -94,20 +94,20 @@ public class UserController {
 			user.setUpdateDate(new Date());
 			userService.update(user);
 			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
+			response.sendRedirect(request.getContextPath()+"/user/userlist");
 		}else {
 			model.addAttribute("user", user);
 			return "content/user/update";
 		}
 		return null;
 	}
-	@RequestMapping("deleteuser.htm")
+	@RequestMapping("/deleteuser")
 	public String deleteUser(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String userId = request.getParameter("userId");
 		User user = userService.findById(Long.valueOf(userId));
 		userService.delete(user);
 		response.setCharacterEncoding("utf-8");
-		response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
+		response.sendRedirect(request.getContextPath()+"/user/userlist");
 		return null;
 	}
 }
