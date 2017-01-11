@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="/static/layui/css/table.css" />
 	</head>
 	<body>
-		 <div class="admin-main">
+		 <div class="admin-main" style="padding-left: 10px;">
 		 	<blockquote class="layui-elem-quote">
 		 		<form action="/user/userlist.htm">
 				  <div class="layui-inline">
@@ -54,8 +54,9 @@
 						</table>
 					</div>
 			</fieldset>	
-			<div class="layui-laypage" style="position: relative;left: 35%;">
-				#parse("/content/sys/page.html")
+			<div class="layui-laypage" style="position: relative; left: 35%;">
+				<div id="page" class="page">
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="/static/js/front.app.js"></script>
@@ -69,11 +70,36 @@
 							url:"/user/deleteuser.htm",
 							param:{userId:id},
 							suc:function(rslt){
-								
-							},
+								MsgUtil.info('success');
+							}
 						});
-					});
+					}
+				});
 			}
+			layui.use( 'laypage', function() {
+				var $ = layui.jquery,
+					laypage = layui.laypage,
+					layer = parent.layer === undefined ? layui.layer : parent.layer;
+				var pages = ${pageInfo.pages};
+				var first = ${pageInfo.firstPage};
+				var last = ${pageInfo.lastPage};
+				var curr = ${pageInfo.pageNum};
+					  
+				//page
+				laypage({
+					cont: 'page'
+					,pages: pages //总页数
+					,groups: 5//连续显示分页数
+					,curr: curr || 1
+					,jump: function(cuur, first) {
+						//得到了当前页，用于向服务端请求对应数据
+						if(!first) {
+							//layer.msg('第 '+ obj.curr +' 页');
+							//location.href = 'curr='+curr;
+						}
+					}
+				});
+			});
 		</script>
 	</body>
 </html>
