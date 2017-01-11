@@ -4,23 +4,25 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Table</title>
+		<base href="$!{ctx}" />
 		<link rel="stylesheet" href="/static/layui/plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="/static/layui/plugins/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/static/layui/css/table.css" />
 	</head>
 	<body>
-		 <div class="admin-main">
+		 <div class="admin-main" style="padding-left: 10px;">
 		 	<blockquote class="layui-elem-quote">
+		 		<form action="/user/userlist.htm">
 				  <div class="layui-inline">
 				    <label class="layui-form-label">用户名称</label>
 				    <div class="layui-input-inline" style="width: 150px;">
-				      <input type="text" name="" autocomplete="off" class="layui-input">
+				      <input type="search" name="userName" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
-				<a href="javascript:;" class="layui-btn" id="search">
+				<button class="layui-btn" type="submit">
 					<i class="layui-icon">&#xe615;</i> 搜索
-				</a>
-				<a href="/user/adduser.htm" class="layui-btn" style="position: relative; left: 60%;" >
+				</button>
+				<a href="/user/adduser.htm" class="layui-btn"  >
 					<i class="layui-icon">&#xe608;</i> 添加信息
 				</a>
 			</blockquote>
@@ -52,17 +54,52 @@
 						</table>
 					</div>
 			</fieldset>	
-			<div class="layui-laypage" style="position: relative;left: 35%;">
-				#parse("/content/sys/page.html")
+			<div class="layui-laypage" style="position: relative; left: 35%;">
+				<div id="page" class="page">
+				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="/static/layui/plugins/layui/layui.js"></script>
+		<script type="text/javascript" src="/static/js/front.app.js"></script>
 		<script>
 			function del(id){
-				if(confirm("是否删除编号是"+id+"的记录？")){
-					location.href="/user/deleteuser.htm?userId="+id;
-				}
+				debugger;
+				MsgUtil.cfm({msg:"是否删除编号是"+id+"的记录？",
+					yes:function(){
+						var req = new Request();
+						req.post({
+							url:"/user/deleteuser.htm",
+							param:{userId:id},
+							suc:function(rslt){
+								MsgUtil.info('success');
+							}
+						});
+					}
+				});
 			}
+			layui.use( 'laypage', function() {
+				var $ = layui.jquery,
+					laypage = layui.laypage,
+					layer = parent.layer === undefined ? layui.layer : parent.layer;
+				var pages = ${pageInfo.pages};
+				var first = ${pageInfo.firstPage};
+				var last = ${pageInfo.lastPage};
+				var curr = ${pageInfo.pageNum};
+					  
+				//page
+				laypage({
+					cont: 'page'
+					,pages: pages //总页数
+					,groups: 5//连续显示分页数
+					,curr: curr || 1
+					,jump: function(cuur, first) {
+						//得到了当前页，用于向服务端请求对应数据
+						if(!first) {
+							//layer.msg('第 '+ obj.curr +' 页');
+							//location.href = 'curr='+curr;
+						}
+					}
+				});
+			});
 		</script>
 	</body>
 </html>

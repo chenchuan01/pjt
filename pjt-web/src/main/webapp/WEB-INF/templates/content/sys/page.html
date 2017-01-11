@@ -5,7 +5,7 @@
 	<a href="#" class="layui-laypage-last"  data-page="$!{pageInfo.prePage}">上一页</a>
 	#else
 	<a href="javascript:toPage(jQuery('#pageNow'), 1, jQuery('form:first'));" class="layui-laypage-first" title="首页" data-page="$!{pageInfo.firstPage}">首页</a>
-	<a href="javascript:toPage(jQuery('#pageNow'), ${pageInfo.getPrePage()}, jQuery('form:first'));" class="layui-laypage-last"  data-page="$!{pageInfo.prePage}">上一页</a>
+	<a href="javascript:toPage(jQuery('#pageNow'), ${pageInfo.getPrePage()}, jQuery('form:first'));" class="layui-laypage-prev"  data-page="$!{pageInfo.prePage}">上一页</a>
 	#end
 	#set($sliders = $pageInfo.getNavigatepageNums())
 		#if($sliders)
