@@ -58,6 +58,9 @@
 	<!-- 配置视图的显示 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="toolboxConfigLocation"> 
+			<value>/WEB-INF/toolbox.xml</value> 
+        </property> 
 		<property name="cache" value="true" />
 		<property name="suffix" value=".html" />
 		<property name="requestContextAttribute" value="request" />

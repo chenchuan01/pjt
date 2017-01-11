@@ -61,6 +61,17 @@ public class AuthController extends BaseController{
 		return CONTENT_SYS + "login";
 	}
 
+	/** 
+	 * <p>标题: login</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2017年1月11日</p>
+	 * @param loginUser
+	 * @param rememberMe
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
 	@RequestMapping("/login")
 	public @ResponseBody WebResult login(SysUser loginUser,Boolean rememberMe,HttpServletRequest req,HttpServletResponse resp) {
 		WebResult rslt = new WebResult();
@@ -80,6 +91,13 @@ public class AuthController extends BaseController{
 		rslt.setData("admin.htm");
 		return rslt;
 	}
+	/** 
+	 * <p>标题: logout</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2017年1月11日</p>
+	 * @return
+	 */
 	@RequestMapping("/logout")
 	public String logout(){
 		SecurityUtils.getSubject().logout();
@@ -87,14 +105,6 @@ public class AuthController extends BaseController{
 		return "redirect:/auth.htm";
 	}
 	/**
-	 * "title": "基本元素",
-	"icon": "fa-cubes",
-	"spread": true,
-	"children": [{
-		"title": "按钮",
-		"icon": "&#xe641;",
-		"href": "button.html"
-	},
 	 * <p>标题: menu</p>	
 	 * <p>说明: </p>	
 	 * <p>作者: chenchuan
@@ -108,6 +118,15 @@ public class AuthController extends BaseController{
 		rslt.setWebRslt(WebResultEnum.STATUS_200,menus);
 		return rslt;
 	}
+	/** 
+	 * <p>标题: error</p>	
+	 * <p>说明: </p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2017年1月11日</p>
+	 * @param code
+	 * @param m
+	 * @return
+	 */
 	@RequestMapping("/error")
 	public String error(String code, Model m) {
 		m.addAttribute("errorCode", code);
