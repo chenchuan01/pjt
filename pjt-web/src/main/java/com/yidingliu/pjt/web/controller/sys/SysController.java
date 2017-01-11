@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageInfo;
+import com.yidingliu.pjt.base.util.StringUtil;
 import com.yidingliu.pjt.data.base.dto.QueryParam;
 import com.yidingliu.pjt.data.bean.sys.SysCompetence;
 import com.yidingliu.pjt.data.bean.sys.SysRole;
@@ -60,20 +61,19 @@ public class SysController {
 	@RequestMapping("/user")
 	public String userList(Model model, QueryParam<SysUserExample> queryParam){
 		SysUserExample sysUserExample = new SysUserExample();
-		sysUserExample.createCriteria();
+		SysUserExample.Criteria criteria= sysUserExample.createCriteria();
+		if(StringUtil.isNotBlank(queryParam.getSearch())){
+			criteria.andLoginNameLike("%"+queryParam.getSearch()+"%");
+			model.addAttribute("search", queryParam.getSearch());
+		}
+		queryParam.setParam(sysUserExample);
 		PageInfo<SysUser> pageInfo = sysUserService.pageQuery(queryParam);
 		model.addAttribute("pageInfo", pageInfo);
 		return CONTENT_ROOT + "sysuser/list";
 	}
-	@RequestMapping("/edituser")
-	public String updateUser(Model model,HttpServletRequest request,HttpServletResponse response){
-		
+	@RequestMapping("/userform")
+	public String updateUser(Model model,String oper,SysUser sysUser,HttpServletRequest request,HttpServletResponse response){
 		return CONTENT_ROOT + "sysuser/update";
-	}
-	@RequestMapping("/adduser")
-	public String addUser(Model model,HttpServletRequest request,HttpServletResponse response){
-		
-		return CONTENT_ROOT + "sysuser/add";
 	}
 	@RequestMapping("/authority")
 	public String authority(Model model, QueryParam<SysCompetenceExample> queryParam){

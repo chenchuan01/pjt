@@ -1,10 +1,8 @@
 layui.config({
 	base: 'static/layui/js/'
-}).use(['element', 'layer', 'navbar', 'tab'], function() {
+}).use(['element','navbar', 'tab'], function() {
 	window.jQuery = window.$ = layui.jquery;
-	
 	var element = layui.element(),
-		layer = layui.layer,
 		navbar = layui.navbar(),
 		tab = layui.tab({
 			elem: '.admin-nav-card' //设置选项卡容器
@@ -28,7 +26,7 @@ layui.config({
 			var index=1;
 			var navs=[{
 				title:'后台首页',
-				icon:'fa fa-dashboard',
+				icon:'fa fa-home',
 				spread:true,
 				href:'dashboard.htm'
 			}];
@@ -112,96 +110,18 @@ layui.config({
 	shadeMobile.on('click', function() {
 		$('body').removeClass('site-mobile');
 	});
+	document.onkeydown = function(e){  
+	    e = window.event || e;  
+	    var keycode = e.keyCode || e.which;  
+	    if(keycode == 116){ 
+	    	var nowWindow=$('.layui-show iframe');
+	    	nowWindow.attr('src', nowWindow.attr('src'));
+	        if(window.event){
+	            try{e.keyCode = 0;}catch(e){}  
+	            e.returnValue = false;  
+	        }else{
+	            e.preventDefault();  
+	        }  
+	    }  
+	}   
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*'use strict';
-layui.use(['jquery','layer','element'],function(){
-	window.jQuery = window.$ = layui.jquery;
-	window.layer = layui.layer;
-  var element = layui.element();
-  
-
- 
-$(function(){
-	var req = new Request();
-	var element = layui.element();
-	// 刷新iframe操作
-    $("#refresh_iframe").click(function(){
-       $(".layui-tab-content .layui-tab-item").each(function(){
-          if($(this).hasClass('layui-show')){
-             $(this).children('iframe')[0].contentWindow.location.reload(true);
-          }
-       });
-    });
-    //监听菜单点击跳转
-    $('a[menu-href]').click(function(){
-		var href=$(this).attr('menu-href');
-		var name=$(this).attr('menu-name');
-		var close=$(this).attr('menu-close');
-		if(CommonUtil.isNotNull(href)){
-			var li=$('li[menu-id="'+href+'"]');
-			li.remove();
-			var div=$('div[menu-id="'+href+'"]');
-			div.remove();
-			$('.layui-tab-title .layui-this').removeClass('layui-this');
-			$('.layui-tab-content .layui-show').removeClass('layui-show');
-			$('.layui-tab-title').append('<li menu-id="'+href+'" menu-close="'+close+'" class="layui-this" >'+name+'</li>');
-			$('.layui-tab-content').append('<div menu-id="'+href+'" class="layui-tab-item layui-show"></div>');
-			req.goPage({
-				url:href,
-				suc:function(html){
-					var content = $('div[menu-id="'+href+'"]');
-					content.html(html);
-				}
-			});
-			element.init();
-			$('li[menu-close="false"] i').remove();
-		}
-	});
-    $('#homePage a').trigger('click');
-    
-});
-
-
-});*/

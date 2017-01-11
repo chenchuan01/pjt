@@ -58,9 +58,7 @@
 	<!-- 配置视图的显示 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
-		<property name="toolboxConfigLocation"> 
-			<value>/WEB-INF/toolbox.xml</value> 
-        </property> 
+		<property name="viewClass" value="com.yidingliu.pjt.web.ext.VelocityToolbox2View"/>
 		<property name="cache" value="true" />
 		<property name="suffix" value=".html" />
 		<property name="requestContextAttribute" value="request" />
@@ -71,6 +69,7 @@
 		<property name="numberToolAttribute" value="numberTool" />
 		<property name="dateToolAttribute" value="dateTool" />
 		<property name="order" value="1" />
+		<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"></property> 
 	</bean>
 
 </beans>

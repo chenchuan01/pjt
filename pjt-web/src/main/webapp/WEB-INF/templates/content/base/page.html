@@ -1,0 +1,25 @@
+<script type="text/javascript">
+layui.use(['jquery','laypage'],function(){
+	var $ = layui.jquery;
+	var pageDiv=$("#page");
+	if(pageDiv){
+		var totalpage='$!{pageInfo.pages}';
+		var currpage='$!{pageInfo.pageNum}';
+		var action=pageDiv.attr('data-action');
+		var laypage = layui.laypage;
+		laypage({
+			cont: 'page',
+			pages: totalpage,
+			curr:currpage,
+			groups: 5,
+			jump: function(obj, first) {
+				var curr = obj.curr;
+				
+				if(!first) {
+					window.location.href=action+"?page="+curr;
+				}
+			}
+		});
+	}
+});
+</script>

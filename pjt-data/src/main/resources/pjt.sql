@@ -141,6 +141,22 @@ CREATE TABLE `sysuser` (
 -- Records of sysuser
 -- ----------------------------
 INSERT INTO `sysuser` VALUES ('1', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('2', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin1', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('3', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin2', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('4', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin3', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('5', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin4', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('6', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin5', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('7', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin6', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('8', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin7', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('9', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin8', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('10', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin9', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('11', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin10', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('12', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin11', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('13', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin12', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('14', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin13', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('15', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin14', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('16', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin15', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('17', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin16', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
 
 -- ----------------------------
 -- Table structure for user

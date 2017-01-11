@@ -2,17 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>后台管理系统</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="format-detection" content="telephone=no">
-		<link rel="stylesheet" href="static/layui/plugins/layui/css/layui.css" media="all" />
-		<link rel="stylesheet" href="static/layui/css/global.css" media="all">
-		<link rel="stylesheet" href="static/layui/plugins/font-awesome/css/font-awesome.min.css">
+		#parse("content/base/style.html")
 	</head>
 	<body>
 		<div class="layui-layout layui-layout-admin">
@@ -30,14 +20,11 @@
 					<ul class="layui-nav admin-header-item">
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
-								<span>Admin</span>
+								<span>$!{sysuser.niceName}</span>
 							</a>
 							<dl class="layui-nav-child">
 								<dd>
 									<a href="javascript:;"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a>
-								</dd>
-								<dd>
-									<a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
 								</dd>
 								<dd>
 									<a href="auth/logout.htm"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
@@ -47,7 +34,7 @@
 					</ul>
 					<ul class="layui-nav admin-header-item-mobile">
 						<li class="layui-nav-item">
-							<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+							<a href="auth/logout.htm"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 						</li>
 					</ul>
 				</div>
@@ -59,7 +46,7 @@
 				<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
 					<ul class="layui-tab-title">
 						<li class="layui-this">
-							<i class="fa fa-dashboard" aria-hidden="true"></i>
+							<i class="fa fa-home" aria-hidden="true"></i>
 							<cite>后台首页</cite>
 						</li>
 					</ul>
@@ -73,7 +60,7 @@
 			<div class="layui-footer footer footer-demo" id="admin-footer">
 				<div class="layui-main">
 					<p>2017 &copy;
-						<a href="http://www.yidingliu.com/">基于layui开发,易鼎流196SF. 版权所有
+						<a href="http://www.yidingliu.com/">基于layui开发,易鼎流196SF. 版权所有</a>
 					</p>
 				</div>
 			</div>
@@ -81,10 +68,10 @@
 				<i class="layui-icon">&#xe602;</i>
 			</div>
 			<div class="site-mobile-shade"></div>
-			<!-- 加载js文件-->
-			<script type="text/javascript" src="/static/js/front.app.js"></script>
-			<script type="text/javascript" src="/static/js/pages/admin.js"></script>
 		</div>
+		<!-- 加载js文件-->
+		#parse("content/base/script.html")
+		<script type="text/javascript" src="static/js/pages/admin.js"></script>
 	</body>
 
 </html>

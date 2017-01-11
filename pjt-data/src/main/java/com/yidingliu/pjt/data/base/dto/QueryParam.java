@@ -24,6 +24,8 @@ public class QueryParam<E> {
 	private E param;
 	
 	private int pageSize=10;
+	
+	private String search;
 
 	public QueryParam() {
 		super();
@@ -69,6 +71,14 @@ public class QueryParam<E> {
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 	
 	

@@ -13,6 +13,7 @@ var Global_Var ={
 	webServer:'',
 	tools:[
 	       'common',
+	       'message',
 	       'request'
 	]
 }
@@ -33,3 +34,4 @@ function _loadConfig(){
 	}
 }
 _loadConfig();
+
