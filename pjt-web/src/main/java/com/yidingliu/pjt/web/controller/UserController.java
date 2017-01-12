@@ -5,7 +5,6 @@ package com.yidingliu.pjt.web.controller;
 
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.StringUtil;
 import com.yidingliu.pjt.data.base.dto.QueryParam;
 import com.yidingliu.pjt.data.bean.User;
 import com.yidingliu.pjt.data.mapper.example.UserExample;
@@ -23,9 +23,9 @@ import com.yidingliu.pjt.data.service.UserService;
 
 /**
  *                       
- * @Filename 
+ * @Filename UserController.java
  *
- * @Description  
+ * @Description  用户controller
  *
  * @Version 1.0
  *
@@ -43,64 +43,80 @@ import com.yidingliu.pjt.data.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	private static final String CONTENT_ROOT="content/user/";
 	/**
 	 * 用户service
 	 */
 	@Resource
 	private UserService userService;
 	
+	/**
+	 * 
+	 * <p>标题: userList</p>
+	 * <p>描述: 用户列表</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
 	@RequestMapping("/userlist")
 	public String userList(Model model,HttpServletRequest request, QueryParam<UserExample> queryParam){
 		UserExample userExample = new UserExample();
-		userExample.createCriteria();
+		UserExample.Criteria criteria = userExample.createCriteria();
+		if (StringUtil.isNotEmpty(queryParam.getSearch())) {
+			criteria.andUserNameLike("%"+queryParam.getSearch()+"%");
+			model.addAttribute("search", queryParam.getSearch());
+		}
+		queryParam.setParam(userExample);
 		PageInfo<User> pageInfo = userService.pageQuery(queryParam);
 		model.addAttribute("pageInfo", pageInfo);
 	
-		return "content/user/list";
+		return CONTENT_ROOT+"list";
 	}
-	@RequestMapping("/adduser")
-	public String addUser(Model model,HttpServletRequest request,HttpServletResponse response,QueryParam<UserExample> queryParam) throws IOException{
-		UserExample userExample = new UserExample();
-		userExample.createCriteria();
-		String type = request.getParameter("type");
-		String userName = request.getParameter("userName");
-		String userPwd = request.getParameter("userPwd");
-		if ("save".equals(type)) {
-			User user = new User();
-			user.setUserName(userName);
-			user.setUserPwd(userPwd);
-			user.setStatus(1);
-			user.setCreateDate(new Date());
-			user.setUpdateDate(new Date());
-			userService.insert(user);
-			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/user/userlist");
-			return "content/user/list";
-		}else {
-			return "content/user/add";
-		}
-	}
-	@RequestMapping("/updateuser")
-	public String updateUser(Model model,HttpServletRequest request,HttpServletResponse response, QueryParam<UserExample> queryParam) throws IOException{
-		String type = request.getParameter("type");
+	/**
+	 * 
+	 * <p>标题: userForm</p>
+	 * <p>描述: 添加或修改用户</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
+	@RequestMapping("/userform")
+	public String userForm(Model model,String oper,User users, HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String userId = request.getParameter("userId");
-		String userName = request.getParameter("userName");
-		String userPwd = request.getParameter("userPwd");
-		User user = userService.findById(Long.valueOf(userId));
-		if ("update".equals(type)) {
-			user.setUserName(userName);
-			user.setUserPwd(userPwd);
-			user.setStatus(1);
-			user.setUpdateDate(new Date());
-			userService.update(user);
-			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/user/userlist");
-		}else {
+		
+		if ("add".equals(oper)) {
+			return CONTENT_ROOT+ "form";
+		}else if ("inf".equals(oper) && StringUtil.isNotEmpty(userId)) {
+			User user = userService.findById(Long.valueOf(userId));
 			model.addAttribute("user", user);
-			return "content/user/update";
+			return CONTENT_ROOT+ "form";
+		}else {
+			if (users != null) {
+				if (users.getId() == null) {
+					userService.insert(users);
+				}else if (users.getId() != null) {
+					userService.update(users);
+				}
+			}
+			response.setCharacterEncoding("utf-8");
+			response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
 		}
 		return null;
 	}
+	/**
+	 * 
+	 * <p>标题: deleteUser</p>
+	 * <p>描述: 删除用户</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
 	@RequestMapping("/deleteuser")
 	public String deleteUser(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String userId = request.getParameter("userId");

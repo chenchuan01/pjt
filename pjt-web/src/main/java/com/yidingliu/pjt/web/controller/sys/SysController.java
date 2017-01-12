@@ -4,6 +4,9 @@
 package com.yidingliu.pjt.web.controller.sys;
 
 
+import java.io.IOException;
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +61,16 @@ public class SysController {
 	@Resource
 	private SysCompetenceService sysCompetenceService;
 	
+	/**
+	 * 
+	 * <p>标题: userList</p>
+	 * <p>描述: 管理员列表</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
 	@RequestMapping("/user")
 	public String userList(Model model, QueryParam<SysUserExample> queryParam){
 		SysUserExample sysUserExample = new SysUserExample();
@@ -71,24 +84,113 @@ public class SysController {
 		model.addAttribute("pageInfo", pageInfo);
 		return CONTENT_ROOT + "sysuser/list";
 	}
+	/**
+	 * 
+	 * <p>标题: userForm</p>
+	 * <p>描述: 添加或修改管理员</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
 	@RequestMapping("/userform")
-	public String updateUser(Model model,String oper,SysUser sysUser,HttpServletRequest request,HttpServletResponse response){
-		return CONTENT_ROOT + "sysuser/update";
+	public String userForm(Model model,String oper,SysUser sysUser,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String userId = request.getParameter("userId");
+		if ("add".equals(oper)) {
+			return CONTENT_ROOT+ "sysuser/form";
+		}else if ("inf".equals(oper) && StringUtil.isNotEmpty(userId)) {
+			SysUser user = sysUserService.findById(Long.valueOf(userId));
+			model.addAttribute("user", user);
+			return CONTENT_ROOT+ "sysuser/form";
+		}else {
+			if (sysUser != null) {
+				if (sysUser.getId() == null) {
+					sysUser.setLastLoginTime(new Date());
+					sysUserService.insert(sysUser);
+				}else if (sysUser.getId() != null) {
+					sysUser.setLastLoginTime(new Date());
+					sysUserService.update(sysUser);
+				}
+			}
+			response.setCharacterEncoding("utf-8");
+			response.sendRedirect(request.getContextPath()+"/sys/user.htm");
+		}
+		return null;
 	}
+	/**
+	 * 
+	 * <p>标题: authority</p>
+	 * <p>描述: 权限列表</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
 	@RequestMapping("/authority")
 	public String authority(Model model, QueryParam<SysCompetenceExample> queryParam){
 		SysCompetenceExample sysCompetenceExample = new SysCompetenceExample();
-		sysCompetenceExample.createCriteria();
+		SysCompetenceExample.Criteria criteria = sysCompetenceExample.createCriteria();
+		criteria.andParentIdIsNull();
+		queryParam.setParam(sysCompetenceExample);
 		PageInfo<SysCompetence> pageInfo = sysCompetenceService.pageQuery(queryParam);
 		model.addAttribute("pageInfo", pageInfo);
 		return CONTENT_ROOT + "sysauth/list";
 	}
+	/**
+	 * 
+	 * <p>标题: roleList</p>
+	 * <p>描述: 角色列表</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
 	@RequestMapping("/role")
 	public String roleList(Model model, QueryParam<SysRoleExample> queryParam){
 		SysRoleExample sysRoleExample = new SysRoleExample();
-		sysRoleExample.createCriteria();
+		SysRoleExample.Criteria criteria = sysRoleExample.createCriteria();
+		if(StringUtil.isNotBlank(queryParam.getSearch())){
+			criteria.andNameLike("%"+queryParam.getSearch()+"%");
+			model.addAttribute("search", queryParam.getSearch());
+		}
+		queryParam.setParam(sysRoleExample);
 		PageInfo<SysRole> pageInfo = sysRoleService.pageQuery(queryParam);
 		model.addAttribute("pageInfo", pageInfo);
 		return CONTENT_ROOT + "sysrole/list";
+	}
+	/**
+	 * 
+	 * <p>标题: roleForm</p>
+	 * <p>描述: 添加或修改角色</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 *
+	 */
+	@RequestMapping("/roleform")
+	public String roleForm(Model model,String oper,SysRole sysRole,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String roleId = request.getParameter("roleId");
+		if ("add".equals(oper)) {
+			return CONTENT_ROOT+ "sysrole/form";
+		}else if ("inf".equals(oper) && StringUtil.isNotEmpty(roleId)) {
+			SysRole role = sysRoleService.findById(Long.valueOf(roleId));
+			model.addAttribute("role", role);
+			return CONTENT_ROOT+ "sysrole/form";
+		}else {
+			if (sysRole != null) {
+				if (sysRole.getId() == null) {
+					sysRoleService.insert(sysRole);
+				}else if (sysRole.getId() != null) {
+					sysRoleService.update(sysRole);
+				}
+			}
+			response.setCharacterEncoding("utf-8");
+			response.sendRedirect(request.getContextPath()+"/sys/role.htm");
+		}
+		return null;
 	}
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		#parse("content/base/style.html")
+	</head>
+	<body>
+		<div class="admin-main">
+			<fieldset class="layui-elem-field layui-field-title" style="width: 30%;position: relative; left: 30%;">
+				<legend>添加或修改表单</legend>
+					<form action="/sys/roleform.htm" class="layui-form" id="form" style="margin-top: 30px;">
+						<input type="hidden" name="id" value="$!{role.id}">
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">角色名称</label>
+					    	<div class="layui-input-inline">
+					      		<input name="name" value="$!{role.name}" lay-verify="required" autocomplete="off" placeholder="请输入角色名称" class="layui-input" type="text">
+					    	</div>
+					    </div>
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">角色描述</label>
+					    	<div class="layui-input-inline">
+					      		<input name="description" value="$!{role.description}" lay-verify="required" autocomplete="off" placeholder="请输入角色描述" class="layui-input" type="text">
+					    	</div>
+					    </div>
+					    <div class="layui-form-item">
+					    	<div class="layui-input-block">
+					      		<button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
+					      		<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					   		</div>
+					    </div>
+					</form>
+			</fieldset>
+		</div>
+		#parse("content/base/script.html")
+		<script >
+			layui.use(['form'], function() {
+				var $ = layui.jquery;
+				var form = layui.form();
+				form.on('submit(form)',function(data){
+						var req = new Request();
+						req.post({
+							url:data.form.action,
+							param:data.field
+						});
+					}
+					return false;
+				});
+			});
+		</script>
+	</body>
+</html>
