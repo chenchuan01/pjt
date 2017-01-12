@@ -6,13 +6,12 @@
 	</head>
 	<body>
 		<div class="admin-main">
+			<a id="refresh" href="javascript:;"><i></a>
 			<blockquote class="layui-elem-quote">
 			   <form id="search" action="sys/user.htm">
 				   <div class="layui-inline">
 				     <div class="layui-input-inline">
 				       <input type="text" name="search" autocomplete="off" class="layui-input" placeholder="查询登录名称" value="$!{search}">
-				       <input type="text" name="ids[0]" autocomplete="off" class="layui-input" placeholder="查询登录名称" value="$!{search}">
-				       <input type="text" name="ids[1]" autocomplete="off" class="layui-input" placeholder="查询登录名称" value="$!{search}">
 				     </div>
 				   </div>
 				   <button class="layui-btn"  lay-submit lay-filter="search">
@@ -24,7 +23,6 @@
 			   </form>
 			</blockquote>
 			<fieldset class="layui-elem-field">
-				<legend>数据列表</legend>
 					<div class="layui-field-box">
 						<table class="layui-table">
 					        <thead>
