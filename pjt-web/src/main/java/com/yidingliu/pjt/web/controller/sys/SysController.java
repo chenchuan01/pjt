@@ -6,6 +6,7 @@ package com.yidingliu.pjt.web.controller.sys;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -131,11 +132,9 @@ public class SysController {
 	@RequestMapping("/authority")
 	public String authority(Model model, QueryParam<SysCompetenceExample> queryParam){
 		SysCompetenceExample sysCompetenceExample = new SysCompetenceExample();
-		SysCompetenceExample.Criteria criteria = sysCompetenceExample.createCriteria();
-		criteria.andParentIdIsNull();
-		queryParam.setParam(sysCompetenceExample);
-		PageInfo<SysCompetence> pageInfo = sysCompetenceService.pageQuery(queryParam);
-		model.addAttribute("pageInfo", pageInfo);
+		sysCompetenceExample.createCriteria();
+		List<SysCompetence> list = sysCompetenceService.findByQuery(sysCompetenceExample);
+		model.addAttribute("list", list);
 		return CONTENT_ROOT + "sysauth/list";
 	}
 	/**

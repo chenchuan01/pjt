@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		#parse("content/base/style.html")
+		<link rel="stylesheet" href="static/layui/css/table.css" />
+		<style type="text/css">
+			.layui-tree-skin-authTree li a cite{
+				color: red;font-size: 20px; margin: 20px;
+			}
+			.layui-tree-skin-authTree li ul li a cite{
+				color: blue;font-size: 18px; margin: 18px;
+			}
+		</style>
+	</head>
+	<body>
+		 <div class="admin-main">
+		 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+			 	<div style="display: inline-block;  padding: 10px;  overflow: auto;">
+	  				<ul id="sysauth"></ul>
+				</div>
+			</fieldset>
+		 </div>
+		 #parse("content/base/script.html")
+		 <script >
+		 layui.use(['tree', 'layer'], function(){
+			  var layer = layui.layer
+			  ,$ = layui.jquery,authTree=layui.tree; 
+			  var data = ${list};
+			  var nodes=[];
+			  var parentIndex=0;
+			  for(var i = 0;i<data.length;i++){
+				  var node = data[i];
+				  if(CommonUtil.isNull(node.parentId)){
+					  var nodeMap={
+							  name:node.name
+							 ,id:node.id
+							 
+					  }
+					  var childIndex=0;
+					  var childs = [];
+					  for(var j=0;j<data.length;j++){
+						  var child=data[j];
+						 
+						  if(CommonUtil.isNotNull(child.parentId)&&node.id==child.parentId){
+							  childs[childIndex]={
+									  name:child.name
+									 ,id:child.id
+							  }
+							  childIndex++;
+						  }
+					  }
+					  nodeMap['children']=childs
+					  nodes[parentIndex]=nodeMap;
+					  parentIndex++;
+				  }
+				  
+			  }
+			  authTree({
+			    elem: '#sysauth' //指定元素
+			    ,
+			    skin:'authTree'
+		    	,click: function(item){ //点击节点回调
+		    	      MsgUtil.info('当前节名称：'+ item.name + '<br>全部参数：'+ JSON.stringify(item));
+		    	      console.log(item);
+		    	    }
+			    ,nodes: nodes
+			  });
+			});
+		 
+		 </script>
+	</body>
+</html>

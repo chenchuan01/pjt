@@ -28,5 +28,9 @@ var CommonUtil={
 			}
 		}
 		return false;
+	},
+	isNull :function(obj){
+		return !CommonUtil.isNotNull(obj);
 	}
+   
 }
