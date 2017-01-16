@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		#parse("content/base/style.html")
+	</head>
+	<body>
+		<div class="admin-main">
+			<fieldset class="layui-elem-field layui-field-title" style="width: 30%;position: relative; left: 30%;">
+				<legend>添加或修改表单</legend>
+					<form action="/sys/authform.htm" class="layui-form" id="form" style="margin-top: 30px;">
+						<input type="hidden" name="id" value="$!{competence.id}">
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">权限名称</label>
+					    	<div class="layui-input-inline">
+					      		<input name="name" value="$!{competence.name}" lay-verify="required" autocomplete="off" placeholder="请输入权限名称" class="layui-input" type="text">
+					    	</div>
+					    </div>
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">菜单名称</label>
+					    	<div class="layui-input-inline">
+					      		<input name="menuName" value="$!{competence.menuName}" lay-verify="required" autocomplete="off" placeholder="请输入菜单名称" class="layui-input" type="text">
+					    	</div>
+					    </div>
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">url</label>
+					    	<div class="layui-input-inline">
+					      		<input name="url" value="$!{competence.url}" lay-verify="required" autocomplete="off" placeholder="请输入权限url" class="layui-input" type="text">
+					    	</div>
+					    </div>
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">图标</label>
+					    	<div class="layui-input-inline">
+					      		<input name="icon" value="$!{competence.icon}" lay-verify="required" autocomplete="off" placeholder="请输入权限图标" class="layui-input" type="text">
+					    	</div>
+					    </div>
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">是否显示菜单</label>
+					    	<div class="layui-input-inline">
+					      		<input name="displayMenu" value="$!{competence.displayMenu}" lay-verify="required" autocomplete="off" placeholder="是否显示菜单:1是、2否" class="layui-input" type="text">
+					    	</div>
+					    </div>
+						<div class="layui-form-item">
+					    	<label class="layui-form-label">父级</label>
+					    	<div class="layui-input-inline">
+					      		<input name="parentId" value="$!{competence.parentId}" lay-verify="required" autocomplete="off" placeholder="请输入父级id" class="layui-input" type="text">
+					    	</div>
+					    </div>
+					    <div class="layui-form-item">
+					    	<div class="layui-input-block">
+					      		<button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
+					      		<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					   		</div>
+					    </div>
+					</form>
+			</fieldset>
+		</div>
+		#parse("content/base/script.html")
+		<script >
+			layui.use(['form'], function() {
+				var $ = layui.jquery;
+				var form = layui.form();
+				form.on('submit(form)',function(data){
+						var req = new Request();
+						req.post({
+							url:data.form.action,
+							param:data.field
+						});
+					}
+					return false;
+				});
+			});
+		</script>
+	</body>
+
+</html>

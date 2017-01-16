@@ -137,6 +137,40 @@ public class SysController {
 		model.addAttribute("list", list);
 		return CONTENT_ROOT + "sysauth/list";
 	}
+	
+	/**
+	 * 
+	 * <p>标题:authForm </p>
+	 * <p>描述: 添加或修改权限</p>
+	 * <p>作者: yzx</p>
+	 * <p>时间:  </p>
+	 * @param 
+	 * @return
+	 * @throws IOException 
+	 *
+	 */
+	@RequestMapping("/authform")
+	public String authForm(Model model,String oper,SysCompetence sysCompetence,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String authId = request.getParameter("authId");
+		if ("add".equals(oper)) {
+			return CONTENT_ROOT+ "sysauth/form";
+		}else if ("inf".equals(oper) && StringUtil.isNotEmpty(authId)) {
+			SysCompetence competence = sysCompetenceService.findById(Long.valueOf(authId));
+			model.addAttribute("competence", competence);
+			return CONTENT_ROOT+ "sysauth/form";
+		}else {
+			if (sysCompetence != null) {
+				if (sysCompetence.getId() == null) {
+					sysCompetenceService.insert(sysCompetence);
+				}else if (sysCompetence.getId() != null) {
+					sysCompetenceService.update(sysCompetence);
+				}
+			}
+			response.setCharacterEncoding("utf-8");
+			response.sendRedirect(request.getContextPath()+"/sys/authority.htm");
+		}
+		return null;
+	}
 	/**
 	 * 
 	 * <p>标题: roleList</p>
