@@ -13,10 +13,6 @@
 	<description>系统数据交互模块</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-		</dependency>
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis.generator</groupId>

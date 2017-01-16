@@ -3,7 +3,9 @@ package com.yidingliu.pjt.data.service;
 import javax.annotation.Resource;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.yidingliu.pjt.base.cache.CacheManage;
 import com.yidingliu.pjt.base.util.LogUtil;
 import com.yidingliu.pjt.data.UnitTest;
 import com.yidingliu.pjt.data.mapper.example.sys.SysUserExample;
@@ -32,10 +34,16 @@ public class SysUserServiceTest extends UnitTest{
 	@Resource
 	SysUserService sysUserService;
 	
+	@Autowired
+	CacheManage cacheManage;
+	
+	
 	@Test
 	public void findAllUser(){
-		SysUserExample example = new SysUserExample();
+		/*SysUserExample example = new SysUserExample();
 		example.createCriteria();
-		LogUtil.info(getClass(), "SysUserLength=>{0}", sysUserService.findByQuery(example).size());
+		LogUtil.info(getClass(), "SysUserLength=>{0}", sysUserService.findByQuery(example).size());*/
+		System.out.println("123");
+		cacheManage.setCacheValue("redis-key", "redis-cache-value");
 	}
 }

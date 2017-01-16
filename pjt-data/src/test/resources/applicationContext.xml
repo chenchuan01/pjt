@@ -53,6 +53,11 @@
     <!-- 事务注解支持 -->
     <tx:annotation-driven transaction-manager="transactionManager" />
     
- 
+ 	<!-- cahce -->
+ 	<import resource="classpath:spring/spring-redis.xml" />
+ 	
+ 	<!-- 内存缓存 -->
+ 	<!-- <bean id="cacheManage" class="com.yidingliu.pjt.base.cache.impl.CacheManageImpl"/> -->
+ 	<bean id="cacheManage"  class="com.yidingliu.pjt.base.cache.impl.RedisCacheManageImpl" lazy-init="false" init-method="init"/>
      
 </beans>
