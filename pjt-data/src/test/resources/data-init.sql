@@ -146,7 +146,7 @@ CREATE TABLE `sysuser` (
 -- ----------------------------
 -- Records of sysuser
 -- ----------------------------
-INSERT INTO `sysuser` VALUES ('1', '2017-01-17 14:55:49', '2017-01-17 14:55:49', '0', '2017-01-17 14:55:49', 'admin', null, 'Administrator', '13987654321', '1');
+INSERT INTO `sysuser` VALUES ('1', '2017-01-17 14:55:49', '2017-01-17 14:55:49', '0', '2017-01-17 14:55:49', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', '13987654321', '1');
 
 -- ----------------------------
 -- Table structure for user
