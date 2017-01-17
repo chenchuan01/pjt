@@ -5,26 +5,37 @@
  * 版本：1.1
  * 描述：封装系统JS公共方法
  */
-var layer;
-layui.use(['layer'],function(){
-	layer=layui.layer;
-});
+
 var MsgUtil={
 	/**
 	 * 提示信息
 	 * @param msg
 	 */
 	info:function(msg){
-		layer.alert(msg);
+		layui.use(['layer'],function(){
+			var layer=layui.layer;
+			layer.alert(msg);
+		});
 	},
 	success:function(msg){
-		layer.alert(msg,{'icon':1});
+		layui.use(['layer'],function(){
+			var layer=layui.layer;
+			layer.alert(msg,{'icon':1});
+		});
+		
 	},
 	error:function(msg){
-		layer.alert(msg,{'icon':2});
+		layui.use(['layer'],function(){
+			var layer=layui.layer;
+			layer.alert(msg,{'icon':2});
+		});
+		
 	},
 	warning:function(msg){
-		layer.alert(msg,{'icon':7});
+		layui.use(['layer'],function(){
+			var layer=layui.layer;
+			layer.alert(msg,{'icon':7});
+		});
 	},
 	/**
 	 * 确认信息
@@ -34,11 +45,14 @@ var MsgUtil={
 	 * }
 	 */
 	cfm:function(cfm){
-		layer.confirm(cfm.msg, {icon: 3, title:'确认信息'}, function(index){
-		  if(cfm.yes&&typeof(cfm.yes)=='function'){
-			  cfm.yes();
-		  }
-		  layer.close(index);
+		layui.use(['layer'],function(){
+			var layer=layui.layer;
+			layer.confirm(cfm.msg, {icon: 3, title:'确认信息'}, function(index){
+				  if(cfm.yes&&typeof(cfm.yes)=='function'){
+					  cfm.yes();
+				  }
+				  layer.close(index);
+				});
 		});
 	},
 }

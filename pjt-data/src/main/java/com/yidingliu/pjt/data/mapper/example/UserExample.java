@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.yidingliu.pjt.data.base.EntityStatusEnum;
 import com.yidingliu.pjt.data.base.mapper.BaseExample;
 /**
  * 
@@ -73,6 +74,7 @@ public class UserExample extends BaseExample{
 
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
+        criteria.andStatusEqualTo(EntityStatusEnum.NORMAL.code());
         return criteria;
     }
 

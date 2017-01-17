@@ -41,7 +41,7 @@
 								<td>$!{element.userPwd}</td>
 								<td>
 								<a href="/user/userform.htm?oper=inf&userId=${element.id}" class="layui-btn layui-btn-mini " ><i class="layui-icon">&#xe642;</i>修改</a>
-								<button onclick="del($!{element.id})" class="layui-btn layui-btn-mini layui-btn-danger" page="$!{pageInfo.page}"  atr="$!{element.id}" uname="$!{element.userName}"><i class="layui-icon">&#x1006;</i>删除</button>									
+								<button  type="button" class="layui-btn layui-btn-mini layui-btn-danger delUser"  data-id="$!{element.id}" ><i class="layui-icon">&#x1006;</i>删除</button>									
 								</td>
 							</tr>
 							 #end
@@ -56,23 +56,6 @@
 		</div>
 		#parse("content/base/script.html")
 		#parse("content/base/page.html")
-		<script type="text/javascript" src="static/js/pages/sys/userlist.js"></script>
-		<script>
-			function del(id){
-				debugger;
-				MsgUtil.cfm({msg:"是否删除编号是"+id+"的记录？",
-					yes:function(){
-						var req = new Request();
-						req.post({
-							url:"/user/deleteuser.htm",
-							param:{userId:id},
-							suc:function(rslt){
-								MsgUtil.info('success');
-							}
-						});
-					}
-				});
-			}
-		</script>
+		<script type="text/javascript" src="static/js/pages/user/userlist.js"></script>
 	</body>
 </html>

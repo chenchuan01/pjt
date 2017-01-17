@@ -5,6 +5,8 @@ package com.yidingliu.pjt.web.controller;
 
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
@@ -20,6 +23,9 @@ import com.yidingliu.pjt.data.base.dto.QueryParam;
 import com.yidingliu.pjt.data.bean.User;
 import com.yidingliu.pjt.data.mapper.example.UserExample;
 import com.yidingliu.pjt.data.service.UserService;
+import com.yidingliu.pjt.web.base.WebResult;
+import com.yidingliu.pjt.web.base.controller.BaseController;
+import com.yidingliu.pjt.web.base.enums.WebResultEnum;
 
 /**
  *                       
@@ -42,7 +48,7 @@ import com.yidingliu.pjt.data.service.UserService;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 	private static final String CONTENT_ROOT="content/user/";
 	/**
 	 * 用户service
@@ -85,8 +91,8 @@ public class UserController {
 	 *
 	 */
 	@RequestMapping("/userform")
-	public String userForm(Model model,String oper,User users, HttpServletRequest request,HttpServletResponse response) throws IOException{
-		String userId = request.getParameter("userId");
+	public String userForm(Model model,String oper,User users, HttpServletRequest req,HttpServletResponse resp) throws IOException{
+		String userId = req.getParameter("userId");
 		
 		if ("add".equals(oper)) {
 			return CONTENT_ROOT+ "form";
@@ -102,8 +108,12 @@ public class UserController {
 					userService.update(users);
 				}
 			}
-			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/user/userlist.htm");
+			WebResult rsult = new WebResult();
+			Map<String, String> data = new HashMap<>();
+			data.put("redirect", "/user/userlist.htm");
+			rsult.setWebRslt(WebResultEnum.STATUS_200);
+			rsult.setData(data);
+			writeWebResult(rsult, req, resp);
 		}
 		return null;
 	}
@@ -118,9 +128,11 @@ public class UserController {
 	 *
 	 */
 	@RequestMapping("/deleteuser")
-	public String deleteUser(Long userId) throws IOException{
+	public @ResponseBody WebResult deleteUser(Long userId){
 		User user = userService.findById(Long.valueOf(userId));
 		userService.delete(user);
-		return "redirect:/user/userlist.htm";
+		WebResult webResult = new WebResult();
+		webResult.setWebRslt(WebResultEnum.STATUS_200);
+		return webResult;
 	}
 }

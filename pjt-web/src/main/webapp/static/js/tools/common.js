@@ -31,6 +31,11 @@ var CommonUtil={
 	},
 	isNull :function(obj){
 		return !CommonUtil.isNotNull(obj);
-	}
-   
+	},
+   refreshCurPage:function(){
+	   window.location.reload();
+   },
+   location:function(redirect){
+	   window.location.href=redirect;
+   }
 }

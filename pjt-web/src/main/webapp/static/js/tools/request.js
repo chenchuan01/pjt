@@ -6,6 +6,7 @@
  * 描述：封装前端请求功能模块
  */
 var Request = function(){
+	
 	var DATA_TYPE_JSON="json";
 	var DATA_TYPE_JSONP="jsonp";
 	var DATA_TYPE_HTML="html";
@@ -77,6 +78,9 @@ var Request = function(){
 	 * }
 	 */
 	var ajax = function(reqMap){
+		layui.use(['jquery'],function(){
+			window.jQuery = window.$ = layui.jquery;
+		});
 		var jsonp = false;
 		if (CommonUtil.isNotNull(Global_Var.webServer)) {
 			reqMap.url = Global_Var.webServer + reqMap.url;
