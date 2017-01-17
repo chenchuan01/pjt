@@ -7,41 +7,47 @@
 		<div class="admin-main">
 			<fieldset class="layui-elem-field layui-field-title" style="width: 30%;position: relative; left: 30%;">
 				<legend>添加或修改表单</legend>
-					<form action="/sys/userform.htm" class="layui-form" id="form" style="margin-top: 30px;">
+					<form action="/sys/userform.htm" class="layui-form" method="post" style="margin-top: 30px;">
 						<input type="hidden" name="id" value="$!{user.id}">
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">登录名称</label>
 					    	<div class="layui-input-inline">
-					      		<input name="loginName" value="$!{user.loginName}" lay-verify="required" autocomplete="off" placeholder="请输入角色名称" class="layui-input" type="text">
+					      		<input name="loginName" value="$!{user.loginName}" lay-verify="required" autocomplete="off" placeholder="请输入登录名称" class="layui-input" type="text">
 					    	</div>
 					    </div>
-						<div class="layui-form-item">
+						<div class="layui-form-item" id="pwdDiv">
 					    	<label class="layui-form-label">登录密码</label>
 					    	<div class="layui-input-inline">
-					      		<input name="loginPassword" value="$!{user.loginPassword}" lay-verify="required" autocomplete="off" placeholder="请输入角色描述" class="layui-input" type="text">
+					      		<input name="loginPassword" value="$!{user.loginPassword}" id="pwd" lay-verify="required" autocomplete="off" placeholder="请输入登录密码" class="layui-input" type="password" >
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">管理员昵称</label>
 					    	<div class="layui-input-inline">
-					      		<input name="niceName" value="$!{user.niceName}" lay-verify="required" autocomplete="off" placeholder="请输入角色描述" class="layui-input" type="text">
+					      		<input name="niceName" value="$!{user.niceName}" lay-verify="required" autocomplete="off" placeholder="请输入管理员昵称" class="layui-input" type="text">
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">角色</label>
 					    	<div class="layui-input-inline">
-					      		<input name="roleId" value="$!{user.roleId}" lay-verify="required" autocomplete="off" placeholder="请输入角色描述" class="layui-input" type="text">
+					      		<!-- <input name="roleId" value="$!{user.roleId}" lay-verify="required" autocomplete="off" placeholder="请输入角色Id" class="layui-input" type="text"> -->
+					      		<select name="roleId">
+					      			<option value="请选择角色"></option>
+					      			#foreach($element in $list)
+					      			<option value="$!{element.id}" #if($!{user.roleId}=="$!{element.id}") selected="selected" #end>$!{element.name}</option>
+					      			#end
+					      		</select>
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">管理员电话</label>
 					    	<div class="layui-input-inline">
-					      		<input name="tel" value="$!{user.tel}" lay-verify="required" autocomplete="off" placeholder="请输入角色描述" class="layui-input" type="text">
+					      		<input name="tel" value="$!{user.tel}" lay-verify="phone" autocomplete="off" placeholder="请输入管理员电话" class="layui-input" type="text">
 					    	</div>
 					    </div>
 					    <div class="layui-form-item">
 					    	<div class="layui-input-block">
-					      		<button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
+					      		<button class="layui-btn" lay-submit lay-filter="add">立即提交</button>
 					      		<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 					   		</div>
 					    </div>
@@ -53,14 +59,13 @@
 			layui.use(['form'], function() {
 				var $ = layui.jquery;
 				var form = layui.form();
-				form.on('submit(form)',function(data){
+				form.on('submit(add)',function(data){
 						var req = new Request();
 						req.post({
 							url:data.form.action,
 							param:data.field
 						});
-					}
-					return false;
+						return false;
 				});
 			});
 		</script>

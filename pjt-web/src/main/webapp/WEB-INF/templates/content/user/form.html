@@ -7,18 +7,18 @@
 		<div class="admin-main">
 			<fieldset class="layui-elem-field layui-field-title" style="width: 30%;position: relative; left: 30%;">
 				<legend>添加或修改表单</legend>
-					<form action="/user/userform.htm" class="layui-form" id="form" style="margin-top: 30px;">
+					<form action="/user/userform.htm" class="layui-form" style="margin-top: 30px;" method="post">
 						<input type="hidden" name="id" value="$!{user.id}">
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">用户名称</label>
 					    	<div class="layui-input-inline">
-					      		<input name="userName" value="$!{user.userName}" lay-verify="required" autocomplete="off" placeholder="请输入角色名称" class="layui-input" type="text">
+					      		<input name="userName" value="$!{user.userName}" lay-verify="required" autocomplete="off" placeholder="请输入用户名称" class="layui-input" type="text">
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">用户密码</label>
 					    	<div class="layui-input-inline">
-					      		<input name="userPwd" value="$!{user.userPwd}" lay-verify="required" autocomplete="off" placeholder="请输入角色描述" class="layui-input" type="text">
+					      		<input name="userPwd" value="$!{user.userPwd}" lay-verify="required" autocomplete="off" placeholder="请输入用户密码" class="layui-input" type="text">
 					    	</div>
 					    </div>
 					    <div class="layui-form-item">
@@ -41,10 +41,9 @@
 							url:data.form.action,
 							param:data.field
 						});
-					}
-					return false;
+						return false;
+					});
 				});
-			});
 		</script>
 	</body>
 </html>

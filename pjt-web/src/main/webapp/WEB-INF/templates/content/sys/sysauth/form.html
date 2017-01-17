@@ -7,8 +7,8 @@
 		<div class="admin-main">
 			<fieldset class="layui-elem-field layui-field-title" style="width: 30%;position: relative; left: 30%;">
 				<legend>添加或修改表单</legend>
-					<form action="/sys/authform.htm" class="layui-form" id="form" style="margin-top: 30px;">
-						<input type="hidden" name="id" value="$!{competence.id}">
+					<form action="/sys/authform.htm" class="layui-form" style="margin-top: 30px;" method="post">
+						<input type="hidden" name="id" value="$!{competence.id}" id="Id">
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">权限名称</label>
 					    	<div class="layui-input-inline">
@@ -30,13 +30,13 @@
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">图标</label>
 					    	<div class="layui-input-inline">
-					      		<input name="icon" value="$!{competence.icon}" lay-verify="required" autocomplete="off" placeholder="请输入权限图标" class="layui-input" type="text">
+					      		<input name="icon" value="$!{competence.icon}"  autocomplete="off" placeholder="请输入权限图标" class="layui-input" type="text">
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">是否显示菜单</label>
 					    	<div class="layui-input-inline">
-					      		<input name="displayMenu" value="$!{competence.displayMenu}" lay-verify="required" autocomplete="off" placeholder="是否显示菜单:1是、2否" class="layui-input" type="text">
+					      		<input name="displayMenu" value="$!{competence.displayMenu}" lay-verify="required" autocomplete="off" placeholder="是否显示菜单:1是、0否" class="layui-input" type="text">
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
@@ -47,8 +47,8 @@
 					    </div>
 					    <div class="layui-form-item">
 					    	<div class="layui-input-block">
-					      		<button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
-					      		<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					      		<button type="button" class="layui-btn" lay-submit lay-filter="add">立即提交</button>
+					      		<button type="reset" class="layui-btn layui-btn-primary" id="btn">重置</button>
 					   		</div>
 					    </div>
 					</form>
@@ -56,19 +56,22 @@
 		</div>
 		#parse("content/base/script.html")
 		<script >
-			layui.use(['form'], function() {
+			layui.use('form', function() {
 				var $ = layui.jquery;
 				var form = layui.form();
+				var authId=$("#Id").val();
+				if(authId != null && authId != ''){
+					$("#btn").after("<a class='layui-btn' href='/sys/delauth.htm?authId='"+authId+">删除</a>");
+				}
 				form.on('submit(form)',function(data){
 						var req = new Request();
 						req.post({
 							url:data.form.action,
 							param:data.field
 						});
-					}
-					return false;
-				});
-			});
+						return false;
+					});
+				}); 
 		</script>
 	</body>
 

@@ -24,6 +24,7 @@ import com.yidingliu.pjt.data.bean.sys.SysRole;
 import com.yidingliu.pjt.data.bean.sys.SysUser;
 import com.yidingliu.pjt.data.mapper.example.sys.SysCompetenceExample;
 import com.yidingliu.pjt.data.mapper.example.sys.SysRoleExample;
+import com.yidingliu.pjt.data.mapper.example.sys.SysRoleExample.Criteria;
 import com.yidingliu.pjt.data.mapper.example.sys.SysUserExample;
 import com.yidingliu.pjt.data.service.sys.SysCompetenceService;
 import com.yidingliu.pjt.data.service.sys.SysRoleService;
@@ -99,16 +100,24 @@ public class SysController {
 	public String userForm(Model model,String oper,SysUser sysUser,HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String userId = request.getParameter("userId");
 		if ("add".equals(oper)) {
+			SysRoleExample sysRoleExample = new SysRoleExample();
+			sysRoleExample.createCriteria();
+			List<SysRole> list = sysRoleService.findByQuery(sysRoleExample);
+			model.addAttribute("list", list);
 			return CONTENT_ROOT+ "sysuser/form";
 		}else if ("inf".equals(oper) && StringUtil.isNotEmpty(userId)) {
+			SysRoleExample sysRoleExample = new SysRoleExample();
+			sysRoleExample.createCriteria();
+			List<SysRole> list = sysRoleService.findByQuery(sysRoleExample);
 			SysUser user = sysUserService.findById(Long.valueOf(userId));
+			model.addAttribute("list", list);
 			model.addAttribute("user", user);
 			return CONTENT_ROOT+ "sysuser/form";
 		}else {
 			if (sysUser != null) {
 				if (sysUser.getId() == null) {
 					sysUser.setLastLoginTime(new Date());
-					sysUserService.insert(sysUser);
+					sysUserService.registUser(sysUser);
 				}else if (sysUser.getId() != null) {
 					sysUser.setLastLoginTime(new Date());
 					sysUserService.update(sysUser);

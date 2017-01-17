@@ -5,10 +5,10 @@
 		<link rel="stylesheet" href="static/layui/css/table.css" />
 		<style type="text/css">
 			.layui-tree-skin-authTree li a cite{
-				color: red;font-size: 20px; margin: 20px;
+				color: red;font-size: 20px; margin: 5px;
 			}
 			.layui-tree-skin-authTree li ul li a cite{
-				color: blue;font-size: 18px; margin: 18px;
+				color: blue;font-size: 18px; margin: 3px;
 			}
 		</style>
 	</head>
@@ -66,10 +66,9 @@
 			    skin:'authTree'
 		    	,click: function(item){ //点击节点回调
 		    		layer.open({
-		    	        type: 2 //此处以iframe举例
-		    	        ,title: '当你选择该窗体时，即会在最顶端'
-		    	        ,area: ['1100px', '600px']
-		    	        ,shade: 0
+		    	        type: 2 
+		    	        ,title: '权限修改'
+		    	        ,area: ['1300px', '700px']
 		    	        ,content: '/sys/authform.htm?oper=inf&authId='+item.id
 		    	        ,success: function(layero){
 		    	          layer.setTop(layero); //重点2

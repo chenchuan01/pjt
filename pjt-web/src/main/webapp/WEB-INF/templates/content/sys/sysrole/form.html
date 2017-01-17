@@ -7,7 +7,7 @@
 		<div class="admin-main">
 			<fieldset class="layui-elem-field layui-field-title" style="width: 30%;position: relative; left: 30%;">
 				<legend>添加或修改表单</legend>
-					<form action="/sys/roleform.htm" class="layui-form" id="form" style="margin-top: 30px;">
+					<form action="/sys/roleform.htm" class="layui-form" method="post" style="margin-top: 30px;">
 						<input type="hidden" name="id" value="$!{role.id}">
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">角色名称</label>
@@ -41,10 +41,9 @@
 							url:data.form.action,
 							param:data.field
 						});
-					}
 					return false;
+					});
 				});
-			});
 		</script>
 	</body>
 </html>
