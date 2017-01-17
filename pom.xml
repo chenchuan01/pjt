@@ -235,7 +235,7 @@
 					<archetypeCatalog>http://nexus.cq196.cn:8081/content/repositories/releases/archetype-catalog.xml</archetypeCatalog>
 					<keepParent>true</keepParent>
 					<includeEmptyDirs>true</includeEmptyDirs>
-					<encoding>${prject.encoding}</encoding>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -245,7 +245,7 @@
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
-					<encoding>${project.encoding}</encoding>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>

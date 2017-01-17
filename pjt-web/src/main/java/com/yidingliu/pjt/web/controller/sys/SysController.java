@@ -119,7 +119,7 @@ public class SysController {
 					sysUserService.registUser(sysUser);
 				}else if (sysUser.getId() != null) {
 					sysUser.setLastLoginTime(new Date());
-					sysUserService.update(sysUser);
+					sysUserService.updateNotNull(sysUser);
 				}
 			}
 			response.setCharacterEncoding("utf-8");
