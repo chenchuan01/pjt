@@ -5,8 +5,9 @@ package com.yidingliu.pjt.web.controller.sys;
 
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.yidingliu.pjt.base.util.StringUtil;
@@ -28,6 +30,9 @@ import com.yidingliu.pjt.data.mapper.example.sys.SysUserExample;
 import com.yidingliu.pjt.data.service.sys.SysCompetenceService;
 import com.yidingliu.pjt.data.service.sys.SysRoleService;
 import com.yidingliu.pjt.data.service.sys.SysUserService;
+import com.yidingliu.pjt.web.base.WebResult;
+import com.yidingliu.pjt.web.base.controller.BaseController;
+import com.yidingliu.pjt.web.base.enums.WebResultEnum;
 
 /**
  *                       
@@ -50,7 +55,7 @@ import com.yidingliu.pjt.data.service.sys.SysUserService;
  */
 @Controller
 @RequestMapping("/sys")
-public class SysController {
+public class SysController extends BaseController {
 	private static final String CONTENT_ROOT="content/sys/";
 	
 	@Resource
@@ -96,8 +101,7 @@ public class SysController {
 	 *
 	 */
 	@RequestMapping("/userform")
-	public String userForm(Model model,String oper,SysUser sysUser,HttpServletRequest request,HttpServletResponse response) throws IOException{
-		String userId = request.getParameter("userId");
+	public String userForm(Model model,String oper,SysUser sysUser,String userId,HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		if ("add".equals(oper)) {
 			SysRoleExample sysRoleExample = new SysRoleExample();
 			sysRoleExample.createCriteria();
@@ -115,15 +119,17 @@ public class SysController {
 		}else {
 			if (sysUser != null) {
 				if (sysUser.getId() == null) {
-					sysUser.setLastLoginTime(new Date());
 					sysUserService.registUser(sysUser);
 				}else if (sysUser.getId() != null) {
-					sysUser.setLastLoginTime(new Date());
 					sysUserService.updateNotNull(sysUser);
 				}
 			}
-			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/sys/user.htm");
+			WebResult rsult = new WebResult();
+			Map<String, String> data = new HashMap<>();
+			data.put("redirect", "/sys/authority.htm");
+			rsult.setWebRslt(WebResultEnum.STATUS_200);
+			rsult.setData(data);
+			writeWebResult(rsult, req, resp);
 		}
 		return null;
 	}
@@ -158,8 +164,7 @@ public class SysController {
 	 *
 	 */
 	@RequestMapping("/authform")
-	public String authForm(Model model,String oper,SysCompetence sysCompetence,HttpServletRequest request,HttpServletResponse response) throws IOException{
-		String authId = request.getParameter("authId");
+	public String authForm(Model model,String oper,SysCompetence sysCompetence,String authId,HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		if ("add".equals(oper)) {
 			return CONTENT_ROOT+ "sysauth/form";
 		}else if ("inf".equals(oper) && StringUtil.isNotEmpty(authId)) {
@@ -167,15 +172,32 @@ public class SysController {
 			model.addAttribute("competence", competence);
 			return CONTENT_ROOT+ "sysauth/form";
 		}else {
+			WebResult rsult = new WebResult();
+			Map<String, String> data = new HashMap<>();
 			if (sysCompetence != null) {
 				if (sysCompetence.getId() == null) {
 					sysCompetenceService.insert(sysCompetence);
+					data.put("redirect", "/sys/authority.htm");
 				}else if (sysCompetence.getId() != null) {
 					sysCompetenceService.update(sysCompetence);
 				}
 			}
-			return "redirect:/sys/authority.htm";
+			
+			
+			rsult.setWebRslt(WebResultEnum.STATUS_200);
+			rsult.setData(data);
+			writeWebResult(rsult, req, resp);
 		}
+		return null;
+	}
+	
+	@RequestMapping("/deleteauth")
+	public @ResponseBody WebResult delAuth(Long authId){
+		SysCompetence sysCompetence = sysCompetenceService.findById(authId);
+		sysCompetenceService.delete(sysCompetence);
+		WebResult webResult = new WebResult();
+		webResult.setWebRslt(WebResultEnum.STATUS_200);
+		return webResult;
 	}
 	/**
 	 * 
@@ -211,8 +233,7 @@ public class SysController {
 	 *
 	 */
 	@RequestMapping("/roleform")
-	public String roleForm(Model model,String oper,SysRole sysRole,HttpServletRequest request,HttpServletResponse response) throws IOException{
-		String roleId = request.getParameter("roleId");
+	public String roleForm(Model model,String oper,SysRole sysRole,String roleId,HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		if ("add".equals(oper)) {
 			return CONTENT_ROOT+ "sysrole/form";
 		}else if ("inf".equals(oper) && StringUtil.isNotEmpty(roleId)) {
@@ -227,8 +248,13 @@ public class SysController {
 					sysRoleService.update(sysRole);
 				}
 			}
-			return "redirect:/sys/role.htm";
+			WebResult rsult = new WebResult();
+			Map<String, String> data = new HashMap<>();
+			data.put("redirect", "/sys/role.htm");
+			rsult.setWebRslt(WebResultEnum.STATUS_200);
+			rsult.setData(data);
+			writeWebResult(rsult, req, resp);
 		}
-		
+		return null;
 	}
 }

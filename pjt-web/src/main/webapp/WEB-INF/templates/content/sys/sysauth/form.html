@@ -24,7 +24,7 @@
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">url</label>
 					    	<div class="layui-input-inline">
-					      		<input name="url" value="$!{competence.url}" lay-verify="required" autocomplete="off" placeholder="请输入权限url" class="layui-input" type="text">
+					      		<input name="url" value="$!{competence.url}"  autocomplete="off" placeholder="请输入权限url" class="layui-input" type="text">
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
@@ -36,19 +36,20 @@
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">是否显示菜单</label>
 					    	<div class="layui-input-inline">
-					      		<input name="displayMenu" value="$!{competence.displayMenu}" lay-verify="required" autocomplete="off" placeholder="是否显示菜单:1是、0否" class="layui-input" type="text">
+					      		<input type="radio" name="displayMenu" value="true" title="是" #if($!{competence.displayMenu}=='true') checked="checked" #end>
+      							<input type="radio" name="displayMenu" value="false" title="否" #if($!{competence.displayMenu}=='false') checked="checked" #end>
 					    	</div>
 					    </div>
 						<div class="layui-form-item">
 					    	<label class="layui-form-label">父级</label>
 					    	<div class="layui-input-inline">
-					      		<input name="parentId" value="$!{competence.parentId}" lay-verify="required" autocomplete="off" placeholder="请输入父级id" class="layui-input" type="text">
+					      		<input name="parentId" value="$!{competence.parentId}"  autocomplete="off" placeholder="请输入父级id" class="layui-input" type="text">
 					    	</div>
 					    </div>
 					    <div class="layui-form-item">
 					    	<div class="layui-input-block">
-					      		<button type="button" class="layui-btn" lay-submit lay-filter="add">立即提交</button>
-					      		<button type="reset" class="layui-btn layui-btn-primary" id="btn">重置</button>
+					      		<button class="layui-btn" lay-submit lay-filter="add">立即提交</button>
+					      		<button type="reset" class="layui-btn layui-btn-primary" id="btn" onclick="">重置</button>
 					   		</div>
 					    </div>
 					</form>
@@ -61,17 +62,40 @@
 				var form = layui.form();
 				var authId=$("#Id").val();
 				if(authId != null && authId != ''){
-					$("#btn").after("<a class='layui-btn' href='/sys/delauth.htm?authId='"+authId+">删除</a>");
+					$("#btn").after("<button type='button' class='layui-btn delAuth' data-id='"+authId+"' >删除</button>");
 				}
-				form.on('submit(form)',function(data){
+				form.on('submit(add)',function(data){
 						var req = new Request();
 						req.post({
 							url:data.form.action,
-							param:data.field
+							param:data.field,
+							suc:function(rslt){
+								if(rslt.data.redirect){
+									CommonUtil.location(rslt.data.redirect);	
+								}else{
+									MsgUtil.success(rslt.msg);
+								}
+								
+							}
 						});
 						return false;
 					});
-				}); 
+				$('.delAuth').click(function(){
+					var id = $(this).attr('data-id');
+					MsgUtil.cfm({msg:"是否删除编号是"+id+"的记录？",
+						yes:function(){
+							var req = new Request();
+							req.post({
+								url:"/sys/deleteauth.htm",
+								param:{authId:id},
+								suc:function(){
+									MsgUtil.success('删除成功请关闭小窗口刷新权限！')
+								}
+							});
+						}
+					});
+				});
+			}); 
 		</script>
 	</body>
 
