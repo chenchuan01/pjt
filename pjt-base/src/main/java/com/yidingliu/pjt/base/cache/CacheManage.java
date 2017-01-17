@@ -62,7 +62,18 @@ public interface CacheManage {
 	 * @param key
 	 * @param value
 	 */
-	public void setCacheValue(String key,String jsonValue);
+	public void setCacheValue(String key,String value);
+	
+	/** 
+	 * <p>标题: setCacheValue</p>	
+	 * <p>说明: 设置缓存值,超时自动清理</p>	
+	 * <p>作者: chenchuan
+	 * <p>时间: 2016年12月29日</p>
+	 * @param key
+	 * @param value
+	 * @param delay 超时时间，单位【毫秒】
+	 */
+	public void setCacheValue(String key,String value,Long delay);
 	
 	/** 
 	 * <p>标题: getCacheValue</p>	

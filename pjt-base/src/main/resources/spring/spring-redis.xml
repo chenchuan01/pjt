@@ -10,15 +10,15 @@
 	<context:property-placeholder location="classpath*:redis.properties" />
 	
 	<bean id="poolConfigRedis" class="redis.clients.jedis.JedisPoolConfig">
-		<property name="maxIdle" value="100" /> 
-		<property name="maxTotal" value="300" />
-		<property name="maxWaitMillis" value="100000" />
+		<property name="maxIdle" value="${redis_maxIdle}" /> 
+		<property name="maxTotal" value="${redis_maxActive}" />
+		<property name="maxWaitMillis" value="${redis_maxIdle}" />
 		<property name="testOnBorrow" value="true" />
 	</bean>
 
 	<bean id="connectionFactoryRedis"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:host-name="redis.cq196.cn" p:port="7070" p:password="196sf_Redis.."
+		p:host-name="${redis_url}" p:port="${redis_port}" p:password="${redis_pwd}"
 		p:pool-config-ref="poolConfigRedis" />
 	<bean id="fastjsonSerializer"    class="com.yidingliu.pjt.base.cache.redis.RedisFastJsonSerializer" />
 	<bean id="redisStringSerializer" class="com.yidingliu.pjt.base.cache.redis.RedisStringSerializer" />

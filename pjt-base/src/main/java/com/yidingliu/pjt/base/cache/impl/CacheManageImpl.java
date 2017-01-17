@@ -2,8 +2,12 @@ package com.yidingliu.pjt.base.cache.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.yidingliu.pjt.base.cache.CacheManage;
+import com.yidingliu.pjt.base.util.FormatUtil;
+import com.yidingliu.pjt.base.util.LogUtil;
 
 /**
  *                       
@@ -31,6 +35,7 @@ public class CacheManageImpl implements CacheManage {
 	public CacheManageImpl() {
 		cache =new  HashMap<String, String>();
 		tables = new HashMap<String,Map<String, Object>>();
+		LogUtil.info(getClass(), "CacheManage缓存管理接口实现类=>{0}", CacheManageImpl.class.getName());
 	}
 	
 	@Override
@@ -75,6 +80,20 @@ public class CacheManageImpl implements CacheManage {
 			return table.get(key);
 		}
 		return "";
+	}
+
+	@Override
+	public void setCacheValue(final String key, String value, Long delay) {
+		cache.put(key, value);
+		if(delay!=null){
+			Timer timer = new Timer(FormatUtil.formatParam("cacheTimer-key[{0}]",key));
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					cache.remove(key);
+				}
+			}, delay);
+		}
 	}
 
 }

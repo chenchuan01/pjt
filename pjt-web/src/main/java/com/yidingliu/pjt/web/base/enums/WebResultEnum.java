@@ -25,6 +25,7 @@ import com.yidingliu.pjt.base.contains.ErrorCode;
  *
  */
 public enum WebResultEnum {
+	
 	STATUS_200("200","请求成功"),
 	STATUS_401("401","授权失败"),
 	STATUS_404("404","页面走丢"),
