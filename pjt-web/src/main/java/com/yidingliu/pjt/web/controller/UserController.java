@@ -67,7 +67,7 @@ public class UserController extends BaseController{
 	 *
 	 */
 	@RequestMapping("/userlist")
-	public String userList(Model model,HttpServletRequest request, QueryParam<UserExample> queryParam){
+	public String userList(Model model, QueryParam<UserExample> queryParam){
 		UserExample userExample = new UserExample();
 		UserExample.Criteria criteria = userExample.createCriteria();
 		if (StringUtil.isNotEmpty(queryParam.getSearch())) {

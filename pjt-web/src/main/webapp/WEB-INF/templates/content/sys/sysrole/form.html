@@ -39,7 +39,10 @@
 						var req = new Request();
 						req.post({
 							url:data.form.action,
-							param:data.field
+							param:data.field,
+							suc:function(rslt){
+								CommonUtil.location(rslt.data.redirect);
+							}
 						});
 					return false;
 					});
