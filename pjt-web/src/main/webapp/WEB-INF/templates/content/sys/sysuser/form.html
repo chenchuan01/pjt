@@ -56,7 +56,7 @@
 		</div>
 		#parse("content/base/script.html")
 		<script >
-			layui.use('form', function() {
+			layui.use(['form'], function() {
 				var $ = layui.jquery;
 				var form = layui.form();
 				var password = $("#pwd").val();

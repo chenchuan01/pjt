@@ -57,7 +57,8 @@
  	<import resource="classpath:spring/spring-redis.xml" />
  	
  	<!-- 内存缓存 -->
- 	<!-- <bean id="cacheManage" class="com.yidingliu.pjt.base.cache.impl.CacheManageImpl"/> -->
+ 	<!-- <bean id="cacheManage" class="com.yidingliu.pjt.base.cache.impl.CacheManageImpl" /> -->
+ 	<!-- redis缓存 -->
  	<bean id="cacheManage"  class="com.yidingliu.pjt.base.cache.impl.RedisCacheManageImpl" lazy-init="false" init-method="init"/>
      
 </beans>

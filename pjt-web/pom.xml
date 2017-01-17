@@ -10,7 +10,8 @@
 	</parent>
 	<artifactId>pjt-web</artifactId>
 	<packaging>war</packaging>
-	<description>系统Web模块</description>
+	<description>后台管理模块</description>
+	
 	<properties>
 		<asm-all.version>3.3</asm-all.version>
 		<jetty.version>9.2.1.v20140609</jetty.version>
@@ -21,7 +22,11 @@
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
 		<logback.version>1.0.6</logback.version>
+		<jetty.scope>test</jetty.scope>
 	</properties>
+	<build>
+		<finalName>ROOT</finalName>
+	</build>
 	<dependencies>
 		<!-- servlet -->
 		<dependency>
@@ -37,7 +42,6 @@
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-tools</artifactId>
 		</dependency>
-
 		<!-- 生成xml流 -->
 		<dependency>
 			<groupId>xmlpull</groupId>
@@ -51,72 +55,22 @@
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 		</dependency>
-
-
 		<!-- spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-asm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm-all</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
 		</dependency>
 		<!-- jetty -->
 		<dependency>
@@ -161,9 +115,6 @@
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
-	<build>
-		<finalName>ROOT</finalName>
-	</build>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -210,66 +161,55 @@
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-http</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-io</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-jmx</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-security</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-server</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-servlet</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-util</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-webapp</artifactId>
 				<version>${jetty.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-xml</artifactId>
 				<version>${jetty.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>asm</groupId>
-				<artifactId>asm-all</artifactId>
-				<version>${asm-all.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-core</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-access</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${logback.version}</version>
+				<scope>${jetty.scope}</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

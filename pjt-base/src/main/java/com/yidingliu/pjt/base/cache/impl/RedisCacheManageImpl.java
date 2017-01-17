@@ -2,6 +2,7 @@ package com.yidingliu.pjt.base.cache.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
@@ -9,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import com.yidingliu.pjt.base.cache.CacheManage;
+import com.yidingliu.pjt.base.util.LogUtil;
 
 /**
  *                       
@@ -41,6 +43,7 @@ public class RedisCacheManageImpl implements CacheManage{
 	public void init(){
 		cache = redisTemplate.opsForValue();
 		cacheTables = redisTemplate.opsForHash();
+		LogUtil.info(getClass(), "CacheManage缓存管理接口实现类=>{0}", RedisCacheManageImpl.class.getName());
 	}
 	
 
@@ -80,8 +83,14 @@ public class RedisCacheManageImpl implements CacheManage{
 
 	@Override
 	public boolean flush() {
-		redisTemplate.multi();
+		//TODO 暂无redis实现
 		return false;
+	}
+
+
+	@Override
+	public void setCacheValue(String key, String value, Long delay) {
+		cache.set(key, value, delay, TimeUnit.MILLISECONDS);
 	}
 
 }

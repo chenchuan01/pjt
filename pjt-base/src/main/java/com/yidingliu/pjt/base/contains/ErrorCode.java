@@ -26,6 +26,8 @@ public class ErrorCode {
 	public static final Integer SYS_DATA_EXCEPTION = 2000;
 	/** 系统Web模块异常[WEB] */
 	public static final Integer SYS_WEB_EXCEPTION  = 3000;
+	/** 系统Web模块异常[API] */
+	public static final Integer SYS_API_EXCEPTION  = 4000;
 	/** 系统REST模块异常[REST] */
-	public static final Integer SYS_REST_EXCEPTION = 4000;
+	public static final Integer SYS_REST_EXCEPTION = 5000;
 }

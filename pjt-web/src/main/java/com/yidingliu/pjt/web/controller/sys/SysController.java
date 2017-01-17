@@ -24,7 +24,6 @@ import com.yidingliu.pjt.data.bean.sys.SysRole;
 import com.yidingliu.pjt.data.bean.sys.SysUser;
 import com.yidingliu.pjt.data.mapper.example.sys.SysCompetenceExample;
 import com.yidingliu.pjt.data.mapper.example.sys.SysRoleExample;
-import com.yidingliu.pjt.data.mapper.example.sys.SysRoleExample.Criteria;
 import com.yidingliu.pjt.data.mapper.example.sys.SysUserExample;
 import com.yidingliu.pjt.data.service.sys.SysCompetenceService;
 import com.yidingliu.pjt.data.service.sys.SysRoleService;
