@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mydb
+Source Server         : 0-Local DB
 Source Server Version : 50528
 Source Host           : localhost:3306
 Source Database       : pjt
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2017-01-11 13:33:52
+Date: 2017-01-17 13:39:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,20 +32,22 @@ CREATE TABLE `syscompetence` (
   `parentId` bigint(20) DEFAULT NULL COMMENT 'parentId',
   PRIMARY KEY (`id`),
   KEY `FK7F27FA56CAD972A9` (`parentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='权限菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='权限菜单表';
 
 -- ----------------------------
 -- Records of syscompetence
 -- ----------------------------
 INSERT INTO `syscompetence` VALUES ('1', '2016-12-30 11:26:54', '2016-12-30 11:26:56', '0', '1', '&#xe614;', '系统管理', '系统管理', '', null);
 INSERT INTO `syscompetence` VALUES ('2', '2017-01-03 12:05:50', '2017-01-03 12:05:52', '0', '1', null, '系统用户', '系统用户', '/sys/user.htm', '1');
-INSERT INTO `syscompetence` VALUES ('3', '2017-01-03 16:25:49', '2017-01-03 16:25:52', '0', '1', null, '用户权限', '用户权限', '/sys/action.htm', '1');
-INSERT INTO `syscompetence` VALUES ('4', '2017-01-03 16:26:52', '2017-01-03 16:26:55', '0', '1', null, '角色管理', '角色管理', '/sys/role.htm', '1');
-INSERT INTO `syscompetence` VALUES ('5', '2017-01-04 11:41:21', '2017-01-04 11:41:23', '0', '1', '&#xe612;', '用户管理', '用户管理', '', null);
-INSERT INTO `syscompetence` VALUES ('6', '2017-01-04 15:29:51', '2017-01-04 15:29:53', '0', '1', null, '用户列表', '用户列表', '/user/userlist.htm', '5');
-INSERT INTO `syscompetence` VALUES ('7', '2017-01-09 13:34:27', '2017-01-09 13:34:30', '0', '0', null, '添加用户', '添加用户', '/user/adduser.htm', '5');
-INSERT INTO `syscompetence` VALUES ('8', '2017-01-09 13:57:40', '2017-01-09 13:57:43', '0', '0', null, '修改用户', '修改用户', '/user/updateuser.htm', '5');
-INSERT INTO `syscompetence` VALUES ('9', '2017-01-09 13:58:34', '2017-01-09 13:58:36', '0', '0', null, '删除用户', '删除用户', '/user/deleteuser.htm', '5');
+INSERT INTO `syscompetence` VALUES ('3', '2017-01-17 13:12:10', '2017-01-17 13:12:13', '0', '0', null, '新增修改系统用户', '系统管理', '/sys/userform.htm', '1');
+INSERT INTO `syscompetence` VALUES ('4', '2017-01-17 13:13:20', '2017-01-17 13:13:22', '0', '1', null, '系统角色', '系统角色', '/sys/role.htm', '1');
+INSERT INTO `syscompetence` VALUES ('5', '2017-01-17 13:14:20', '2017-01-17 13:14:23', '0', '0', null, '新增修改系统角色', '新增修改系统角色', '/sys/roleform.htm', '1');
+INSERT INTO `syscompetence` VALUES ('6', '2017-01-17 13:15:20', '2017-01-17 13:15:22', '0', '1', null, '系统权限', '系统权限', '/sys/authority.htm', '1');
+INSERT INTO `syscompetence` VALUES ('7', '2017-01-17 13:16:09', '2017-01-17 13:16:12', '0', '0', null, '新增修改系统权限', '新增修改系统权限', '/sys/authform.htm', '1');
+INSERT INTO `syscompetence` VALUES ('8', '2017-01-17 13:17:46', '2017-01-17 13:17:48', '0', '1', '&#xe613;', 'APP用户管理', 'APP用户管理', '', null);
+INSERT INTO `syscompetence` VALUES ('9', '2017-01-17 13:19:29', '2017-01-17 13:19:32', '0', '0', null, '新增修改APP用户', '新增修改APP用户', '/user/userform.htm', '8');
+INSERT INTO `syscompetence` VALUES ('10', '2017-01-17 13:20:22', '2017-01-17 13:20:24', '0', '0', null, '删除APP用户', '删除APP用户', '/user/deleteuser.htm', '8');
+INSERT INTO `syscompetence` VALUES ('11', '2017-01-17 13:25:13', '2017-01-17 13:25:15', '0', '1', null, 'APP用户列表', 'APP用户列表', '/user/userlist.htm', '8');
 
 -- ----------------------------
 -- Table structure for sysconfiger
@@ -102,20 +104,22 @@ CREATE TABLE `sysrole_syscompetence` (
   PRIMARY KEY (`id`),
   KEY `sysroleId` (`sysroleId`),
   KEY `competencesId` (`competencesId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sysrole_syscompetence
 -- ----------------------------
-INSERT INTO `sysrole_syscompetence` VALUES ('1', '2016-12-30 11:28:04', '2016-12-30 11:28:07', '0', '1', '1');
-INSERT INTO `sysrole_syscompetence` VALUES ('2', '2017-01-03 12:06:45', '2017-01-03 12:06:47', '0', '1', '2');
-INSERT INTO `sysrole_syscompetence` VALUES ('3', '2017-01-03 12:06:45', '2017-01-03 12:06:47', '0', '1', '3');
-INSERT INTO `sysrole_syscompetence` VALUES ('4', '2017-01-03 12:06:45', '2017-01-03 12:06:47', '0', '1', '4');
-INSERT INTO `sysrole_syscompetence` VALUES ('5', '2017-01-04 11:43:06', '2017-01-04 11:43:09', '0', '1', '5');
-INSERT INTO `sysrole_syscompetence` VALUES ('6', '2017-01-04 15:30:18', '2017-01-04 15:30:21', '0', '1', '6');
-INSERT INTO `sysrole_syscompetence` VALUES ('7', '2017-01-09 13:34:57', '2017-01-09 13:35:01', '0', '1', '7');
-INSERT INTO `sysrole_syscompetence` VALUES ('8', '2017-01-09 13:58:59', '2017-01-09 13:59:02', '0', '1', '8');
-INSERT INTO `sysrole_syscompetence` VALUES ('9', '2017-01-09 13:59:16', '2017-01-09 13:59:20', '0', '1', '9');
+INSERT INTO `sysrole_syscompetence` VALUES ('1', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '1');
+INSERT INTO `sysrole_syscompetence` VALUES ('2', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '2');
+INSERT INTO `sysrole_syscompetence` VALUES ('3', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '3');
+INSERT INTO `sysrole_syscompetence` VALUES ('4', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '4');
+INSERT INTO `sysrole_syscompetence` VALUES ('5', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '5');
+INSERT INTO `sysrole_syscompetence` VALUES ('6', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '6');
+INSERT INTO `sysrole_syscompetence` VALUES ('7', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '7');
+INSERT INTO `sysrole_syscompetence` VALUES ('8', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '8');
+INSERT INTO `sysrole_syscompetence` VALUES ('9', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '9');
+INSERT INTO `sysrole_syscompetence` VALUES ('10', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '10');
+INSERT INTO `sysrole_syscompetence` VALUES ('11', '2017-01-17 13:21:48', '2017-01-17 13:21:53', '0', '1', '11');
 
 -- ----------------------------
 -- Table structure for sysuser
@@ -140,23 +144,7 @@ CREATE TABLE `sysuser` (
 -- ----------------------------
 -- Records of sysuser
 -- ----------------------------
-INSERT INTO `sysuser` VALUES ('1', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('2', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin1', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('3', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin2', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('4', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin3', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('5', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin4', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('6', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin5', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('7', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin6', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('8', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin7', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('9', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin8', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('10', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin9', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('11', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin10', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('12', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin11', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('13', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin12', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('14', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin13', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('15', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin14', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('16', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin15', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
-INSERT INTO `sysuser` VALUES ('17', '2016-12-30 11:24:00', '2016-12-30 11:24:02', '0', '2017-01-11 13:10:04', 'admin16', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', null, '1');
+INSERT INTO `sysuser` VALUES ('1', '2017-01-17 13:32:56', '2017-01-17 13:32:56', '0', '2017-01-17 13:32:56', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Administrator', '13987654321', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -170,7 +158,7 @@ CREATE TABLE `user` (
   `createDate` datetime DEFAULT NULL,
   `updateDate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user

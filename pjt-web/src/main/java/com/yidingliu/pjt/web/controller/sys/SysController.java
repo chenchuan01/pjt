@@ -174,10 +174,8 @@ public class SysController {
 					sysCompetenceService.update(sysCompetence);
 				}
 			}
-			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/sys/authority.htm");
+			return "redirect:/sys/authority.htm";
 		}
-		return null;
 	}
 	/**
 	 * 
@@ -229,9 +227,8 @@ public class SysController {
 					sysRoleService.update(sysRole);
 				}
 			}
-			response.setCharacterEncoding("utf-8");
-			response.sendRedirect(request.getContextPath()+"/sys/role.htm");
+			return "redirect:/sys/role.htm";
 		}
-		return null;
+		
 	}
 }

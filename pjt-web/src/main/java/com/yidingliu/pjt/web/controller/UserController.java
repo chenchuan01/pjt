@@ -118,12 +118,9 @@ public class UserController {
 	 *
 	 */
 	@RequestMapping("/deleteuser")
-	public String deleteUser(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		String userId = request.getParameter("userId");
+	public String deleteUser(Long userId) throws IOException{
 		User user = userService.findById(Long.valueOf(userId));
 		userService.delete(user);
-		response.setCharacterEncoding("utf-8");
-		response.sendRedirect(request.getContextPath()+"/user/userlist");
-		return null;
+		return "redirect:/user/userlist.htm";
 	}
 }
