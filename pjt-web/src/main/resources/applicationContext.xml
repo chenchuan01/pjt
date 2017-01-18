@@ -15,7 +15,7 @@
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task-3.0.xsd">
-        
+    <context:annotation-config />
 	<!-- 扫描组件 -->
 	<context:component-scan base-package="com.yidingliu.pjt">
 		<context:exclude-filter type="annotation"
@@ -26,8 +26,7 @@
 	<context:property-placeholder location="classpath:res.properties" />
 	
 	<!-- 加载Spring Module -->
-	<import resource="classpath:spring/spring-data.xml" />
-	<import resource="classpath:spring/spring-*.xml" />
+	<import resource="classpath*:**/spring/spring-*.xml" />
 	<!-- 保存Spring容器 -->
 	<bean id="springContextHolder" class="com.yidingliu.pjt.base.SpringContextHolder" />
 </beans>

@@ -13,8 +13,6 @@
 						http://www.springframework.org/schema/task/spring-task-3.2.xsd">
 
 	<context:annotation-config />
-
-
 	<!-- 自动扫描(自动注入） -->
 	<context:component-scan base-package="com.yidingliu.pjt">
 		<context:include-filter type="annotation"
