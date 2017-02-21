@@ -21,7 +21,7 @@
 
 	<mvc:interceptors>  
 	    <mvc:interceptor>    
-	     	<mvc:mapping path="/api/*" />
+	     	<mvc:mapping path="**/api/*" />
 	        <bean class="com.yidingliu.pjt.api.interceptor.OpenApiHandlerInterceptor"></bean>    
 	    </mvc:interceptor>
 	</mvc:interceptors>
